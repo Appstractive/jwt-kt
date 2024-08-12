@@ -1,0 +1,28 @@
+[versions]
+kotlin = "2.0.10" # https://kotlinlang.org/docs/releases.html#release-details
+agp = "8.2.2" # https://developer.android.com/studio/releases/gradle-plugin
+
+compileSdk = "34"
+minSdk = "26"
+targetSdk = "34"
+
+kotlin-datetime = "0.6.0"
+kotlin-serialization = "1.7.1"
+kotlin-coroutines = "1.8.1"
+
+[libraries]
+
+kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlin-serialization" }
+kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
+kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlin-datetime" }
+kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
+
+test-kotlin = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+
+junit = "junit:junit:4.13.2"
+
+[plugins]
+
+multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+android-library = { id = "com.android.library", version.ref = "agp" }
+kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
