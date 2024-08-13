@@ -12,6 +12,8 @@ kotlin-datetime = "0.6.0"
 kotlin-serialization = "1.7.1"
 kotlin-coroutines = "1.8.1"
 
+cryptography = "0.3.1"
+
 [libraries]
 
 kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-core", version.ref = "kotlin-serialization" }
@@ -28,7 +30,16 @@ ktor-client-serialization = { module = "io.ktor:ktor-client-serialization", vers
 ktor-client-json = { module = "io.ktor:ktor-client-json", version.ref = "ktor" }
 ktor-client-contentnegotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
 
+crypto = { module = "dev.whyoleg.cryptography:cryptography-core", version.ref = "cryptography" }
+crypto-jdk = { module = "dev.whyoleg.cryptography:cryptography-provider-jdk", version.ref = "cryptography" }
+crypto-apple = { module = "dev.whyoleg.cryptography:cryptography-provider-apple", version.ref = "cryptography" }
+crypto-webcrypto = { module = "dev.whyoleg.cryptography:cryptography-provider-webcrypto", version.ref = "cryptography" }
+crypto-openssl3 = { module = "dev.whyoleg.cryptography:cryptography-provider-openssl3", version.ref = "cryptography" }
+crypto-pem = { module = "dev.whyoleg.cryptography:cryptography-serialization-pem", version.ref = "cryptography" }
+crypto-asn = { module = "dev.whyoleg.cryptography:cryptography-serialization-asn1", version.ref = "cryptography" }
+
 test-kotlin = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+test-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.8.1" }
 
 junit = "junit:junit:4.13.2"
 

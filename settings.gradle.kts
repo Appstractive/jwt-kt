@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "jwt-kt"
 
+include(":jwt")

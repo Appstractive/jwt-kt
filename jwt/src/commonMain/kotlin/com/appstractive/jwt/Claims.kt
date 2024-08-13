@@ -1,8 +1,9 @@
 ﻿package com.appstractive.jwt
 
 import com.appstractive.jwt.utils.instantOrNull
+import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
-import kotlinx.serialization.*
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.*
 
 class ClaimsBuilder {
@@ -43,6 +44,14 @@ class ClaimsBuilder {
 
     private val additionalClaims: MutableMap<String, JsonElement> = mutableMapOf()
 
+    fun issuedNow() {
+        issuedAt = Clock.System.now()
+    }
+
+    fun notBeforeNow() {
+        notBefore = Clock.System.now()
+    }
+
     fun claim(key: String, value: String) {
         additionalClaims[key] = JsonPrimitive(value)
     }
@@ -72,11 +81,11 @@ class ClaimsBuilder {
         additionalClaims[key] = value
     }
 
-    fun claim(key: String, builder: JsonObjectBuilder.() -> Unit) {
+    fun objectClaim(key: String, builder: JsonObjectBuilder.() -> Unit) {
         additionalClaims[key] = buildJsonObject(builder)
     }
 
-    fun claim(key: String, builder: JsonArrayBuilder.() -> Unit) {
+    fun arrayClaim(key: String, builder: JsonArrayBuilder.() -> Unit) {
         additionalClaims[key] = buildJsonArray(builder)
     }
 
@@ -87,6 +96,13 @@ class ClaimsBuilder {
     internal fun build(): JsonObject {
         return JsonObject(
             buildMap {
+                issuer?.let { put("iss", JsonPrimitive(it)) }
+                subject?.let { put("sub", JsonPrimitive(it)) }
+                audience?.let { put("aud", JsonPrimitive(it)) }
+                expiresAt?.let { put("exp", JsonPrimitive(it.epochSeconds)) }
+                notBefore?.let { put("nbf", JsonPrimitive(it.epochSeconds)) }
+                issuedAt?.let { put("iat", JsonPrimitive(it.epochSeconds)) }
+                id?.let { put("jti", JsonPrimitive(it)) }
                 putAll(additionalClaims)
             }
         )
