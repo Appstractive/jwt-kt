@@ -2,7 +2,6 @@
 
 import com.appstractive.jwt.utils.urlEncoded
 import kotlinx.serialization.json.JsonObject
-import kotlin.io.encoding.ExperimentalEncodingApi
 
 /**
  * @see <a href="https://www.rfc-editor.org/rfc/rfc7519.html">JSON Web Token (JWT)</a>
@@ -13,7 +12,6 @@ data class JWT(
     val signature: ByteArray,
 ) {
 
-    @OptIn(ExperimentalEncodingApi::class)
     override fun toString(): String {
         return listOf(
             header.urlEncoded(),
@@ -51,9 +49,9 @@ suspend fun jwt(builder: JwtBuilder.() -> Unit): JWT {
 
 class JwtBuilder {
 
-    private var header: HeaderBuilder? = null
+    private var header: HeaderBuilder = HeaderBuilder()
     private var claims: ClaimsBuilder? = null
-    private var signature: SignatureBuilder = DEFAULT_SIGNATURE
+    private var signature: SignatureBuilder? = null
 
     fun header(header: HeaderBuilder.() -> Unit) {
         this.header = HeaderBuilder().apply(header)
@@ -68,20 +66,22 @@ class JwtBuilder {
     }
 
     internal suspend fun build(): JWT {
-        val header = header?.build(
-            alg = signature.algorithm.type,
-        ) ?: DEFAULT_HEADER
+        return signature?.let {
+            val header = header.build(
+                alg = it.type,
+            )
 
-        val claims = claims?.build() ?: JsonObject(emptyMap())
+            val claims = claims?.build() ?: JsonObject(emptyMap())
 
-        return JWT(
-            header = header,
-            claims = claims,
-            signature = signature.sign(
+            JWT(
                 header = header,
                 claims = claims,
-            ),
-        )
+                signature = it.sign(
+                    header = header,
+                    claims = claims,
+                ),
+            )
+        } ?: throw IllegalStateException("no signature provided")
     }
 
 }

@@ -37,11 +37,11 @@ interface SigningAlgorithm<C : SigningAlgorithmConfig> {
 
 }
 
-internal val DEFAULT_SIGNATURE: SignatureBuilder = SignatureBuilder()
-
 class SignatureBuilder {
 
-    internal var algorithm: SigningAlgorithm<*> = SigningAlgorithm.HS256(SigningAlgorithm.HS256.Config())
+    private var algorithm: SigningAlgorithm<*>? = null
+    internal val type: Algorithm
+        get() = algorithm?.type ?: throw IllegalStateException("No signature configured")
 
     fun hs256(configure: SigningAlgorithm.HS256.Config.() -> Unit) {
         val config = SigningAlgorithm.HS256.Config().apply(configure)
@@ -52,9 +52,9 @@ class SignatureBuilder {
         val headerEncoded = header.urlEncoded()
         val claimsEncoded = claims.urlEncoded()
 
-        return algorithm.sign(
+        return algorithm?.sign(
             headerEncoded = headerEncoded,
             claimsEncoded = claimsEncoded,
-        )
+        ) ?: throw IllegalStateException("No algorithm provided")
     }
 }

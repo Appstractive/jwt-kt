@@ -5,6 +5,6 @@ import kotlinx.serialization.json.Json
 val json = Json {
     isLenient = true
     ignoreUnknownKeys = true
-    explicitNulls = true
+    explicitNulls = false
     encodeDefaults = true
 }

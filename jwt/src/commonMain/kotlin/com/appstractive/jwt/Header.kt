@@ -2,11 +2,6 @@
 
 import kotlinx.serialization.Serializable
 
-internal val DEFAULT_HEADER: Header = Header(
-    alg = Algorithm.HS256,
-    typ = "JWT",
-)
-
 @Serializable
 data class Header(
     val alg: Algorithm,
