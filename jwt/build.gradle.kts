@@ -58,7 +58,7 @@ kotlin {
             implementation(libs.kotlin.serialization.json)
             implementation(libs.kotlin.coroutines)
             implementation(libs.kotlin.datetime)
-            implementation(libs.crypto)
+            api(libs.crypto)
         }
 
         commonTest.dependencies {

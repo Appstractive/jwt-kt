@@ -4,18 +4,19 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Header(
-    val alg: Algorithm,
+    val alg: Algorithm = Algorithm.HS256,
     val typ: String,
+    val kid: String? = null,
 )
 
 class HeaderBuilder {
     var keyId: String? = null
     var typ: String = "JWT"
 
-    internal fun build(alg: Algorithm): Header {
+    internal fun build(): Header {
         return Header(
             typ = typ,
-            alg = alg,
+            kid = keyId,
         )
     }
 }

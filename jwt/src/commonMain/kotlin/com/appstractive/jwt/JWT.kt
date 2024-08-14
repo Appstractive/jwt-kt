@@ -1,14 +1,26 @@
 ﻿package com.appstractive.jwt
 
 import com.appstractive.jwt.utils.urlEncoded
-import kotlinx.serialization.json.JsonObject
+
+data class UnsignedJWT(
+    val header: Header,
+    val claims: Claims,
+) {
+    override fun toString(): String {
+        return listOf(
+            header.urlEncoded(),
+            claims.urlEncoded(),
+            "",
+        ).joinToString(".")
+    }
+}
 
 /**
  * @see <a href="https://www.rfc-editor.org/rfc/rfc7519.html">JSON Web Token (JWT)</a>
  */
 data class JWT(
     val header: Header,
-    val claims: JsonObject,
+    val claims: Claims,
     val signature: ByteArray,
 ) {
 
@@ -41,17 +53,21 @@ data class JWT(
     }
 }
 
-suspend fun jwt(builder: JwtBuilder.() -> Unit): JWT {
+fun jwt(builder: JwtBuilder.() -> Unit): UnsignedJWT {
     val jwtBuilder = JwtBuilder().apply(builder)
 
     return jwtBuilder.build()
+}
+
+suspend fun signedJwt(builder: JwtBuilder.() -> Unit, signature: SignatureBuilder.() -> Unit): JWT {
+    val jwtBuilder = JwtBuilder().apply(builder)
+    return jwtBuilder.build().sign(signature)
 }
 
 class JwtBuilder {
 
     private var header: HeaderBuilder = HeaderBuilder()
     private var claims: ClaimsBuilder? = null
-    private var signature: SignatureBuilder? = null
 
     fun header(header: HeaderBuilder.() -> Unit) {
         this.header = HeaderBuilder().apply(header)
@@ -61,27 +77,14 @@ class JwtBuilder {
         this.claims = ClaimsBuilder().apply(builder)
     }
 
-    fun signature(signature: SignatureBuilder.() -> Unit) {
-        this.signature = SignatureBuilder().apply(signature)
+    internal fun build(): UnsignedJWT {
+        val header = header.build()
+
+        val claims = claims?.build() ?: Claims(emptyMap())
+
+        return UnsignedJWT(
+            header = header,
+            claims = claims,
+        )
     }
-
-    internal suspend fun build(): JWT {
-        return signature?.let {
-            val header = header.build(
-                alg = it.type,
-            )
-
-            val claims = claims?.build() ?: JsonObject(emptyMap())
-
-            JWT(
-                header = header,
-                claims = claims,
-                signature = it.sign(
-                    header = header,
-                    claims = claims,
-                ),
-            )
-        } ?: throw IllegalStateException("no signature provided")
-    }
-
 }

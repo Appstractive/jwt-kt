@@ -6,6 +6,8 @@ import kotlinx.datetime.Instant
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.*
 
+typealias Claims = JsonObject
+
 class ClaimsBuilder {
     /**
      * @see <a href="https://www.rfc-editor.org/rfc/rfc7519.html#section-4.1.1">RFC7519, Section 4.1.1</a>
