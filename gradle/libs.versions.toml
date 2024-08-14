@@ -34,7 +34,7 @@ crypto = { module = "dev.whyoleg.cryptography:cryptography-core", version.ref = 
 crypto-jdk = { module = "dev.whyoleg.cryptography:cryptography-provider-jdk", version.ref = "cryptography" }
 crypto-apple = { module = "dev.whyoleg.cryptography:cryptography-provider-apple", version.ref = "cryptography" }
 crypto-webcrypto = { module = "dev.whyoleg.cryptography:cryptography-provider-webcrypto", version.ref = "cryptography" }
-crypto-openssl3 = { module = "dev.whyoleg.cryptography:cryptography-provider-openssl3", version.ref = "cryptography" }
+crypto-openssl3 = { module = "dev.whyoleg.cryptography:cryptography-provider-openssl3-prebuilt", version.ref = "cryptography" }
 crypto-pem = { module = "dev.whyoleg.cryptography:cryptography-serialization-pem", version.ref = "cryptography" }
 crypto-asn = { module = "dev.whyoleg.cryptography:cryptography-serialization-asn1", version.ref = "cryptography" }
 

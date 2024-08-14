@@ -1,6 +1,7 @@
 ﻿package com.appstractive.jwt
 
 import com.appstractive.jwt.signatures.hs256
+import dev.whyoleg.cryptography.random.CryptographyRandom
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import kotlin.test.Test
@@ -10,9 +11,15 @@ import kotlin.time.Duration.Companion.hours
 
 class JwtVerifierTests {
 
+    private val hmacSecret = CryptographyRandom.nextBytes(64)
+
     @Test
     fun testVerifyAudSuccess() = runTest {
-        val jwt = signedJwt()
+        val jwt = signedJwt {
+            hs256 {
+                secret = hmacSecret
+            }
+        }
 
         val result = jwt.verify {
             hs256 {
@@ -27,7 +34,11 @@ class JwtVerifierTests {
 
     @Test
     fun testVerifyAudFail() = runTest {
-        val jwt = signedJwt()
+        val jwt = signedJwt {
+            hs256 {
+                secret = hmacSecret
+            }
+        }
 
         val result = jwt.verify {
             hs256 {
@@ -42,7 +53,11 @@ class JwtVerifierTests {
 
     @Test
     fun testVerifyIssSuccess() = runTest {
-        val jwt = signedJwt()
+        val jwt = signedJwt {
+            hs256 {
+                secret = hmacSecret
+            }
+        }
 
         val result = jwt.verify {
             hs256 {
@@ -57,7 +72,11 @@ class JwtVerifierTests {
 
     @Test
     fun testVerifyIssFail() = runTest {
-        val jwt = signedJwt()
+        val jwt = signedJwt {
+            hs256 {
+                secret = hmacSecret
+            }
+        }
 
         val result = jwt.verify {
             hs256 {
@@ -72,7 +91,11 @@ class JwtVerifierTests {
 
     @Test
     fun testVerifyExpSuccess() = runTest {
-        val jwt = signedJwt()
+        val jwt = signedJwt {
+            hs256 {
+                secret = hmacSecret
+            }
+        }
 
         val result = jwt.verify {
             hs256 {
@@ -87,7 +110,11 @@ class JwtVerifierTests {
 
     @Test
     fun testVerifyExpFail() = runTest {
-        val jwt = signedJwt()
+        val jwt = signedJwt {
+            hs256 {
+                secret = hmacSecret
+            }
+        }
 
         val result = jwt.verify {
             hs256 {
@@ -102,7 +129,11 @@ class JwtVerifierTests {
 
     @Test
     fun testVerifyNbfSuccess() = runTest {
-        val jwt = signedJwt()
+        val jwt = signedJwt {
+            hs256 {
+                secret = hmacSecret
+            }
+        }
 
         val result = jwt.verify {
             hs256 {
@@ -117,7 +148,11 @@ class JwtVerifierTests {
 
     @Test
     fun testVerifyNbfFail() = runTest {
-        val jwt = signedJwt()
+        val jwt = signedJwt {
+            hs256 {
+                secret = hmacSecret
+            }
+        }
 
         val result = jwt.verify {
             hs256 {

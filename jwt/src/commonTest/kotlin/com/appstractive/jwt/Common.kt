@@ -2,6 +2,7 @@
 
 import com.appstractive.jwt.signatures.hs256
 import com.appstractive.jwt.utils.claim
+import dev.whyoleg.cryptography.random.CryptographyRandom
 import kotlinx.datetime.Clock
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
@@ -13,8 +14,6 @@ private enum class TestEnum {
     VALUE2,
     VALUE3,
 }
-
-val hmacSecret = "your-256-bit-secret".encodeToByteArray()
 
 @Serializable
 private data class TestClass(
@@ -86,11 +85,7 @@ fun unsignedJwt(): UnsignedJWT = jwt {
 }
 
 suspend fun signedJwt(
-    builder: SignatureBuilder.() -> Unit = {
-        hs256 {
-            secret = hmacSecret
-        }
-    },
+    builder: SignatureBuilder.() -> Unit,
 ): JWT {
     return unsignedJwt().sign(builder)
 }

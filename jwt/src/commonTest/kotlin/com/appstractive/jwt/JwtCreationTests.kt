@@ -11,7 +11,10 @@ import dev.whyoleg.cryptography.algorithms.digest.Digest
 import dev.whyoleg.cryptography.algorithms.digest.SHA256
 import dev.whyoleg.cryptography.algorithms.digest.SHA384
 import dev.whyoleg.cryptography.algorithms.digest.SHA512
+import dev.whyoleg.cryptography.random.CryptographyRandom
 import kotlinx.coroutines.test.runTest
+import kotlin.io.encoding.Base64.Default.UrlSafe
+import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -39,6 +42,7 @@ class JwtCreationTests {
     @Test
     fun createJwtHS384() = runTest {
         val jwt = createJwtHmac(
+            secret = CryptographyRandom.nextBytes(128),
             builder = {
                 hs384 {
                     secret = it
@@ -57,6 +61,7 @@ class JwtCreationTests {
     @Test
     fun createJwtHS512() = runTest {
         val jwt = createJwtHmac(
+            secret = CryptographyRandom.nextBytes(128),
             builder = {
                 hs512 {
                     secret = it
@@ -72,17 +77,19 @@ class JwtCreationTests {
         assertEquals(Algorithm.HS512, jwt.header.alg)
     }
 
+    @OptIn(ExperimentalEncodingApi::class)
     private suspend fun createJwtHmac(
+        secret: ByteArray = CryptographyRandom.nextBytes(64),
         builder: SignatureBuilder.(ByteArray) -> Unit,
         verifier: VerificationBuilder.(ByteArray) -> Unit,
     ): JWT {
-        val secret = hmacSecret
         val unsignedJwt = unsignedJwt()
 
         val signedJwt = unsignedJwt.sign {
             builder(secret)
         }
 
+        println(UrlSafe.encode(secret).replace("=", ""))
         println(signedJwt.toString())
 
         assertTrue(signedJwt.verify { verifier(secret) })
