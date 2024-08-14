@@ -10,7 +10,7 @@ import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.longOrNull
 
-fun JsonObject.instantOrNull(claim: String) : Instant? = this[claim]?.jsonPrimitive?.longOrNull?.let {
+fun JsonObject.instantOrNull(claim: String): Instant? = this[claim]?.jsonPrimitive?.longOrNull?.let {
     Instant.fromEpochSeconds(it)
 }
 

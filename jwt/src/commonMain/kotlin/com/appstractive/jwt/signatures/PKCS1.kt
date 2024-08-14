@@ -1,57 +1,64 @@
 ﻿package com.appstractive.jwt.signatures
 
-import com.appstractive.jwt.Algorithm
-import com.appstractive.jwt.SignatureBuilder
+import com.appstractive.jwt.*
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
-import dev.whyoleg.cryptography.algorithms.asymmetric.RSA
 import dev.whyoleg.cryptography.algorithms.digest.Digest
-import dev.whyoleg.cryptography.algorithms.digest.SHA256
-import dev.whyoleg.cryptography.algorithms.digest.SHA384
-import dev.whyoleg.cryptography.algorithms.digest.SHA512
+import dev.whyoleg.cryptography.operations.signature.SignatureGenerator
+import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 
-fun SignatureBuilder.rs256(configure: RSABase.Config.() -> Unit) {
-    val config = RSABase.Config().apply(configure)
-    algorithm = RS256(config)
+fun SignatureBuilder.rs256(configure: RSASigningConfig.() -> Unit) {
+    val config = RSASigningConfig().apply(configure)
+    type = Algorithm.RS256
+    algorithm = PKCS1Signer(config = config)
 }
 
-fun SignatureBuilder.rs384(configure: RSABase.Config.() -> Unit) {
-    val config = RSABase.Config().apply(configure)
-    algorithm = RS384(config)
+fun SignatureBuilder.rs384(configure: RSASigningConfig.() -> Unit) {
+    val config = RSASigningConfig().apply(configure)
+    type = Algorithm.RS384
+    algorithm = PKCS1Signer(config = config)
 }
 
-fun SignatureBuilder.rs512(configure: RSABase.Config.() -> Unit) {
-    val config = RSABase.Config().apply(configure)
-    algorithm = RS512(config)
+fun SignatureBuilder.rs512(configure: RSASigningConfig.() -> Unit) {
+    val config = RSASigningConfig().apply(configure)
+    type = Algorithm.RS512
+    algorithm = PKCS1Signer(config = config)
 }
 
-abstract class PKCS1(
-    config: RSABase.Config,
-    digest: CryptographyAlgorithmId<Digest>,
-) : RSABase<RSA.PKCS1.PublicKey, RSA.PKCS1.PrivateKey, RSA.PKCS1.KeyPair>(
-    config = config,
-    digest = digest,
-) {
-
-    override val type: Algorithm
-        get() = when (digest) {
-            SHA256 -> Algorithm.RS256
-            SHA384 -> Algorithm.RS384
-            SHA512 -> Algorithm.RS512
-            else -> throw IllegalArgumentException("Unsupported digest algorithm")
-        }
-
-    override val alg: RSA<RSA.PKCS1.PublicKey, RSA.PKCS1.PrivateKey, RSA.PKCS1.KeyPair> = provider.get(RSA.PKCS1)
-
-    override suspend fun sign(headerEncoded: String, claimsEncoded: String): ByteArray {
-        val privateKey: RSA.PKCS1.PrivateKey =
-            alg.privateKeyDecoder(digest).decodeFrom(checkNotNull(config.format), checkNotNull(config.privateKey))
-
-        return privateKey.signatureGenerator().generateSignature("$headerEncoded.$claimsEncoded".encodeToByteArray())
+fun VerificationBuilder.rs256(configure: RSAVerifierConfig.() -> Unit) {
+    val config = RSAVerifierConfig().apply(configure)
+    PKCS1Verifier(config).also {
+        algorithms[Algorithm.RS256] = it
     }
 }
 
-class RS256(config: Config) : PKCS1(digest = SHA256, config = config)
+fun VerificationBuilder.rs384(configure: RSAVerifierConfig.() -> Unit) {
+    val config = RSAVerifierConfig().apply(configure)
+    PKCS1Verifier(config).also {
+        algorithms[Algorithm.RS384] = it
+    }
+}
 
-class RS384(config: Config) : PKCS1(digest = SHA384, config = config)
+fun VerificationBuilder.rs512(configure: RSAVerifierConfig.() -> Unit) {
+    val config = RSAVerifierConfig().apply(configure)
+    PKCS1Verifier(config).also {
+        algorithms[Algorithm.RS512] = it
+    }
+}
 
-class RS512(config: Config) : PKCS1(digest = SHA512, config = config)
+internal class PKCS1Signer(
+    private val config: RSASigningConfig,
+) : SigningAlgorithm {
+    override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
+        return pkcs1.privateKeyDecoder(digest)
+            .decodeFrom(checkNotNull(config.format), checkNotNull(config.privateKey)).signatureGenerator()
+    }
+}
+
+internal class PKCS1Verifier(
+    private val config: RSAVerifierConfig,
+) : VerificationAlgorithm {
+    override suspend fun verifier(jwt: JWT): SignatureVerifier {
+        return pkcs1.publicKeyDecoder(digest = jwt.header.alg.digest)
+            .decodeFrom(checkNotNull(config.format), checkNotNull(config.publicKey)).signatureVerifier()
+    }
+}

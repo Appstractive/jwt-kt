@@ -9,6 +9,7 @@ data class Header(
     val kid: String? = null,
 )
 
+@JwtDsl
 class HeaderBuilder {
     var keyId: String? = null
     var typ: String = "JWT"

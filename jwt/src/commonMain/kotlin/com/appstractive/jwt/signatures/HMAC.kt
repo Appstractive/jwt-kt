@@ -3,61 +3,73 @@
 import com.appstractive.jwt.*
 import com.appstractive.jwt.utils.urlEncoded
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
-import dev.whyoleg.cryptography.CryptographyProvider
 import dev.whyoleg.cryptography.algorithms.digest.Digest
-import dev.whyoleg.cryptography.algorithms.digest.SHA256
-import dev.whyoleg.cryptography.algorithms.digest.SHA384
-import dev.whyoleg.cryptography.algorithms.digest.SHA512
 import dev.whyoleg.cryptography.algorithms.symmetric.HMAC
+import dev.whyoleg.cryptography.operations.signature.SignatureGenerator
+import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 import kotlinx.serialization.json.JsonObject
 
 fun SignatureBuilder.hs256(configure: Hmac.Config.() -> Unit) {
     val config = Hmac.Config().apply(configure)
-    algorithm = HS256(config)
+    type = Algorithm.HS256
+    algorithm = Hmac(config = config)
 }
 
 fun SignatureBuilder.hs384(configure: Hmac.Config.() -> Unit) {
     val config = Hmac.Config().apply(configure)
-    algorithm = HS384(config)
+    type = Algorithm.HS384
+    algorithm = Hmac(config = config)
 }
 
 fun SignatureBuilder.hs512(configure: Hmac.Config.() -> Unit) {
     val config = Hmac.Config().apply(configure)
-    algorithm = HS512(config)
+    type = Algorithm.HS512
+    algorithm = Hmac(config = config)
 }
 
-abstract class Hmac(
-    private val digest: CryptographyAlgorithmId<Digest>,
+fun VerificationBuilder.hs256(configure: Hmac.Config.() -> Unit) {
+    val config = Hmac.Config().apply(configure)
+    Hmac(config).also {
+        algorithms[Algorithm.HS256] = it
+    }
+}
+
+fun VerificationBuilder.hs384(configure: Hmac.Config.() -> Unit) {
+    val config = Hmac.Config().apply(configure)
+    Hmac(config).also {
+        algorithms[Algorithm.HS384] = it
+    }
+}
+
+fun VerificationBuilder.hs512(configure: Hmac.Config.() -> Unit) {
+    val config = Hmac.Config().apply(configure)
+    Hmac(config).also {
+        algorithms[Algorithm.HS512] = it
+    }
+}
+
+class Hmac(
     private val config: Config,
-) : SigningAlgorithm<Hmac.Config> {
-
-    private val provider = CryptographyProvider.Default
-    private val hmac = provider.get(HMAC)
-
-    override val type: Algorithm
-        get() = when(digest) {
-            SHA256 -> Algorithm.HS256
-            SHA384 -> Algorithm.HS384
-            SHA512 -> Algorithm.HS512
-            else -> throw IllegalArgumentException("Unsupported digest algorithm")
-        }
+) : SigningAlgorithm, VerificationAlgorithm {
 
     override suspend fun sign(header: Header, claims: JsonObject): ByteArray {
         val headerEncoded = header.urlEncoded()
         val claimsEncoded = claims.urlEncoded()
 
-        val key = hmac.keyDecoder(digest).decodeFrom(HMAC.Key.Format.RAW, config.secret)
+        val key = hmac.keyDecoder(header.alg.digest).decodeFrom(HMAC.Key.Format.RAW, config.secret)
 
         return key.signatureGenerator().generateSignature("$headerEncoded.$claimsEncoded".encodeToByteArray())
     }
 
-    class Config : SigningAlgorithmConfig {
+    override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
+        return hmac.keyDecoder(digest).decodeFrom(HMAC.Key.Format.RAW, config.secret).signatureGenerator()
+    }
+
+    override suspend fun verifier(jwt: JWT): SignatureVerifier {
+        return hmac.keyDecoder(jwt.header.alg.digest).decodeFrom(HMAC.Key.Format.RAW, config.secret).signatureVerifier()
+    }
+
+    class Config {
         var secret: ByteArray = ByteArray(0)
     }
 }
-
-class HS256(config: Config) : Hmac(digest = SHA256, config = config)
-
-class HS384(config: Config) : Hmac(digest = SHA384, config = config)
-
-class HS512(config: Config) : Hmac(digest = SHA512, config = config)

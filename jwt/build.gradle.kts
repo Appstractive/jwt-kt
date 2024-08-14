@@ -56,7 +56,6 @@ kotlin {
         commonMain.dependencies {
             implementation(libs.kotlin.serialization)
             implementation(libs.kotlin.serialization.json)
-            implementation(libs.kotlin.coroutines)
             implementation(libs.kotlin.datetime)
             api(libs.crypto)
         }

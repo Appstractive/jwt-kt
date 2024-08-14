@@ -2,6 +2,13 @@
 
 import com.appstractive.jwt.utils.urlEncoded
 
+@DslMarker
+@Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE)
+annotation class JwtDsl
+
+/**
+ * @see <a href="https://www.rfc-editor.org/rfc/rfc7519.html">JSON Web Token (JWT)</a>
+ */
 data class UnsignedJWT(
     val header: Header,
     val claims: Claims,
@@ -51,6 +58,8 @@ data class JWT(
         result = 31 * result + signature.contentHashCode()
         return result
     }
+
+    companion object
 }
 
 fun jwt(builder: JwtBuilder.() -> Unit): UnsignedJWT {
@@ -59,11 +68,7 @@ fun jwt(builder: JwtBuilder.() -> Unit): UnsignedJWT {
     return jwtBuilder.build()
 }
 
-suspend fun signedJwt(builder: JwtBuilder.() -> Unit, signature: SignatureBuilder.() -> Unit): JWT {
-    val jwtBuilder = JwtBuilder().apply(builder)
-    return jwtBuilder.build().sign(signature)
-}
-
+@JwtDsl
 class JwtBuilder {
 
     private var header: HeaderBuilder = HeaderBuilder()

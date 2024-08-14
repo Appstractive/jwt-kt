@@ -1,55 +1,54 @@
 ﻿package com.appstractive.jwt.signatures
 
-import com.appstractive.jwt.Header
-import com.appstractive.jwt.SigningAlgorithm
-import com.appstractive.jwt.SigningAlgorithmConfig
-import com.appstractive.jwt.utils.urlEncoded
-import dev.whyoleg.cryptography.CryptographyAlgorithmId
-import dev.whyoleg.cryptography.CryptographyProvider
 import dev.whyoleg.cryptography.algorithms.asymmetric.RSA
 import dev.whyoleg.cryptography.algorithms.asymmetric.RSA.PrivateKey.Format
-import dev.whyoleg.cryptography.algorithms.digest.Digest
-import kotlinx.serialization.json.JsonObject
 
-abstract class RSABase<PublicK : RSA.PublicKey, PrivateK : RSA.PrivateKey, KP : RSA.KeyPair<PublicK, PrivateK>>(
-    protected val digest: CryptographyAlgorithmId<Digest>,
-    protected val config: RSABase.Config,
-) : SigningAlgorithm<RSABase.Config> {
+class RSASigningConfig {
+    internal var privateKey: ByteArray? = null
+    internal var format: Format? = null
 
-    protected val provider = CryptographyProvider.Default
-    abstract val alg: RSA<PublicK, PrivateK, KP>
-
-    override suspend fun sign(header: Header, claims: JsonObject): ByteArray {
-        val headerEncoded = header.urlEncoded()
-        val claimsEncoded = claims.urlEncoded()
-
-        return sign(headerEncoded = headerEncoded, claimsEncoded = claimsEncoded)
+    fun pem(key: ByteArray) {
+        privateKey = key
+        format = Format.PEM.Generic
     }
 
-    abstract suspend fun sign(headerEncoded: String, claimsEncoded: String): ByteArray
+    fun pem(key: String) {
+        privateKey = key.encodeToByteArray()
+        format = Format.PEM.Generic
+    }
 
-    class Config : SigningAlgorithmConfig {
-        internal var privateKey: ByteArray? = null
-        internal var format: Format? = null
+    fun der(key: ByteArray) {
+        privateKey = key
+        format = Format.DER.Generic
+    }
 
-        fun pem(key: ByteArray) {
-            privateKey = key
-            format = Format.PEM.Generic
-        }
+    fun der(key: String) {
+        privateKey = key.encodeToByteArray()
+        format = Format.DER.Generic
+    }
+}
 
-        fun pem(key: String) {
-            privateKey = key.encodeToByteArray()
-            format = Format.PEM.Generic
-        }
+class RSAVerifierConfig {
+    internal var publicKey: ByteArray? = null
+    internal var format: RSA.PublicKey.Format? = null
 
-        fun der(key: ByteArray) {
-            privateKey = key
-            format = Format.DER.Generic
-        }
+    fun pem(key: ByteArray) {
+        publicKey = key
+        format = RSA.PublicKey.Format.PEM
+    }
 
-        fun der(key: String) {
-            privateKey = key.encodeToByteArray()
-            format = Format.DER.Generic
-        }
+    fun pem(key: String) {
+        publicKey = key.encodeToByteArray()
+        format = RSA.PublicKey.Format.PEM
+    }
+
+    fun der(key: ByteArray) {
+        publicKey = key
+        format = RSA.PublicKey.Format.DER
+    }
+
+    fun der(key: String) {
+        publicKey = key.encodeToByteArray()
+        format = RSA.PublicKey.Format.DER
     }
 }
