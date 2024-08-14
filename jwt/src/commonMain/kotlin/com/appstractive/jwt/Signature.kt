@@ -37,8 +37,14 @@ interface SigningAlgorithm {
 @JwtDsl
 class SignatureBuilder {
 
-    internal var algorithm: SigningAlgorithm? = null
+    private var algorithm: SigningAlgorithm? = null
     internal var type: Algorithm? = null
+        private set
+
+    fun algorithm(algorithm: SigningAlgorithm, type: Algorithm) {
+        this.algorithm = algorithm
+        this.type = type
+    }
 
     internal suspend fun sign(header: Header, claims: JsonObject): ByteArray {
         return algorithm?.sign(

@@ -1,7 +1,5 @@
 ﻿package com.appstractive.jwt
 
-import com.appstractive.jwt.signatures.hs256
-import dev.whyoleg.cryptography.random.CryptographyRandom
 import kotlinx.coroutines.test.runTest
 import kotlinx.datetime.Clock
 import kotlin.test.Test
@@ -11,20 +9,20 @@ import kotlin.time.Duration.Companion.hours
 
 class JwtVerifierTests {
 
-    private val hmacSecret = CryptographyRandom.nextBytes(64)
-
     @Test
     fun testVerifyAudSuccess() = runTest {
         val jwt = signedJwt {
-            hs256 {
-                secret = hmacSecret
-            }
+            algorithm(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
         }
 
         val result = jwt.verify {
-            hs256 {
-                secret = hmacSecret
-            }
+            verifier(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
 
             audience = "api.example.com"
         }
@@ -35,15 +33,17 @@ class JwtVerifierTests {
     @Test
     fun testVerifyAudFail() = runTest {
         val jwt = signedJwt {
-            hs256 {
-                secret = hmacSecret
-            }
+            algorithm(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
         }
 
         val result = jwt.verify {
-            hs256 {
-                secret = hmacSecret
-            }
+            verifier(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
 
             audience = "example.com"
         }
@@ -54,15 +54,17 @@ class JwtVerifierTests {
     @Test
     fun testVerifyIssSuccess() = runTest {
         val jwt = signedJwt {
-            hs256 {
-                secret = hmacSecret
-            }
+            algorithm(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
         }
 
         val result = jwt.verify {
-            hs256 {
-                secret = hmacSecret
-            }
+            verifier(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
 
             issuer = "example.com"
         }
@@ -73,15 +75,17 @@ class JwtVerifierTests {
     @Test
     fun testVerifyIssFail() = runTest {
         val jwt = signedJwt {
-            hs256 {
-                secret = hmacSecret
-            }
+            algorithm(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
         }
 
         val result = jwt.verify {
-            hs256 {
-                secret = hmacSecret
-            }
+            verifier(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
 
             issuer = "example2.com"
         }
@@ -92,15 +96,17 @@ class JwtVerifierTests {
     @Test
     fun testVerifyExpSuccess() = runTest {
         val jwt = signedJwt {
-            hs256 {
-                secret = hmacSecret
-            }
+            algorithm(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
         }
 
         val result = jwt.verify {
-            hs256 {
-                secret = hmacSecret
-            }
+            verifier(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
 
             expiresAt()
         }
@@ -111,15 +117,17 @@ class JwtVerifierTests {
     @Test
     fun testVerifyExpFail() = runTest {
         val jwt = signedJwt {
-            hs256 {
-                secret = hmacSecret
-            }
+            algorithm(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
         }
 
         val result = jwt.verify {
-            hs256 {
-                secret = hmacSecret
-            }
+            verifier(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
 
             expiresAt(now = Clock.System.now() + 25.hours)
         }
@@ -130,15 +138,17 @@ class JwtVerifierTests {
     @Test
     fun testVerifyNbfSuccess() = runTest {
         val jwt = signedJwt {
-            hs256 {
-                secret = hmacSecret
-            }
+            algorithm(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
         }
 
         val result = jwt.verify {
-            hs256 {
-                secret = hmacSecret
-            }
+            verifier(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
 
             notBefore()
         }
@@ -149,15 +159,17 @@ class JwtVerifierTests {
     @Test
     fun testVerifyNbfFail() = runTest {
         val jwt = signedJwt {
-            hs256 {
-                secret = hmacSecret
-            }
+            algorithm(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
         }
 
         val result = jwt.verify {
-            hs256 {
-                secret = hmacSecret
-            }
+            verifier(
+                type = Algorithm.HS256,
+                algorithm = MockSignerVerifier,
+            )
 
             notBefore(now = Clock.System.now() - 1.hours)
         }

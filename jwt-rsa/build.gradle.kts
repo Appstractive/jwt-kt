@@ -4,11 +4,10 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 plugins {
     alias(libs.plugins.multiplatform)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlinx.serialization)
 }
 
-group = "com.appstractive.jwt"
-version = "1.0-SNAPSHOT"
+group = "com.appstractive.jwt-rsa"
+version = rootProject.version
 
 kotlin {
     androidTarget {
@@ -54,10 +53,7 @@ kotlin {
 
     sourceSets {
         commonMain.dependencies {
-            implementation(libs.kotlin.serialization)
-            implementation(libs.kotlin.serialization.json)
-            implementation(libs.kotlin.datetime)
-            api(libs.crypto)
+            implementation(projects.jwt)
         }
 
         commonTest.dependencies {

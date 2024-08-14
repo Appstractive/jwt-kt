@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 pluginManagement {
     repositories {
         google()
@@ -15,4 +17,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "jwt-kt"
 
-include(":jwt")
+include(":jwt", ":jwt-hmac", ":jwt-rsa", "jwt-ecdsa")

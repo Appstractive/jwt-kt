@@ -1,13 +1,35 @@
 ﻿package com.appstractive.jwt
 
-import com.appstractive.jwt.signatures.hs256
 import com.appstractive.jwt.utils.claim
-import dev.whyoleg.cryptography.random.CryptographyRandom
+import dev.whyoleg.cryptography.CryptographyAlgorithmId
+import dev.whyoleg.cryptography.CryptographyProviderApi
+import dev.whyoleg.cryptography.algorithms.digest.Digest
+import dev.whyoleg.cryptography.operations.signature.SignatureGenerator
+import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 import kotlinx.datetime.Clock
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonPrimitive
 import kotlin.time.Duration.Companion.hours
+
+@OptIn(CryptographyProviderApi::class)
+object MockSignerVerifier : VerificationAlgorithm, SigningAlgorithm {
+    override suspend fun verifier(jwt: JWT): SignatureVerifier {
+        return object : SignatureVerifier {
+            override fun verifySignatureBlocking(dataInput: ByteArray, signatureInput: ByteArray): Boolean {
+                return true
+            }
+        }
+    }
+
+    override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
+        return object : SignatureGenerator {
+            override fun generateSignatureBlocking(dataInput: ByteArray): ByteArray {
+                return "123456".encodeToByteArray()
+            }
+        }
+    }
+}
 
 private enum class TestEnum {
     VALUE1,

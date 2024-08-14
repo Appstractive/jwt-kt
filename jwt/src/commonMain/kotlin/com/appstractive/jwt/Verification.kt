@@ -14,13 +14,17 @@ interface VerificationAlgorithm {
 }
 
 class VerificationBuilder {
-    internal val algorithms: MutableMap<Algorithm, VerificationAlgorithm> = mutableMapOf()
+    private val algorithms: MutableMap<Algorithm, VerificationAlgorithm> = mutableMapOf()
 
     private var verifyExpiresAt: Instant? = null
     private var verifyNotBefore: Instant? = null
 
     var audience: String? = null
     var issuer: String? = null
+
+    fun verifier(type: Algorithm, algorithm: VerificationAlgorithm) {
+        algorithms[type] = algorithm
+    }
 
     fun expiresAt(now: Instant = Clock.System.now()) {
         verifyExpiresAt = now

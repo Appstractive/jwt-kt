@@ -2,48 +2,62 @@
 
 import com.appstractive.jwt.*
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
+import dev.whyoleg.cryptography.CryptographyProvider
 import dev.whyoleg.cryptography.algorithms.asymmetric.EC
+import dev.whyoleg.cryptography.algorithms.asymmetric.ECDSA
 import dev.whyoleg.cryptography.algorithms.digest.Digest
 import dev.whyoleg.cryptography.operations.signature.SignatureGenerator
 import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 
+internal val provider by lazy { CryptographyProvider.Default }
+internal val ecdsa: ECDSA by lazy { provider.get(ECDSA) }
+
 fun SignatureBuilder.ec256(configure: ECDSASignerConfig.() -> Unit) {
     val config = ECDSASignerConfig().apply(configure)
-    type = Algorithm.EC256
-    algorithm = ECDSASigner(config = config)
+    algorithm(
+        algorithm = ECDSASigner(config = config),
+        type = Algorithm.EC256,
+    )
 }
 
 fun SignatureBuilder.ec384(configure: ECDSASignerConfig.() -> Unit) {
     val config = ECDSASignerConfig().apply(configure)
-    type = Algorithm.EC384
-    algorithm = ECDSASigner(config = config)
+    algorithm(
+        algorithm = ECDSASigner(config = config),
+        type = Algorithm.EC384,
+    )
 }
 
 fun SignatureBuilder.ec512(configure: ECDSASignerConfig.() -> Unit) {
     val config = ECDSASignerConfig().apply(configure)
-    type = Algorithm.EC512
-    algorithm = ECDSASigner(config = config)
+    algorithm(
+        algorithm = ECDSASigner(config = config),
+        type = Algorithm.EC512,
+    )
 }
 
 fun VerificationBuilder.ec256(configure: ECDSAVerifierConfig.() -> Unit) {
     val config = ECDSAVerifierConfig().apply(configure)
-    ECDSAVerifier(config = config).also {
-        algorithms[Algorithm.EC256] = it
-    }
+    verifier(
+        type = Algorithm.EC256,
+        algorithm = ECDSAVerifier(config = config),
+    )
 }
 
 fun VerificationBuilder.ec384(configure: ECDSAVerifierConfig.() -> Unit) {
     val config = ECDSAVerifierConfig().apply(configure)
-    ECDSAVerifier(config = config).also {
-        algorithms[Algorithm.EC384] = it
-    }
+    verifier(
+        type = Algorithm.EC384,
+        algorithm = ECDSAVerifier(config = config),
+    )
 }
 
 fun VerificationBuilder.ec512(configure: ECDSAVerifierConfig.() -> Unit) {
     val config = ECDSAVerifierConfig().apply(configure)
-    ECDSAVerifier(config = config).also {
-        algorithms[Algorithm.EC512] = it
-    }
+    verifier(
+        type = Algorithm.EC512,
+        algorithm = ECDSAVerifier(config = config),
+    )
 }
 
 internal class ECDSASigner(
