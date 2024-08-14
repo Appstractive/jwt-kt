@@ -74,7 +74,7 @@ kotlin {
         }
 
         appleMain.dependencies {
-            implementation(libs.crypto.apple)
+            implementation(libs.crypto.openssl3)
         }
 
         linuxMain.dependencies {

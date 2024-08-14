@@ -263,7 +263,6 @@ class JwtCreationTests {
     @Test
     fun createJwtEC256() = runTest {
         val jwt = createJwtEC(
-            SHA256,
             builder = {
                 ec256 {
                     pem(it)
@@ -282,7 +281,6 @@ class JwtCreationTests {
     @Test
     fun createJwtEC384() = runTest {
         val jwt = createJwtEC(
-            SHA384,
             builder = {
                 ec384 {
                     pem(it)
@@ -301,7 +299,6 @@ class JwtCreationTests {
     @Test
     fun createJwtEC512() = runTest {
         val jwt = createJwtEC(
-            SHA512,
             builder = {
                 ec512 {
                     pem(it)
@@ -318,7 +315,6 @@ class JwtCreationTests {
     }
 
     private suspend fun createJwtEC(
-        digest: CryptographyAlgorithmId<Digest>,
         curve: EC.Curve = EC.Curve.P256,
         builder: SignatureBuilder.(ByteArray) -> Unit,
         verifier: VerificationBuilder.(ByteArray) -> Unit,
@@ -345,8 +341,8 @@ class JwtCreationTests {
 
     companion object {
         private val provider = CryptographyProvider.Default
-        val PKCS1: PKCS1 = provider.get(RSA.PKCS1)
-        val PSS: RSA.PSS = provider.get(RSA.PSS)
-        val ECD: ECDSA = provider.get(ECDSA)
+        val PKCS1: PKCS1 by lazy { provider.get(RSA.PKCS1) }
+        val PSS: RSA.PSS by lazy { provider.get(RSA.PSS) }
+        val ECD: ECDSA by lazy { provider.get(ECDSA) }
     }
 }
