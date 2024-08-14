@@ -36,9 +36,9 @@ abstract class Hmac(
 
     override val type: Algorithm
         get() = when(digest) {
-            SHA256 -> Algorithm.RS256
-            SHA384 -> Algorithm.RS384
-            SHA512 -> Algorithm.RS512
+            SHA256 -> Algorithm.HS256
+            SHA384 -> Algorithm.HS384
+            SHA512 -> Algorithm.HS512
             else -> throw IllegalArgumentException("Unsupported digest algorithm")
         }
 

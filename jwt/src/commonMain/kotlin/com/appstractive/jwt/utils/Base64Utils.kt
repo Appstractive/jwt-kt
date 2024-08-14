@@ -29,3 +29,11 @@ fun urlEncoded(source: String): String {
 fun urlEncoded(source: ByteArray): String {
     return UrlSafe.encode(source).replace("=", "")
 }
+
+fun String.urlDecodedString(): String {
+    return UrlSafe.decode(this).decodeToString()
+}
+
+fun String.urlDecodedBytes(): ByteArray {
+    return UrlSafe.decode(this)
+}

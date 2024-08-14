@@ -43,7 +43,7 @@ private data class TestClass(
     val nullable: Nothing? = null,
 )
 
-class JwtTests {
+class JwtCreationTests {
 
     @OptIn(ExperimentalSerializationApi::class)
     private fun unsignedJwt(): UnsignedJWT = jwt {
@@ -104,29 +104,35 @@ class JwtTests {
 
     @Test
     fun createJwtHS256() = runTest {
-        createJwtHmac {
+        val jwt = createJwtHmac {
             hs256 {
                 secret = it
             }
         }
+
+        assertEquals(Algorithm.HS256, jwt.header.alg)
     }
 
     @Test
     fun createJwtHS384() = runTest {
-        createJwtHmac {
+        val jwt = createJwtHmac {
             hs384 {
                 secret = it
             }
         }
+
+        assertEquals(Algorithm.HS384, jwt.header.alg)
     }
 
     @Test
     fun createJwtHS512() = runTest {
-        createJwtHmac {
+        val jwt = createJwtHmac {
             hs512 {
                 secret = it
             }
         }
+
+        assertEquals(Algorithm.HS512, jwt.header.alg)
     }
 
     private suspend fun createJwtHmac(builder: SignatureBuilder.(ByteArray) -> Unit): JWT {
