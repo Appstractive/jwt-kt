@@ -55,7 +55,6 @@ kotlin {
 
       implementation(libs.ktor.serialization.json)
       implementation(libs.ktor.client.core)
-      implementation(libs.ktor.client.cio)
       implementation(libs.ktor.client.serialization)
       implementation(libs.ktor.client.json)
       implementation(libs.ktor.client.contentnegotiation)
@@ -67,17 +66,35 @@ kotlin {
       implementation(libs.test.ktor.client.mock)
     }
 
-    androidMain.dependencies { implementation(libs.crypto.jdk) }
+    androidMain.dependencies {
+      implementation(libs.crypto.jdk)
+      implementation(libs.ktor.client.cio)
+    }
 
-    jvmMain.dependencies { implementation(libs.crypto.jdk) }
+    jvmMain.dependencies {
+      implementation(libs.crypto.jdk)
+      implementation(libs.ktor.client.cio)
+    }
 
-    appleMain.dependencies { implementation(libs.crypto.openssl3) }
+    appleMain.dependencies {
+      implementation(libs.crypto.openssl3)
+      implementation(libs.ktor.client.cio)
+    }
 
-    linuxMain.dependencies { implementation(libs.crypto.openssl3) }
+    linuxMain.dependencies {
+      implementation(libs.crypto.openssl3)
+      implementation(libs.ktor.client.cio)
+    }
 
-    mingwMain.dependencies { implementation(libs.crypto.openssl3) }
+    mingwMain.dependencies {
+      implementation(libs.crypto.openssl3)
+      implementation(libs.ktor.client.win)
+    }
 
-    jsMain.dependencies { implementation(libs.crypto.webcrypto) }
+    jsMain.dependencies {
+      implementation(libs.crypto.webcrypto)
+      implementation(libs.ktor.client.js)
+    }
   }
 }
 

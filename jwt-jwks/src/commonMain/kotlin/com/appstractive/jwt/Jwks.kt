@@ -8,7 +8,6 @@ import dev.whyoleg.cryptography.algorithms.symmetric.HMAC
 import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
@@ -72,7 +71,7 @@ internal class JwksVerifier(
 
 class JwksConfig {
   var endpoint: String? = null
-  var client: HttpClient = HttpClient(CIO)
+  var client: HttpClient = HttpClient()
   var cacheDuration: Duration = 24.hours
 }
 

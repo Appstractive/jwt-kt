@@ -55,8 +55,6 @@ private data class TestClass(
 
 @OptIn(ExperimentalSerializationApi::class)
 fun unsignedJwt(): UnsignedJWT = jwt {
-  header { keyId = "123456" }
-
   claims {
     issuer = "example.com"
     subject = "me"
@@ -110,5 +108,5 @@ fun unsignedJwt(): UnsignedJWT = jwt {
 suspend fun signedJwt(
     builder: Signer.() -> Unit,
 ): JWT {
-  return unsignedJwt().sign(builder)
+  return unsignedJwt().sign(builder = builder)
 }

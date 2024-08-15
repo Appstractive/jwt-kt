@@ -77,13 +77,17 @@ class Signer {
 
 fun signer(builder: Signer.() -> Unit): Signer = Signer().apply(builder)
 
-suspend fun UnsignedJWT.sign(builder: Signer.() -> Unit): JWT = sign(signer(builder))
+suspend fun UnsignedJWT.sign(kid: String? = null, builder: Signer.() -> Unit): JWT =
+    sign(
+        kid = kid,
+        signer = signer(builder),
+    )
 
-suspend fun UnsignedJWT.sign(signer: Signer): JWT {
+suspend fun UnsignedJWT.sign(kid: String? = null, signer: Signer): JWT {
   val finalHeader =
       header.copy(
           alg = checkNotNull(signer.type) { "No algorithm configured" },
-          kid = header.kid,
+          kid = kid,
       )
   return JWT(
       header = finalHeader,
