@@ -15,7 +15,7 @@ import kotlinx.coroutines.test.runTest
 
 class JwksVerifierTests {
 
-  val mockEngine = MockEngine { request ->
+  private val mockEngine = MockEngine { request ->
     respond(
         content = ByteReadChannel(KEY_SET_RSA),
         status = HttpStatusCode.OK,
@@ -23,7 +23,7 @@ class JwksVerifierTests {
     )
   }
 
-  val mockClient = HttpClient(mockEngine)
+  private val mockClient = HttpClient(mockEngine)
 
   @Test
   fun testVerifyRSA() = runTest {
