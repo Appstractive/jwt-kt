@@ -55,6 +55,7 @@ kotlin {
 
       implementation(libs.ktor.serialization.json)
       implementation(libs.ktor.client.core)
+      implementation(libs.ktor.client.cio)
       implementation(libs.ktor.client.serialization)
       implementation(libs.ktor.client.json)
       implementation(libs.ktor.client.contentnegotiation)
@@ -63,6 +64,7 @@ kotlin {
     commonTest.dependencies {
       implementation(kotlin("test"))
       implementation(libs.test.kotlin.coroutines)
+      implementation(libs.test.ktor.client.mock)
     }
 
     androidMain.dependencies { implementation(libs.crypto.jdk) }
