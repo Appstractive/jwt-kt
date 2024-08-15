@@ -3,7 +3,9 @@
 ![badge][badge-ios]
 ![badge][badge-macos]
 ![badge][badge-tvos]
+![badge][badge-watchos]
 ![badge][badge-jvm]
+![badge][badge-js]
 ![badge][badge-win]
 ![badge][badge-linux]
 
@@ -106,6 +108,8 @@ val isValid = jwt.verify {
 [badge-ios]: http://img.shields.io/badge/platform-ios-CDCDCD.svg?style=flat
 [badge-macos]: http://img.shields.io/badge/platform-macos-111111.svg?style=flat
 [badge-tvos]: http://img.shields.io/badge/platform-tvos-808080.svg?style=flat
+[badge-watchos]: http://img.shields.io/badge/platform-watchos-808080.svg?style=flat
 [badge-jvm]: http://img.shields.io/badge/platform-jvm-CDCDCD.svg?style=flat
+[badge-js]: http://img.shields.io/badge/platform-js-CDCDCD.svg?style=flat
 [badge-win]: http://img.shields.io/badge/platform-win-CDCDCD.svg?style=flat
 [badge-linux]: http://img.shields.io/badge/platform-linux-CDCDCD.svg?style=flat
