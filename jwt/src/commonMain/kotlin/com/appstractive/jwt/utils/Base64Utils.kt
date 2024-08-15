@@ -6,9 +6,9 @@ import com.appstractive.jwt.Claims
 import com.appstractive.jwt.Header
 import com.appstractive.jwt.JWT
 import com.appstractive.jwt.UnsignedJWT
-import kotlinx.serialization.encodeToString
 import kotlin.io.encoding.Base64.Default.UrlSafe
 import kotlin.io.encoding.ExperimentalEncodingApi
+import kotlinx.serialization.encodeToString
 
 fun UnsignedJWT.urlEncoded(): String = "${header.urlEncoded()}.${claims.urlEncoded()}"
 

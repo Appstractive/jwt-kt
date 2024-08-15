@@ -12,130 +12,133 @@ import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 internal val provider by lazy { CryptographyProvider.Default }
 internal val ecdsa: ECDSA by lazy { provider.get(ECDSA) }
 
-fun SignatureBuilder.ec256(configure: ECDSASignerConfig.() -> Unit) {
-    val config = ECDSASignerConfig().apply(configure)
-    algorithm(
-        algorithm = ECDSASigner(config = config),
-        type = Algorithm.EC256,
-    )
+fun Signer.ec256(configure: ECDSASignerConfig.() -> Unit) {
+  val config = ECDSASignerConfig().apply(configure)
+  algorithm(
+      algorithm = ECDSASigner(config = config),
+      type = Algorithm.EC256,
+  )
 }
 
-fun SignatureBuilder.ec384(configure: ECDSASignerConfig.() -> Unit) {
-    val config = ECDSASignerConfig().apply(configure)
-    algorithm(
-        algorithm = ECDSASigner(config = config),
-        type = Algorithm.EC384,
-    )
+fun Signer.ec384(configure: ECDSASignerConfig.() -> Unit) {
+  val config = ECDSASignerConfig().apply(configure)
+  algorithm(
+      algorithm = ECDSASigner(config = config),
+      type = Algorithm.EC384,
+  )
 }
 
-fun SignatureBuilder.ec512(configure: ECDSASignerConfig.() -> Unit) {
-    val config = ECDSASignerConfig().apply(configure)
-    algorithm(
-        algorithm = ECDSASigner(config = config),
-        type = Algorithm.EC512,
-    )
+fun Signer.ec512(configure: ECDSASignerConfig.() -> Unit) {
+  val config = ECDSASignerConfig().apply(configure)
+  algorithm(
+      algorithm = ECDSASigner(config = config),
+      type = Algorithm.EC512,
+  )
 }
 
-fun VerificationBuilder.ec256(configure: ECDSAVerifierConfig.() -> Unit) {
-    val config = ECDSAVerifierConfig().apply(configure)
-    verifier(
-        type = Algorithm.EC256,
-        algorithm = ECDSAVerifier(config = config),
-    )
+fun Verifier.ec256(configure: ECDSAVerifierConfig.() -> Unit) {
+  val config = ECDSAVerifierConfig().apply(configure)
+  algorithm(
+      type = Algorithm.EC256,
+      algorithm = ECDSAVerifier(config = config),
+  )
 }
 
-fun VerificationBuilder.ec384(configure: ECDSAVerifierConfig.() -> Unit) {
-    val config = ECDSAVerifierConfig().apply(configure)
-    verifier(
-        type = Algorithm.EC384,
-        algorithm = ECDSAVerifier(config = config),
-    )
+fun Verifier.ec384(configure: ECDSAVerifierConfig.() -> Unit) {
+  val config = ECDSAVerifierConfig().apply(configure)
+  algorithm(
+      type = Algorithm.EC384,
+      algorithm = ECDSAVerifier(config = config),
+  )
 }
 
-fun VerificationBuilder.ec512(configure: ECDSAVerifierConfig.() -> Unit) {
-    val config = ECDSAVerifierConfig().apply(configure)
-    verifier(
-        type = Algorithm.EC512,
-        algorithm = ECDSAVerifier(config = config),
-    )
+fun Verifier.ec512(configure: ECDSAVerifierConfig.() -> Unit) {
+  val config = ECDSAVerifierConfig().apply(configure)
+  algorithm(
+      type = Algorithm.EC512,
+      algorithm = ECDSAVerifier(config = config),
+  )
 }
 
 internal class ECDSASigner(
     private val config: ECDSASignerConfig,
 ) : SigningAlgorithm {
 
-    override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
-        return ecdsa.privateKeyDecoder(config.curve)
-            .decodeFrom(checkNotNull(config.format), checkNotNull(config.privateKey)).signatureGenerator(digest)
-    }
+  override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
+    return ecdsa
+        .privateKeyDecoder(config.curve)
+        .decodeFrom(checkNotNull(config.format), checkNotNull(config.privateKey))
+        .signatureGenerator(digest)
+  }
 }
 
 internal class ECDSAVerifier(
     private val config: ECDSAVerifierConfig,
 ) : VerificationAlgorithm {
-    override suspend fun verifier(jwt: JWT): SignatureVerifier {
-        return ecdsa.publicKeyDecoder(curve = config.curve)
-            .decodeFrom(checkNotNull(config.format), checkNotNull(config.publicKey))
-            .signatureVerifier(digest = jwt.header.alg.digest)
-    }
+  override suspend fun verifier(jwt: JWT): SignatureVerifier {
+    return ecdsa
+        .publicKeyDecoder(curve = config.curve)
+        .decodeFrom(checkNotNull(config.format), checkNotNull(config.publicKey))
+        .signatureVerifier(digest = jwt.header.alg.digest)
+  }
 }
 
 class ECDSASignerConfig {
-    internal var privateKey: ByteArray? = null
-    internal var format: EC.PrivateKey.Format? = null
-    internal var curve: EC.Curve = EC.Curve.P256
+  internal var privateKey: ByteArray? = null
+  internal var format: EC.PrivateKey.Format? = null
+  internal var curve: EC.Curve = EC.Curve.P256
 
-    fun pem(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
-        privateKey = key
-        format = EC.PrivateKey.Format.PEM
-        this.curve = curve
-    }
+  fun pem(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
+    privateKey = key
+    format = EC.PrivateKey.Format.PEM
+    this.curve = curve
+  }
 
-    fun pem(key: String, curve: EC.Curve = EC.Curve.P256) {
-        privateKey = key.encodeToByteArray()
-        format = EC.PrivateKey.Format.PEM
-        this.curve = curve
-    }
+  fun pem(key: String, curve: EC.Curve = EC.Curve.P256) {
+    privateKey = key.encodeToByteArray()
+    format = EC.PrivateKey.Format.PEM
+    this.curve = curve
+  }
 
-    fun der(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
-        privateKey = key
-        format = EC.PrivateKey.Format.DER
-        this.curve = curve
-    }
+  fun der(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
+    privateKey = key
+    format = EC.PrivateKey.Format.DER
+    this.curve = curve
+  }
 
-    fun der(key: String, curve: EC.Curve = EC.Curve.P256) {
-        privateKey = key.encodeToByteArray()
-        format = EC.PrivateKey.Format.DER
-        this.curve = curve
-    }
+  fun der(key: String, curve: EC.Curve = EC.Curve.P256) {
+    privateKey = key.encodeToByteArray()
+    format = EC.PrivateKey.Format.DER
+    this.curve = curve
+  }
 }
 
 class ECDSAVerifierConfig {
-    internal var publicKey: ByteArray? = null
-    internal var format: EC.PublicKey.Format? = null
-    internal var curve: EC.Curve = EC.Curve.P256
+  internal var publicKey: ByteArray? = null
+  internal var format: EC.PublicKey.Format? = null
+  internal var curve: EC.Curve = EC.Curve.P256
 
-    fun pem(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
-        publicKey = key
-        format = EC.PublicKey.Format.PEM
-        this.curve = curve
-    }
+  fun pem(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
+    publicKey = key
+    format = EC.PublicKey.Format.PEM
+    this.curve = curve
+  }
 
-    fun pem(key: String, curve: EC.Curve = EC.Curve.P256) {
-        publicKey = key.encodeToByteArray()
-        format = EC.PublicKey.Format.PEM
-        this.curve = curve
-    }
+  fun pem(key: String, curve: EC.Curve = EC.Curve.P256) {
+    publicKey = key.encodeToByteArray()
+    format = EC.PublicKey.Format.PEM
+    this.curve = curve
+  }
 
-    fun der(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
-        publicKey = key
-        format = EC.PublicKey.Format.DER
-        this.curve = curve
-    }
+  fun der(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
+    publicKey = key
+    format = EC.PublicKey.Format.DER
+    this.curve = curve
+  }
 
-    fun der(key: String, curve: EC.Curve = EC.Curve.P256) {
-        publicKey = key.encodeToByteArray()
-        format = EC.PublicKey.Format.DER
-        this.curve = curve
-    }
+  fun der(key: String, curve: EC.Curve = EC.Curve.P256) {
+    publicKey = key.encodeToByteArray()
+    format = EC.PublicKey.Format.DER
+    this.curve = curve
+  }
 }

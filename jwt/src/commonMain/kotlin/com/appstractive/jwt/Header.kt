@@ -11,13 +11,13 @@ data class Header(
 
 @JwtDsl
 class HeaderBuilder {
-    var keyId: String? = null
-    var typ: String = "JWT"
+  var keyId: String? = null
+  var typ: String = "JWT"
 
-    internal fun build(): Header {
-        return Header(
-            typ = typ,
-            kid = keyId,
-        )
-    }
+  internal fun build(): Header {
+    return Header(
+        typ = typ,
+        kid = keyId,
+    )
+  }
 }
