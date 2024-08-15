@@ -40,7 +40,7 @@ kotlin {
       )
       .forEach {
         it.binaries.framework {
-          baseName = "JWT-KT"
+          baseName = "JWT-ECDSA-KT"
           isStatic = true
         }
       }
@@ -68,7 +68,7 @@ kotlin {
 }
 
 android {
-  namespace = group.toString()
+  namespace = "com.appstractive.jwt.ecdsa"
   compileSdk = libs.versions.compileSdk.get().toInt()
 
   defaultConfig { minSdk = libs.versions.minSdk.get().toInt() }

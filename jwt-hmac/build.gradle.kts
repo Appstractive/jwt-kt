@@ -40,7 +40,7 @@ kotlin {
       )
       .forEach {
         it.binaries.framework {
-          baseName = "JWT-KT"
+          baseName = "JWT-HMAC-KT"
           isStatic = true
         }
       }
@@ -68,7 +68,7 @@ kotlin {
 }
 
 android {
-  namespace = group.toString()
+  namespace = "com.appstractive.jwt.hmac"
   compileSdk = libs.versions.compileSdk.get().toInt()
 
   defaultConfig { minSdk = libs.versions.minSdk.get().toInt() }

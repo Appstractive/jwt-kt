@@ -1,12 +1,11 @@
 ﻿import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
   alias(libs.plugins.multiplatform)
   alias(libs.plugins.android.library)
 }
 
-group = "com.appstractive.jwt-rsa"
+group = "com.appstractive.jwt-jwks"
 
 version = rootProject.version
 
@@ -23,7 +22,6 @@ kotlin {
   linuxX64()
 
   js()
-  @OptIn(ExperimentalWasmDsl::class) wasmJs()
 
   listOf(
           iosX64(),
@@ -40,13 +38,22 @@ kotlin {
       )
       .forEach {
         it.binaries.framework {
-          baseName = "JWT-RSA-KT"
+          baseName = "JWT-JWKS-KT"
           isStatic = true
         }
       }
 
   sourceSets {
-    commonMain.dependencies { implementation(projects.jwt) }
+    commonMain.dependencies {
+      implementation(projects.jwt)
+      implementation(projects.jwtRsa)
+      implementation(projects.jwtHmac)
+      implementation(projects.jwtEcdsa)
+      implementation(libs.ktor.client.core)
+      implementation(libs.ktor.client.serialization)
+      implementation(libs.ktor.client.json)
+      implementation(libs.ktor.client.contentnegotiation)
+    }
 
     commonTest.dependencies {
       implementation(kotlin("test"))
@@ -68,7 +75,7 @@ kotlin {
 }
 
 android {
-  namespace = "com.appstractive.jwt.rsa"
+  namespace = "com.appstractive.jwt.jwks"
   compileSdk = libs.versions.compileSdk.get().toInt()
 
   defaultConfig { minSdk = libs.versions.minSdk.get().toInt() }

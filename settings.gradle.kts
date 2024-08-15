@@ -17,4 +17,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "jwt-kt"
 
-include(":jwt", ":jwt-hmac", ":jwt-rsa", "jwt-ecdsa")
+include(":jwt", ":jwt-hmac", ":jwt-rsa", ":jwt-ecdsa", ":jwt-jwks")
