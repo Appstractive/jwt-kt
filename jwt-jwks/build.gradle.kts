@@ -3,6 +3,7 @@
 plugins {
   alias(libs.plugins.multiplatform)
   alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlinx.serialization)
 }
 
 group = "com.appstractive.jwt-jwks"
@@ -47,8 +48,10 @@ kotlin {
     commonMain.dependencies {
       implementation(projects.jwt)
       implementation(projects.jwtRsa)
-      implementation(projects.jwtHmac)
       implementation(projects.jwtEcdsa)
+
+      implementation(libs.kotlin.coroutines)
+
       implementation(libs.ktor.client.core)
       implementation(libs.ktor.client.serialization)
       implementation(libs.ktor.client.json)
