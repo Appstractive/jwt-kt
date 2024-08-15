@@ -51,7 +51,9 @@ kotlin {
       implementation(projects.jwtEcdsa)
 
       implementation(libs.kotlin.coroutines)
+      implementation(libs.kotlin.datetime)
 
+      implementation(libs.ktor.serialization.json)
       implementation(libs.ktor.client.core)
       implementation(libs.ktor.client.serialization)
       implementation(libs.ktor.client.json)

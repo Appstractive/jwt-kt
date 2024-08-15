@@ -2,7 +2,7 @@
 
 import kotlinx.serialization.json.Json
 
-val json = Json {
+internal val json = Json {
   isLenient = true
   ignoreUnknownKeys = true
   explicitNulls = false
