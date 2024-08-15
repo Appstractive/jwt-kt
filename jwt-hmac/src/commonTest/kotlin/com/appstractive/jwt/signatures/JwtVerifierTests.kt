@@ -1,6 +1,12 @@
 ﻿package com.appstractive.jwt.signatures
 
-import com.appstractive.jwt.*
+import com.appstractive.jwt.Algorithm
+import com.appstractive.jwt.JWT
+import com.appstractive.jwt.Signer
+import com.appstractive.jwt.Verifier
+import com.appstractive.jwt.jwt
+import com.appstractive.jwt.sign
+import com.appstractive.jwt.verify
 import dev.whyoleg.cryptography.random.CryptographyRandom
 import kotlin.io.encoding.Base64.Default.UrlSafe
 import kotlin.io.encoding.ExperimentalEncodingApi
@@ -15,7 +21,10 @@ class JwtVerifierTests {
   @Test
   fun createJwtHS256() = runTest {
     val jwt =
-        createJwtHmac(builder = { hs256 { secret = it } }, verifier = { hs256 { secret = it } })
+        createJwtHmac(
+            builder = { hs256 { secret = it } },
+            verifier = { hs256 { secret = it } },
+        )
 
     assertEquals(Algorithm.HS256, jwt.header.alg)
   }
@@ -26,7 +35,8 @@ class JwtVerifierTests {
         createJwtHmac(
             secret = CryptographyRandom.nextBytes(128),
             builder = { hs384 { secret = it } },
-            verifier = { hs384 { secret = it } })
+            verifier = { hs384 { secret = it } },
+        )
 
     assertEquals(Algorithm.HS384, jwt.header.alg)
   }
@@ -37,7 +47,8 @@ class JwtVerifierTests {
         createJwtHmac(
             secret = CryptographyRandom.nextBytes(128),
             builder = { hs512 { secret = it } },
-            verifier = { hs512 { secret = it } })
+            verifier = { hs512 { secret = it } },
+        )
 
     assertEquals(Algorithm.HS512, jwt.header.alg)
   }
@@ -57,7 +68,7 @@ class JwtVerifierTests {
 
     assertTrue(signedJwt.verify { verifier(secret) })
 
-    assertFalse(signedJwt.verify { verifier(CryptographyRandom.nextBytes(64)) })
+    assertFalse(signedJwt.verify { verifier(CryptographyRandom.nextBytes(secret.size)) })
 
     return signedJwt
   }
