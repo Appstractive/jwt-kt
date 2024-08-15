@@ -8,13 +8,6 @@ import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-internal val json: Json = Json {
-  isLenient = true
-  explicitNulls = false
-  encodeDefaults = true
-  ignoreUnknownKeys = true
-}
-
 fun JSONWebKeySet.getKey(kid: String?): JSONWebKey =
     when {
       kid == null && keys.size == 1 -> {
@@ -71,7 +64,7 @@ suspend fun JSONWebKey.getVerifier(serializer: Json = json): SignatureVerifier {
                           serializer.encodeToString(this).encodeToByteArray(), // TODO NYI in Crypto
                   )
                   .signatureVerifier()
-          else -> throw IllegalArgumentException("Unknown algorithm ${alg}")
+          else -> throw IllegalArgumentException("Unknown algorithm $alg")
         }
   }
 }

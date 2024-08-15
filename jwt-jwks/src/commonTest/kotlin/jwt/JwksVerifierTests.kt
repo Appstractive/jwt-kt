@@ -4,9 +4,5 @@ import kotlin.test.Test
 
 class JwksVerifierTests {
 
-  @Test
-  fun test() {
-
-  }
-
+  @Test fun test() {}
 }
