@@ -10,6 +10,7 @@ import io.ktor.client.engine.mock.*
 import io.ktor.http.*
 import io.ktor.utils.io.*
 import kotlin.test.Test
+import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.minutes
 import kotlinx.coroutines.test.runTest
 
@@ -37,7 +38,7 @@ class JwksVerifierTests {
 
     val jwt = JWT.from(RSA_JWT_VALID)
 
-    jwt.verify(verifier)
+    assertTrue(jwt.verify(verifier))
   }
 
   companion object {

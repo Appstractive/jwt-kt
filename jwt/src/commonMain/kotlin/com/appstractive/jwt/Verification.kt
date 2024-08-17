@@ -4,6 +4,7 @@ import com.appstractive.jwt.utils.urlEncoded
 import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
+import kotlin.collections.plus
 
 interface VerificationAlgorithm {
   suspend fun verifier(jwt: JWT): SignatureVerifier
@@ -19,11 +20,19 @@ class Verifier {
   private var verifyExpiresAt: Instant? = null
   private var verifyNotBefore: Instant? = null
 
-  var audience: String? = null
-  var issuer: String? = null
+  private var audiences: MutableSet<String> = mutableSetOf()
+  private var issuers: MutableSet<String> = mutableSetOf()
 
   fun algorithm(type: Algorithm, algorithm: VerificationAlgorithm) {
     algorithms[type] = algorithm
+  }
+
+  fun audience(vararg audience: String) {
+    audiences.addAll(audience)
+  }
+
+  fun issuer(vararg issuer: String) {
+    issuers.addAll(issuer)
   }
 
   fun expiresAt(now: Instant = Clock.System.now()) {
@@ -35,16 +44,12 @@ class Verifier {
   }
 
   internal suspend fun verify(jwt: JWT): Boolean {
-    audience?.let {
-      if (jwt.audience != it) {
-        return false
-      }
+    if(audiences.isNotEmpty() && !audiences.contains(jwt.audience)) {
+      return false
     }
 
-    issuer?.let {
-      if (jwt.issuer != it) {
-        return false
-      }
+    if(issuers.isNotEmpty() && !issuers.contains(jwt.issuer)) {
+      return false
     }
 
     verifyExpiresAt?.let {

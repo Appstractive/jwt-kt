@@ -1,4 +1,7 @@
-﻿# WIP
+﻿# JWT Kotlin Multiplatform
+
+[![Maven Central](https://img.shields.io/maven-central/v/com.appstractive/jwt-kt?label=Maven%20Central)](https://central.sonatype.com/artifact/com.appstractive/jwt-kt)
+
 ![badge][badge-android]
 ![badge][badge-ios]
 ![badge][badge-macos]
@@ -30,10 +33,12 @@ A kotlin multiplatform library for creating, parsing, signing and verifying JWTs
 
 ### Installation
 
-Gradle (TODO not yet published):
+Gradle:
 
 ```
-implementation("com.appstractive:jwt-kt:1.0.0")
+commonMain.dependencies { 
+    implementation("com.appstractive:jwt-kt:1.0.0")
+}
 ```
 
 ### Create JWT

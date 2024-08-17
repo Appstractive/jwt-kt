@@ -25,7 +25,7 @@ class JwtVerifierTests {
               algorithm = MockSignerVerifier,
           )
 
-          audience = "api.example.com"
+          audience("api.example.com", "api.example2.com")
         }
 
     assertTrue(result)
@@ -47,7 +47,7 @@ class JwtVerifierTests {
               algorithm = MockSignerVerifier,
           )
 
-          audience = "example.com"
+          audience("example.com", "example2.com")
         }
 
     assertFalse(result)
@@ -69,7 +69,7 @@ class JwtVerifierTests {
               algorithm = MockSignerVerifier,
           )
 
-          issuer = "example.com"
+          issuer("example.com", "example2.com")
         }
 
     assertTrue(result)
@@ -91,7 +91,7 @@ class JwtVerifierTests {
               algorithm = MockSignerVerifier,
           )
 
-          issuer = "example2.com"
+          issuer("example2.com", "example3.com")
         }
 
     assertFalse(result)
