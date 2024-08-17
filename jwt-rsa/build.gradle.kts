@@ -4,9 +4,10 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 plugins {
   alias(libs.plugins.multiplatform)
   alias(libs.plugins.android.library)
+  id("jwt.publication")
 }
 
-group = "com.appstractive.jwt-rsa"
+group = rootProject.group
 
 version = rootProject.version
 
@@ -46,7 +47,7 @@ kotlin {
       }
 
   sourceSets {
-    commonMain.dependencies { implementation(projects.jwt) }
+    commonMain.dependencies { implementation(projects.jwtKt) }
 
     commonTest.dependencies {
       implementation(kotlin("test"))

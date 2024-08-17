@@ -6,7 +6,7 @@ plugins {
   alias(libs.plugins.kotlinx.serialization)
 }
 
-group = "com.appstractive.jwt-jwks"
+group = rootProject.group
 
 version = rootProject.version
 
@@ -46,9 +46,9 @@ kotlin {
 
   sourceSets {
     commonMain.dependencies {
-      implementation(projects.jwt)
-      implementation(projects.jwtRsa)
-      implementation(projects.jwtEcdsa)
+      implementation(projects.jwtKt)
+      implementation(projects.jwtRsaKt)
+      implementation(projects.jwtEcdsaKt)
 
       implementation(libs.kotlin.coroutines)
       implementation(libs.kotlin.datetime)

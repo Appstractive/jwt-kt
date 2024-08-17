@@ -53,3 +53,5 @@ junit = "junit:junit:4.13.2"
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+nexus = { id = "io.github.gradle-nexus.publish-plugin", version = "1.3.0" }
+dokka = { id = "org.jetbrains.dokka", version = "1.9.20" }

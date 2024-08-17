@@ -5,11 +5,12 @@ plugins {
   alias(libs.plugins.multiplatform)
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlinx.serialization)
+  id("jwt.publication")
 }
 
-group = "com.appstractive.jwt"
+group = rootProject.group
 
-version = "1.0-SNAPSHOT"
+version = rootProject.version
 
 kotlin {
   androidTarget {
