@@ -19,12 +19,12 @@ A kotlin multiplatform library for creating, parsing, signing and verifying JWTs
 - HS256
 - HS384
 - HS512
-- PS256
-- PS384
-- PS512
 - RS256
 - RS384
 - RS512
+- PS256
+- PS384
+- PS512
 - ES256
 - ES384
 - ES512
@@ -85,10 +85,15 @@ val jwt: UnsignedJWT = jwt {
 }
 val mySecret = CryptographyRandom.nextBytes(64)
 
-jwt.sign {
+val signedJWT = jwt.sign {
     hs256 { secret = mySecret }
 }
 ```
+
+For more algorithms see:
+- [HMAC](jwt-hmac/README.md)
+- [RSA](jwt-rsa/README.md)
+- [ECDSA](jwt-ecdsa/README.md)
 
 ### Verify JWT
 
@@ -98,16 +103,21 @@ val mySecret = CryptographyRandom.nextBytes(64)
 
 val isValid = jwt.verify {
     hs256 { secret = mySecret }
-    // verify specific issuer
-    issuer = "example.com"
-    // verify specific audience
-    audience = "api.example.com"
+    // verify issuer
+    issuer("example.com")
+    // verify audience
+    audience("api.example.com")
     // verify expiration
     expiresAt()
     // verify not before time
     notBefore()
 }
 ```
+
+For more algorithms see:
+- [HMAC](jwt-hmac/README.md)
+- [RSA](jwt-rsa/README.md)
+- [ECDSA](jwt-ecdsa/README.md)
 
 ## License
 
