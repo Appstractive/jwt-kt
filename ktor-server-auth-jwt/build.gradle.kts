@@ -23,11 +23,6 @@ kotlin {
   linuxArm64()
   linuxX64()
 
-  mingwX64()
-
-  js()
-  @OptIn(ExperimentalWasmDsl::class) wasmJs()
-
   listOf(
       iosX64(),
       iosArm64(),
@@ -63,8 +58,6 @@ kotlin {
     appleMain.dependencies {  }
 
     linuxMain.dependencies {  }
-
-    jsMain.dependencies {  }
   }
 }
 
