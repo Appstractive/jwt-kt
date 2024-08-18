@@ -1,6 +1,4 @@
-# JWT Kotlin Multiplatform - JWKS (TODO)
-
-[![Maven Central](https://img.shields.io/maven-central/v/com.appstractive/jwt-jwks-kt?label=Maven%20Central)](https://central.sonatype.com/artifact/com.appstractive/jwt-jwks-kt)
+﻿# KTOR Server Auth JWT Kotlin Multiplatform
 
 ![badge][badge-android]
 ![badge][badge-apple]
@@ -9,41 +7,15 @@
 ![badge][badge-win]
 ![badge][badge-linux]
 
-Verify JWTs using JSONWebKeySets.
+A fork of the [KTOR Server Auth JWT Plugin](https://ktor.io/docs/server-jwt.html) supporting more platforms than just JVM.
 
-## Usage
-
-### Installation
+## Installation
 
 Gradle:
 
-TODO: Not yet published, requires JWK support from kotlin crypto library
-
 ```
 commonMain.dependencies { 
-    implementation("com.appstractive:jwt-jwks-kt:1.0.0")
-}
-```
-
-### Verify JWT
-
-```kotlin
-val jwt = JWT.from("eyJraWQiOiJzLWRmZmZkMDJlLTlhNDItNDQzMC1hNT...")
-
-val isValid = jwt.verify {
-    jwks {
-        endpoint = "http://example.com/.well-known/jwt/jwks.json"
-        cacheDuration = 1.minutes
-    }
-    
-    // verify issuer
-    issuer("example.com")
-    // verify audience
-    audience("api.example.com")
-    // verify expiration
-    expiresAt()
-    // verify not before time
-    notBefore()
+    implementation("com.appstractive:ktor-server-auth-jwt:1.0.0")
 }
 ```
 

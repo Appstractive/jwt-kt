@@ -17,7 +17,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "jwt-kotlin-multiplatform"
 
-include(":jwt", ":jwt-hmac", ":jwt-rsa", ":jwt-ecdsa", ":jwt-jwks")
+include(":jwt", ":jwt-hmac", ":jwt-rsa", ":jwt-ecdsa", ":jwt-jwks", ":ktor-server-auth-jwt", ":examples:ktor-server")
 
 project(":jwt").name = "jwt-kt"
 project(":jwt-hmac").name = "jwt-hmac-kt"

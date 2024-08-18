@@ -3,10 +3,7 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.appstractive/jwt-kt?label=Maven%20Central)](https://central.sonatype.com/artifact/com.appstractive/jwt-kt)
 
 ![badge][badge-android]
-![badge][badge-ios]
-![badge][badge-macos]
-![badge][badge-tvos]
-![badge][badge-watchos]
+![badge][badge-apple]
 ![badge][badge-jvm]
 ![badge][badge-js]
 ![badge][badge-win]
@@ -125,11 +122,8 @@ limitations under the License.
 ```
 
 [badge-android]: http://img.shields.io/badge/platform-android-6EDB8D.svg?style=flat
-[badge-ios]: http://img.shields.io/badge/platform-ios-CDCDCD.svg?style=flat
-[badge-macos]: http://img.shields.io/badge/platform-macos-111111.svg?style=flat
-[badge-tvos]: http://img.shields.io/badge/platform-tvos-808080.svg?style=flat
-[badge-watchos]: http://img.shields.io/badge/platform-watchos-808080.svg?style=flat
+[badge-apple]: http://img.shields.io/badge/platform-apple-111111.svg?style=flat
 [badge-jvm]: http://img.shields.io/badge/platform-jvm-CDCDCD.svg?style=flat
-[badge-js]: http://img.shields.io/badge/platform-js-CDCDCD.svg?style=flat
-[badge-win]: http://img.shields.io/badge/platform-win-CDCDCD.svg?style=flat
+[badge-js]: http://img.shields.io/badge/platform-js-f7df1e.svg?style=flat
+[badge-win]: http://img.shields.io/badge/platform-win-357EC7.svg?style=flat
 [badge-linux]: http://img.shields.io/badge/platform-linux-CDCDCD.svg?style=flat

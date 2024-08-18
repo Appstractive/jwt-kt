@@ -127,7 +127,10 @@ class ClaimsBuilder {
  *   4.1.1</a>
  */
 val JWT.issuer: String?
-  get() = claims["iss"]?.jsonPrimitive?.contentOrNull
+  get() = claims.issuer
+
+val Claims.issuer: String?
+  get() = get("iss")?.jsonPrimitive?.contentOrNull
 
 /**
  * The "sub" (subject) claim identifies the principal that is the subject of the JWT. The claims in
@@ -140,7 +143,10 @@ val JWT.issuer: String?
  *   4.1.2</a>
  */
 val JWT.subject: String?
-  get() = claims["sub"]?.jsonPrimitive?.contentOrNull
+  get() = claims.subject
+
+val Claims.subject: String?
+  get() = get("sub")?.jsonPrimitive?.contentOrNull
 
 /**
  * The "aud" (audience) claim identifies the recipients that the JWT is intended for. Each principal
@@ -155,7 +161,10 @@ val JWT.subject: String?
  *   4.1.3</a>
  */
 val JWT.audience: String?
-  get() = claims["aud"]?.jsonPrimitive?.contentOrNull
+  get() = claims.audience
+
+val Claims.audience: String?
+  get() = get("aud")?.jsonPrimitive?.contentOrNull
 
 /**
  * The "exp" (expiration time) claim identifies the expiration time on or after which the JWT MUST
@@ -168,7 +177,10 @@ val JWT.audience: String?
  *   4.1.4</a>
  */
 val JWT.expiresAt: Instant?
-  get() = claims.instantOrNull("exp")
+  get() = claims.expiresAt
+
+val Claims.expiresAt: Instant?
+  get() = instantOrNull("exp")
 
 /**
  * The "nbf" (not before) claim identifies the time before which the JWT MUST NOT be accepted for
@@ -181,7 +193,10 @@ val JWT.expiresAt: Instant?
  *   4.1.5</a>
  */
 val JWT.notBefore: Instant?
-  get() = claims.instantOrNull("nbf")
+  get() = claims.notBefore
+
+val Claims.notBefore: Instant?
+  get() = instantOrNull("nbf")
 
 /**
  * The "iat" (issued at) claim identifies the time at which the JWT was issued. This claim can be
@@ -191,7 +206,10 @@ val JWT.notBefore: Instant?
  *   4.1.6</a>
  */
 val JWT.issuedAt: Instant?
-  get() = claims.instantOrNull("iat")
+  get() = claims.issuedAt
+
+val Claims.issuedAt: Instant?
+  get() = instantOrNull("iat")
 
 /**
  * The "jti" (JWT ID) claim provides a unique identifier for the JWT. The identifier value MUST be
@@ -204,4 +222,7 @@ val JWT.issuedAt: Instant?
  *   4.1.7</a>
  */
 val JWT.id: String?
-  get() = claims["jti"]?.jsonPrimitive?.contentOrNull
+  get() = claims.id
+
+val Claims.id: String?
+  get() = get("jti")?.jsonPrimitive?.contentOrNull
