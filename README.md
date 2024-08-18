@@ -79,18 +79,7 @@ val userId = jwt.subject
 
 ### Sign JWT
 
-```kotlin
-val jwt: UnsignedJWT = jwt {
-    claims { issuer = "example.com" }
-}
-val mySecret = CryptographyRandom.nextBytes(64)
-
-val signedJWT = jwt.sign {
-    hs256 { secret = mySecret }
-}
-```
-
-For more algorithms see:
+For specific algorithms see:
 - [HMAC](jwt-hmac/README.md)
 - [RSA](jwt-rsa/README.md)
 - [ECDSA](jwt-ecdsa/README.md)
@@ -99,10 +88,8 @@ For more algorithms see:
 
 ```kotlin
 val jwt = JWT.from("eyJraWQiOiJzLWRmZmZkMDJlLTlhNDItNDQzMC1hNT...")
-val mySecret = CryptographyRandom.nextBytes(64)
 
 val isValid = jwt.verify {
-    hs256 { secret = mySecret }
     // verify issuer
     issuer("example.com")
     // verify audience
@@ -114,7 +101,7 @@ val isValid = jwt.verify {
 }
 ```
 
-For more algorithms see:
+For signature verification see:
 - [HMAC](jwt-hmac/README.md)
 - [RSA](jwt-rsa/README.md)
 - [ECDSA](jwt-ecdsa/README.md)
