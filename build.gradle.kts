@@ -8,6 +8,7 @@ plugins {
 }
 
 group = "com.appstractive"
+
 version = "1.0"
 
 val localProps = Properties()
@@ -18,21 +19,21 @@ if (localPropertiesFile.exists()) {
 }
 
 val signingKey by
-extra(
-    localProps["signing.keyFile"]?.let { rootDir.resolve(it.toString()).readText() }
-      ?: System.getenv("SIGNING_KEY")
-      ?: "",
-)
+    extra(
+        localProps["signing.keyFile"]?.let { rootDir.resolve(it.toString()).readText() }
+            ?: System.getenv("SIGNING_KEY")
+            ?: "",
+    )
 val signingPassword by
-extra(localProps.getOrDefault("signing.password", System.getenv("SIGNING_PASSWORD") ?: ""))
+    extra(localProps.getOrDefault("signing.password", System.getenv("SIGNING_PASSWORD") ?: ""))
 val ossrhUsername by
-extra(localProps.getOrDefault("ossrhUsername", System.getenv("OSSRH_USERNAME") ?: ""))
+    extra(localProps.getOrDefault("ossrhUsername", System.getenv("OSSRH_USERNAME") ?: ""))
 val ossrhPassword by
-extra(localProps.getOrDefault("ossrhPassword", System.getenv("OSSRH_PASSWORD") ?: ""))
+    extra(localProps.getOrDefault("ossrhPassword", System.getenv("OSSRH_PASSWORD") ?: ""))
 val sonatypeStagingProfileId by
-extra(
-    localProps.getOrDefault(
-        "sonatypeStagingProfileId", System.getenv("SONATYPE_STAGING_PROFILE_ID") ?: ""))
+    extra(
+        localProps.getOrDefault(
+            "sonatypeStagingProfileId", System.getenv("SONATYPE_STAGING_PROFILE_ID") ?: ""))
 
 nexusPublishing {
   this.repositories {

@@ -16,7 +16,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import kotlin.time.Duration.Companion.minutes
 import kotlinx.datetime.Clock
-import kotlinx.serialization.*
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.jsonPrimitive
 
 @Serializable data class UserDTO(val username: String, val password: String)
@@ -39,9 +39,7 @@ fun Application.module() {
           issuer = issuer,
           audience = audience,
       ) {
-        hs256 {
-          this.secret = secret.encodeToByteArray()
-        }
+        hs256 { this.secret = secret.encodeToByteArray() }
       }
 
       validate { credential ->
@@ -79,7 +77,8 @@ fun Application.module() {
 
     authenticate("auth-jwt") {
       get("/hello") {
-        val principal = call.principal<JWTPrincipal>() ?: return@get call.respond(HttpStatusCode.Unauthorized)
+        val principal =
+            call.principal<JWTPrincipal>() ?: return@get call.respond(HttpStatusCode.Unauthorized)
         val username = principal.claims["username"]?.jsonPrimitive?.content
         val expiresIn = principal.claims.expiresAt?.minus(Clock.System.now())
         call.respondText("Hello, $username! Token is expired in ${expiresIn?.inWholeSeconds} s.")

@@ -6,6 +6,7 @@ package io.ktor.server.auth.jwt
 
 import com.appstractive.jwt.Claims
 import com.appstractive.jwt.Verifier
+import com.appstractive.jwt.jwtVerifier
 import io.ktor.http.auth.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -134,12 +135,11 @@ public class JWTAuthenticationProvider internal constructor(config: Config) :
      * @param [audience] restriction
      */
     public fun verifier(issuer: String, audience: String, block: Verifier.() -> Unit = {}) {
-      val verification: Verifier =
-          com.appstractive.jwt.verifier {
-            audience(audience)
-            issuer(issuer)
-            block()
-          }
+      val verification: Verifier = jwtVerifier {
+        audience(audience)
+        issuer(issuer)
+        block()
+      }
 
       verifier(verification)
     }

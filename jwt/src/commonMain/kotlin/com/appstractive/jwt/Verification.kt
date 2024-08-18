@@ -4,7 +4,6 @@ import com.appstractive.jwt.utils.urlEncoded
 import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
-import kotlin.collections.plus
 
 interface VerificationAlgorithm {
   suspend fun verifier(jwt: JWT): SignatureVerifier
@@ -44,11 +43,11 @@ class Verifier {
   }
 
   internal suspend fun verify(jwt: JWT): Boolean {
-    if(audiences.isNotEmpty() && !audiences.contains(jwt.audience)) {
+    if (audiences.isNotEmpty() && !audiences.contains(jwt.audience)) {
       return false
     }
 
-    if(issuers.isNotEmpty() && !issuers.contains(jwt.issuer)) {
+    if (issuers.isNotEmpty() && !issuers.contains(jwt.issuer)) {
       return false
     }
 
@@ -73,9 +72,9 @@ class Verifier {
   }
 }
 
-fun verifier(builder: Verifier.() -> Unit): Verifier = Verifier().apply(builder)
+fun jwtVerifier(builder: Verifier.() -> Unit): Verifier = Verifier().apply(builder)
 
-suspend fun JWT.verify(builder: Verifier.() -> Unit): Boolean = verify(verifier(builder))
+suspend fun JWT.verify(builder: Verifier.() -> Unit): Boolean = verify(jwtVerifier(builder))
 
 suspend fun JWT.verify(verifier: Verifier): Boolean {
   return verifier.verify(this)

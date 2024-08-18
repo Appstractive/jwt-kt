@@ -15,25 +15,25 @@ fun UnsignedJWT.urlEncoded(): String = "${header.urlEncoded()}.${claims.urlEncod
 fun JWT.urlEncoded(): String = "${header.urlEncoded()}.${claims.urlEncoded()}"
 
 fun Header.urlEncoded(): String {
-    return urlEncoded(json.encodeToString(this))
+  return urlEncoded(json.encodeToString(this))
 }
 
 fun Claims.urlEncoded(): String {
-    return urlEncoded(json.encodeToString(this))
+  return urlEncoded(json.encodeToString(this))
 }
 
 fun urlEncoded(source: String): String {
-    return urlEncoded(source.encodeToByteArray())
+  return urlEncoded(source.encodeToByteArray())
 }
 
 fun urlEncoded(source: ByteArray): String {
-    return UrlSafe.encode(source).replace("=", "")
+  return UrlSafe.encode(source).replace("=", "")
 }
 
 fun String.urlDecodedString(): String {
-    return UrlSafe.decode(this).decodeToString()
+  return UrlSafe.decode(this).decodeToString()
 }
 
 fun String.urlDecodedBytes(): ByteArray {
-    return UrlSafe.decode(this)
+  return UrlSafe.decode(this)
 }

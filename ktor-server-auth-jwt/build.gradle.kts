@@ -1,5 +1,4 @@
 ﻿import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 
 plugins {
   alias(libs.plugins.multiplatform)
@@ -24,18 +23,18 @@ kotlin {
   linuxX64()
 
   listOf(
-      iosX64(),
-      iosArm64(),
-      iosSimulatorArm64(),
-      macosX64(),
-      macosArm64(),
-      tvosX64(),
-      tvosArm64(),
-      tvosSimulatorArm64(),
-      watchosX64(),
-      watchosArm64(),
-      watchosSimulatorArm64(),
-  )
+          iosX64(),
+          iosArm64(),
+          iosSimulatorArm64(),
+          macosX64(),
+          macosArm64(),
+          tvosX64(),
+          tvosArm64(),
+          tvosSimulatorArm64(),
+          watchosX64(),
+          watchosArm64(),
+          watchosSimulatorArm64(),
+      )
       .forEach {
         it.binaries.framework {
           baseName = "Ktor Server Auth JWT"
@@ -49,15 +48,15 @@ kotlin {
       implementation(libs.ktor.server.auth)
     }
 
-    commonTest.dependencies { }
+    commonTest.dependencies {}
 
-    androidMain.dependencies {  }
+    androidMain.dependencies {}
 
-    jvmMain.dependencies {  }
+    jvmMain.dependencies {}
 
-    appleMain.dependencies {  }
+    appleMain.dependencies {}
 
-    linuxMain.dependencies {  }
+    linuxMain.dependencies {}
   }
 }
 

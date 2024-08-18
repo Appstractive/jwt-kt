@@ -16,9 +16,9 @@ kotlin {
   linuxX64()
 
   listOf(
-      macosX64(),
-      macosArm64(),
-  )
+          macosX64(),
+          macosArm64(),
+      )
       .forEach {
         it.binaries.framework {
           baseName = "JWT-KT"
@@ -41,18 +41,16 @@ kotlin {
       implementation(libs.ktor.server.auth)
     }
 
-    commonTest.dependencies { }
+    commonTest.dependencies {}
 
-    jvmMain.dependencies {  }
+    jvmMain.dependencies {}
 
-    appleMain.dependencies {  }
+    appleMain.dependencies {}
 
-    linuxMain.dependencies {  }
+    linuxMain.dependencies {}
 
-    mingwMain.dependencies {  }
+    mingwMain.dependencies {}
   }
 }
 
-application {
-  mainClass.set("com.appstractive.ApplicationKt")
-}
+application { mainClass.set("com.appstractive.ApplicationKt") }

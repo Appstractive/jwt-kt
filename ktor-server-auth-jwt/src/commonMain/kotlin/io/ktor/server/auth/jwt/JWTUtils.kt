@@ -14,10 +14,10 @@ import io.ktor.server.auth.*
 import io.ktor.server.request.*
 
 internal fun AuthenticationContext.bearerChallenge(
-  cause: AuthenticationFailedCause,
-  realm: String,
-  schemes: JWTAuthSchemes,
-  challengeFunction: JWTAuthChallengeFunction
+    cause: AuthenticationFailedCause,
+    realm: String,
+    schemes: JWTAuthSchemes,
+    challengeFunction: JWTAuthChallengeFunction
 ) {
   challenge(JWTAuthKey, cause) { challenge, call ->
     challengeFunction(JWTChallengeContext(call), schemes.defaultScheme, realm)
@@ -28,18 +28,16 @@ internal fun AuthenticationContext.bearerChallenge(
 }
 
 internal suspend fun verifyAndValidate(
-  call: ApplicationCall,
-  jwtVerifier: Verifier?,
-  token: HttpAuthHeader,
-  schemes: JWTAuthSchemes,
-  validate: suspend ApplicationCall.(JWTCredential) -> Principal?
+    call: ApplicationCall,
+    jwtVerifier: Verifier?,
+    token: HttpAuthHeader,
+    schemes: JWTAuthSchemes,
+    validate: suspend ApplicationCall.(JWTCredential) -> Principal?
 ): Principal? {
-  val jwt = token.getBlob(schemes)?.let {
-    JWT.from(it)
-  } ?: return null
+  val jwt = token.getBlob(schemes)?.let { JWT.from(it) } ?: return null
 
   jwtVerifier?.let { verifier ->
-    if(!jwt.verify(verifier)) {
+    if (!jwt.verify(verifier)) {
       return null
     }
   }
@@ -48,13 +46,15 @@ internal suspend fun verifyAndValidate(
   return validate(call, credentials)
 }
 
-internal fun HttpAuthHeader.getBlob(schemes: JWTAuthSchemes) = when {
-  this is HttpAuthHeader.Single && authScheme in schemes -> blob
-  else -> null
-}
+internal fun HttpAuthHeader.getBlob(schemes: JWTAuthSchemes) =
+    when {
+      this is HttpAuthHeader.Single && authScheme in schemes -> blob
+      else -> null
+    }
 
-internal fun ApplicationRequest.parseAuthorizationHeaderOrNull() = try {
-  parseAuthorizationHeader()
-} catch (cause: IllegalArgumentException) {
-  null
-}
+internal fun ApplicationRequest.parseAuthorizationHeaderOrNull() =
+    try {
+      parseAuthorizationHeader()
+    } catch (cause: IllegalArgumentException) {
+      null
+    }

@@ -18,7 +18,8 @@ extensions.configure<PublishingExtension>("publishing") {
 
     pom {
       name.set(project.name)
-      description.set("JWT creating, parsing, signing and verifying implementation for Kotlin Multiplatform")
+      description.set(
+          "JWT creating, parsing, signing and verifying implementation for Kotlin Multiplatform")
       url.set("https://github.com/Appstractive/jwt-kt")
 
       scm {
