@@ -13,16 +13,28 @@ version = "1.0.0"
 kotlin {
   jvm { compilerOptions { jvmTarget.set(JvmTarget.JVM_17) } }
 
-  linuxX64()
+  linuxX64().apply {
+    binaries {
+      executable {
+        entryPoint = "com.appstractive.main"
+      }
+    }
+  }
 
   listOf(
           macosX64(),
           macosArm64(),
       )
       .forEach {
-        it.binaries.framework {
-          baseName = "JWT-KT"
-          isStatic = true
+        it.binaries {
+          framework {
+            baseName = "JWT-KT"
+            isStatic = true
+          }
+
+          executable {
+            entryPoint = "com.appstractive.main"
+          }
         }
       }
 
