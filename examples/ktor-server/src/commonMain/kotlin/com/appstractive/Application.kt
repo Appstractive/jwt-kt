@@ -65,7 +65,7 @@ fun main() {
                 this.audience = audience
                 this.issuer = issuer
                 claim("username", user.username)
-                expiresAt = Clock.System.now() + 60.minutes
+                expires()
               }
             }
                 .sign { hs256 { this.secret = secret } }

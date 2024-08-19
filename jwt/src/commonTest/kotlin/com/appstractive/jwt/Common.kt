@@ -59,9 +59,9 @@ fun unsignedJwt(): UnsignedJWT = jwt {
     issuer = "example.com"
     subject = "me"
     audience = "api.example.com"
-    expiresAt = Clock.System.now() + 24.hours
-    notBeforeNow()
-    issuedNow()
+    expires(at = Clock.System.now() + 24.hours)
+    notBefore()
+    issuedAt()
     id = "123456"
 
     claim("double", 1.1)

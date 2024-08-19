@@ -1,10 +1,20 @@
 ﻿package com.appstractive.jwt
 
 import com.appstractive.jwt.utils.instantOrNull
+import kotlin.time.Duration.Companion.minutes
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.serialization.ExperimentalSerializationApi
-import kotlinx.serialization.json.*
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonArrayBuilder
+import kotlinx.serialization.json.JsonElement
+import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.JsonObjectBuilder
+import kotlinx.serialization.json.JsonPrimitive
+import kotlinx.serialization.json.buildJsonArray
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonPrimitive
 
 typealias Claims = JsonObject
 
@@ -54,12 +64,16 @@ class ClaimsBuilder {
 
   private val additionalClaims: MutableMap<String, JsonElement> = mutableMapOf()
 
-  fun issuedNow() {
-    issuedAt = Clock.System.now()
+  fun issuedAt(now: Instant = Clock.System.now()) {
+    issuedAt = now
   }
 
-  fun notBeforeNow() {
-    notBefore = Clock.System.now()
+  fun notBefore(before: Instant = Clock.System.now()) {
+    notBefore = before
+  }
+
+  fun expires(at: Instant = Clock.System.now() + 60.minutes) {
+    expiresAt = at
   }
 
   fun claim(key: String, value: String) {
