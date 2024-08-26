@@ -40,7 +40,6 @@ kotlin {
 
   sourceSets {
     commonMain.dependencies {
-      implementation(projects.jwtKt)
       implementation(projects.jwtHmacKt)
       implementation(projects.ktorServerAuthJwt)
 

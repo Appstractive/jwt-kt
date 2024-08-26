@@ -44,7 +44,7 @@ kotlin {
 
   sourceSets {
     commonMain.dependencies {
-      implementation(projects.jwtKt)
+      api(projects.jwtKt)
       implementation(libs.ktor.server.auth)
     }
 

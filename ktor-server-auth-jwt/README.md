@@ -17,6 +17,10 @@ Gradle:
 ```
 commonMain.dependencies { 
     implementation("com.appstractive:ktor-server-auth-jwt:1.0.0")
+    implementation("com.appstractive:jwt-hmac-kt:1.0.0")
+    // or
+    // implementation("com.appstractive:jwt-rsa-kt:1.0.0")
+    // implementation("com.appstractive:jwt-ecdsa-kt:1.0.0")
 }
 ```
 
