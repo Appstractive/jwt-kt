@@ -24,7 +24,8 @@ Sign and verify JWTs using HMAC algorithm.
 Gradle:
 
 ```
-commonMain.dependencies { 
+commonMain.dependencies {
+    implementation("com.appstractive:jwt-kt:1.0.0")
     implementation("com.appstractive:jwt-hmac-kt:1.0.0")
 }
 ```

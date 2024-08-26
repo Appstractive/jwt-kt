@@ -24,7 +24,8 @@ Sign and verify JWTs using ECDSA algorithm.
 Gradle:
 
 ```
-commonMain.dependencies { 
+commonMain.dependencies {
+    implementation("com.appstractive:jwt-kt:1.0.0")
     implementation("com.appstractive:jwt-ecdsa-kt:1.0.0")
 }
 ```
