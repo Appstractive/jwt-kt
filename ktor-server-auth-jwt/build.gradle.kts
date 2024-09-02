@@ -4,6 +4,7 @@ plugins {
   alias(libs.plugins.multiplatform)
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlinx.serialization)
+  alias(libs.plugins.kotlinx.binary.compatibility)
   id("jwt.publication")
 }
 

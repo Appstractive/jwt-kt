@@ -1,0 +1,23 @@
+public final class com/appstractive/jwt/signatures/HMACKt {
+	public static final fun hs256 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun hs256 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+	public static final fun hs384 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun hs384 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+	public static final fun hs512 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun hs512 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/appstractive/jwt/signatures/Hmac : com/appstractive/jwt/SigningAlgorithm, com/appstractive/jwt/VerificationAlgorithm {
+	public fun <init> (Lcom/appstractive/jwt/signatures/Hmac$Config;)V
+	public fun generator (Ldev/whyoleg/cryptography/CryptographyAlgorithmId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun sign (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun verifier (Lcom/appstractive/jwt/JWT;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun verify (Lcom/appstractive/jwt/JWT;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/appstractive/jwt/signatures/Hmac$Config {
+	public fun <init> ()V
+	public final fun getSecret ()[B
+	public final fun setSecret ([B)V
+}
+

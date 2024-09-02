@@ -1,0 +1,188 @@
+public final class com/appstractive/jwt/CurveType : java/lang/Enum {
+	public static final field P256 Lcom/appstractive/jwt/CurveType;
+	public static final field P384 Lcom/appstractive/jwt/CurveType;
+	public static final field P521 Lcom/appstractive/jwt/CurveType;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/appstractive/jwt/CurveType;
+	public static fun values ()[Lcom/appstractive/jwt/CurveType;
+}
+
+public abstract interface class com/appstractive/jwt/JSONWebKey {
+	public static final field Companion Lcom/appstractive/jwt/JSONWebKey$Companion;
+	public abstract fun getAlg ()Lcom/appstractive/jwt/Algorithm;
+	public abstract fun getKid ()Ljava/lang/String;
+}
+
+public final class com/appstractive/jwt/JSONWebKey$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/appstractive/jwt/JSONWebKeyEC : com/appstractive/jwt/JSONWebKey {
+	public static final field Companion Lcom/appstractive/jwt/JSONWebKeyEC$Companion;
+	public fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/CurveType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/CurveType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lcom/appstractive/jwt/Algorithm;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Lcom/appstractive/jwt/CurveType;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun copy (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/CurveType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/appstractive/jwt/JSONWebKeyEC;
+	public static synthetic fun copy$default (Lcom/appstractive/jwt/JSONWebKeyEC;Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/CurveType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/appstractive/jwt/JSONWebKeyEC;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getAlg ()Lcom/appstractive/jwt/Algorithm;
+	public final fun getCrv ()Lcom/appstractive/jwt/CurveType;
+	public final fun getD ()Ljava/lang/String;
+	public fun getKid ()Ljava/lang/String;
+	public final fun getX ()Ljava/lang/String;
+	public final fun getY ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class com/appstractive/jwt/JSONWebKeyEC$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/appstractive/jwt/JSONWebKeyEC$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/appstractive/jwt/JSONWebKeyEC;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeyEC;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/appstractive/jwt/JSONWebKeyEC$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/appstractive/jwt/JSONWebKeyExtKt {
+	public static final fun getKey (Lcom/appstractive/jwt/JSONWebKeySet;Ljava/lang/String;)Lcom/appstractive/jwt/JSONWebKey;
+	public static final fun getVerifier (Lcom/appstractive/jwt/JSONWebKey;Lkotlinx/serialization/json/Json;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun getVerifier$default (Lcom/appstractive/jwt/JSONWebKey;Lkotlinx/serialization/json/Json;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+}
+
+public final class com/appstractive/jwt/JSONWebKeyHMAC : com/appstractive/jwt/JSONWebKey {
+	public static final field Companion Lcom/appstractive/jwt/JSONWebKeyHMAC$Companion;
+	public fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lcom/appstractive/jwt/Algorithm;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;)Lcom/appstractive/jwt/JSONWebKeyHMAC;
+	public static synthetic fun copy$default (Lcom/appstractive/jwt/JSONWebKeyHMAC;Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/appstractive/jwt/JSONWebKeyHMAC;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getAlg ()Lcom/appstractive/jwt/Algorithm;
+	public final fun getK ()Ljava/lang/String;
+	public fun getKid ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class com/appstractive/jwt/JSONWebKeyHMAC$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/appstractive/jwt/JSONWebKeyHMAC$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/appstractive/jwt/JSONWebKeyHMAC;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeyHMAC;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/appstractive/jwt/JSONWebKeyHMAC$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/appstractive/jwt/JSONWebKeyKt {
+	public static final fun getCurve (Lcom/appstractive/jwt/CurveType;)Ljava/lang/String;
+}
+
+public final class com/appstractive/jwt/JSONWebKeyRSA : com/appstractive/jwt/JSONWebKey {
+	public static final field Companion Lcom/appstractive/jwt/JSONWebKeyRSA$Companion;
+	public fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lcom/appstractive/jwt/Algorithm;
+	public final fun component10 ()Ljava/lang/String;
+	public final fun component11 ()Ljava/lang/String;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()Ljava/lang/String;
+	public final fun component5 ()Ljava/lang/String;
+	public final fun component6 ()Ljava/lang/String;
+	public final fun component7 ()Ljava/lang/String;
+	public final fun component8 ()Ljava/lang/String;
+	public final fun component9 ()Ljava/lang/String;
+	public final fun copy (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/appstractive/jwt/JSONWebKeyRSA;
+	public static synthetic fun copy$default (Lcom/appstractive/jwt/JSONWebKeyRSA;Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/appstractive/jwt/JSONWebKeyRSA;
+	public fun equals (Ljava/lang/Object;)Z
+	public fun getAlg ()Lcom/appstractive/jwt/Algorithm;
+	public final fun getD ()Ljava/lang/String;
+	public final fun getDp ()Ljava/lang/String;
+	public final fun getDq ()Ljava/lang/String;
+	public final fun getE ()Ljava/lang/String;
+	public fun getKid ()Ljava/lang/String;
+	public final fun getN ()Ljava/lang/String;
+	public final fun getP ()Ljava/lang/String;
+	public final fun getQ ()Ljava/lang/String;
+	public final fun getQi ()Ljava/lang/String;
+	public final fun getUse ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class com/appstractive/jwt/JSONWebKeyRSA$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/appstractive/jwt/JSONWebKeyRSA$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/appstractive/jwt/JSONWebKeyRSA;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeyRSA;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/appstractive/jwt/JSONWebKeyRSA$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/appstractive/jwt/JSONWebKeySet {
+	public static final field Companion Lcom/appstractive/jwt/JSONWebKeySet$Companion;
+	public fun <init> (Ljava/util/List;)V
+	public final fun component1 ()Ljava/util/List;
+	public final fun copy (Ljava/util/List;)Lcom/appstractive/jwt/JSONWebKeySet;
+	public static synthetic fun copy$default (Lcom/appstractive/jwt/JSONWebKeySet;Ljava/util/List;ILjava/lang/Object;)Lcom/appstractive/jwt/JSONWebKeySet;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getKeys ()Ljava/util/List;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class com/appstractive/jwt/JSONWebKeySet$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/appstractive/jwt/JSONWebKeySet$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/appstractive/jwt/JSONWebKeySet;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeySet;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/appstractive/jwt/JSONWebKeySet$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/appstractive/jwt/JwksConfig {
+	public fun <init> ()V
+	public final fun getCacheDuration-UwyO8pc ()J
+	public final fun getClient ()Lio/ktor/client/HttpClient;
+	public final fun getEndpoint ()Ljava/lang/String;
+	public final fun setCacheDuration-LRDsOJo (J)V
+	public final fun setClient (Lio/ktor/client/HttpClient;)V
+	public final fun setEndpoint (Ljava/lang/String;)V
+}
+
+public final class com/appstractive/jwt/JwksKt {
+	public static final fun jwks (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+}
+

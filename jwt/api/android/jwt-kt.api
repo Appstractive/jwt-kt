@@ -1,0 +1,220 @@
+public final class com/appstractive/jwt/Algorithm : java/lang/Enum {
+	public static final field EC256 Lcom/appstractive/jwt/Algorithm;
+	public static final field EC384 Lcom/appstractive/jwt/Algorithm;
+	public static final field EC512 Lcom/appstractive/jwt/Algorithm;
+	public static final field HS256 Lcom/appstractive/jwt/Algorithm;
+	public static final field HS384 Lcom/appstractive/jwt/Algorithm;
+	public static final field HS512 Lcom/appstractive/jwt/Algorithm;
+	public static final field PS256 Lcom/appstractive/jwt/Algorithm;
+	public static final field PS384 Lcom/appstractive/jwt/Algorithm;
+	public static final field PS512 Lcom/appstractive/jwt/Algorithm;
+	public static final field RS256 Lcom/appstractive/jwt/Algorithm;
+	public static final field RS384 Lcom/appstractive/jwt/Algorithm;
+	public static final field RS512 Lcom/appstractive/jwt/Algorithm;
+	public static fun getEntries ()Lkotlin/enums/EnumEntries;
+	public static fun valueOf (Ljava/lang/String;)Lcom/appstractive/jwt/Algorithm;
+	public static fun values ()[Lcom/appstractive/jwt/Algorithm;
+}
+
+public final class com/appstractive/jwt/ClaimsBuilder {
+	public fun <init> ()V
+	public final fun arrayClaim (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public final fun claim (Ljava/lang/String;D)V
+	public final fun claim (Ljava/lang/String;J)V
+	public final fun claim (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun claim (Ljava/lang/String;Ljava/lang/Void;)V
+	public final fun claim (Ljava/lang/String;Lkotlinx/serialization/json/JsonArray;)V
+	public final fun claim (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;)V
+	public final fun claim (Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;)V
+	public final fun claim (Ljava/lang/String;Z)V
+	public final fun expires (Lkotlinx/datetime/Instant;)V
+	public static synthetic fun expires$default (Lcom/appstractive/jwt/ClaimsBuilder;Lkotlinx/datetime/Instant;ILjava/lang/Object;)V
+	public final fun getAudience ()Ljava/lang/String;
+	public final fun getExpiresAt ()Lkotlinx/datetime/Instant;
+	public final fun getId ()Ljava/lang/String;
+	public final fun getIssuedAt ()Lkotlinx/datetime/Instant;
+	public final fun getIssuer ()Ljava/lang/String;
+	public final fun getNotBefore ()Lkotlinx/datetime/Instant;
+	public final fun getSubject ()Ljava/lang/String;
+	public final fun issuedAt (Lkotlinx/datetime/Instant;)V
+	public static synthetic fun issuedAt$default (Lcom/appstractive/jwt/ClaimsBuilder;Lkotlinx/datetime/Instant;ILjava/lang/Object;)V
+	public final fun notBefore (Lkotlinx/datetime/Instant;)V
+	public static synthetic fun notBefore$default (Lcom/appstractive/jwt/ClaimsBuilder;Lkotlinx/datetime/Instant;ILjava/lang/Object;)V
+	public final fun objectClaim (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
+	public final fun setAudience (Ljava/lang/String;)V
+	public final fun setExpiresAt (Lkotlinx/datetime/Instant;)V
+	public final fun setId (Ljava/lang/String;)V
+	public final fun setIssuedAt (Lkotlinx/datetime/Instant;)V
+	public final fun setIssuer (Ljava/lang/String;)V
+	public final fun setNotBefore (Lkotlinx/datetime/Instant;)V
+	public final fun setSubject (Ljava/lang/String;)V
+}
+
+public final class com/appstractive/jwt/ClaimsKt {
+	public static final fun getAudience (Lcom/appstractive/jwt/JWT;)Ljava/lang/String;
+	public static final fun getAudience (Lkotlinx/serialization/json/JsonObject;)Ljava/lang/String;
+	public static final fun getExpiresAt (Lcom/appstractive/jwt/JWT;)Lkotlinx/datetime/Instant;
+	public static final fun getExpiresAt (Lkotlinx/serialization/json/JsonObject;)Lkotlinx/datetime/Instant;
+	public static final fun getId (Lcom/appstractive/jwt/JWT;)Ljava/lang/String;
+	public static final fun getId (Lkotlinx/serialization/json/JsonObject;)Ljava/lang/String;
+	public static final fun getIssuedAt (Lcom/appstractive/jwt/JWT;)Lkotlinx/datetime/Instant;
+	public static final fun getIssuedAt (Lkotlinx/serialization/json/JsonObject;)Lkotlinx/datetime/Instant;
+	public static final fun getIssuer (Lcom/appstractive/jwt/JWT;)Ljava/lang/String;
+	public static final fun getIssuer (Lkotlinx/serialization/json/JsonObject;)Ljava/lang/String;
+	public static final fun getNotBefore (Lcom/appstractive/jwt/JWT;)Lkotlinx/datetime/Instant;
+	public static final fun getNotBefore (Lkotlinx/serialization/json/JsonObject;)Lkotlinx/datetime/Instant;
+	public static final fun getSubject (Lcom/appstractive/jwt/JWT;)Ljava/lang/String;
+	public static final fun getSubject (Lkotlinx/serialization/json/JsonObject;)Ljava/lang/String;
+}
+
+public final class com/appstractive/jwt/Header {
+	public static final field Companion Lcom/appstractive/jwt/Header$Companion;
+	public fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public final fun component1 ()Lcom/appstractive/jwt/Algorithm;
+	public final fun component2 ()Ljava/lang/String;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun copy (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;)Lcom/appstractive/jwt/Header;
+	public static synthetic fun copy$default (Lcom/appstractive/jwt/Header;Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/appstractive/jwt/Header;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getAlg ()Lcom/appstractive/jwt/Algorithm;
+	public final fun getKid ()Ljava/lang/String;
+	public final fun getTyp ()Ljava/lang/String;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public synthetic class com/appstractive/jwt/Header$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+	public static final field INSTANCE Lcom/appstractive/jwt/Header$$serializer;
+	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
+	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/appstractive/jwt/Header;
+	public synthetic fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Ljava/lang/Object;
+	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
+	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/Header;)V
+	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/appstractive/jwt/Header$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
+}
+
+public final class com/appstractive/jwt/HeaderBuilder {
+	public fun <init> ()V
+	public final fun getTyp ()Ljava/lang/String;
+	public final fun setTyp (Ljava/lang/String;)V
+}
+
+public final class com/appstractive/jwt/JWT {
+	public static final field Companion Lcom/appstractive/jwt/JWT$Companion;
+	public fun <init> (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;[B)V
+	public final fun component1 ()Lcom/appstractive/jwt/Header;
+	public final fun component2 ()Lkotlinx/serialization/json/JsonObject;
+	public final fun component3 ()[B
+	public final fun copy (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;[B)Lcom/appstractive/jwt/JWT;
+	public static synthetic fun copy$default (Lcom/appstractive/jwt/JWT;Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;[BILjava/lang/Object;)Lcom/appstractive/jwt/JWT;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getClaims ()Lkotlinx/serialization/json/JsonObject;
+	public final fun getHeader ()Lcom/appstractive/jwt/Header;
+	public final fun getSignature ()[B
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public final class com/appstractive/jwt/JWT$Companion {
+}
+
+public final class com/appstractive/jwt/JWTKt {
+	public static final fun jwt (Lkotlin/jvm/functions/Function1;)Lcom/appstractive/jwt/UnsignedJWT;
+}
+
+public final class com/appstractive/jwt/JwtBuilder {
+	public fun <init> ()V
+	public final fun claims (Lkotlin/jvm/functions/Function1;)V
+	public final fun header (Lkotlin/jvm/functions/Function1;)V
+}
+
+public abstract interface annotation class com/appstractive/jwt/JwtDsl : java/lang/annotation/Annotation {
+}
+
+public final class com/appstractive/jwt/ParserKt {
+	public static final fun from (Lcom/appstractive/jwt/JWT$Companion;Ljava/lang/String;)Lcom/appstractive/jwt/JWT;
+}
+
+public final class com/appstractive/jwt/Signer {
+	public fun <init> ()V
+	public final fun algorithm (Lcom/appstractive/jwt/SigningAlgorithm;Lcom/appstractive/jwt/Algorithm;)V
+}
+
+public abstract interface class com/appstractive/jwt/SigningAlgorithm {
+	public abstract fun generator (Ldev/whyoleg/cryptography/CryptographyAlgorithmId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun sign (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/appstractive/jwt/SigningAlgorithm$DefaultImpls {
+	public static fun sign (Lcom/appstractive/jwt/SigningAlgorithm;Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/appstractive/jwt/SigningKt {
+	public static final fun getDigest (Lcom/appstractive/jwt/Algorithm;)Ldev/whyoleg/cryptography/CryptographyAlgorithmId;
+	public static final fun sign (Lcom/appstractive/jwt/UnsignedJWT;Ljava/lang/String;Lcom/appstractive/jwt/Signer;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun sign (Lcom/appstractive/jwt/UnsignedJWT;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static synthetic fun sign$default (Lcom/appstractive/jwt/UnsignedJWT;Ljava/lang/String;Lcom/appstractive/jwt/Signer;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static synthetic fun sign$default (Lcom/appstractive/jwt/UnsignedJWT;Ljava/lang/String;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;ILjava/lang/Object;)Ljava/lang/Object;
+	public static final fun signer (Lkotlin/jvm/functions/Function1;)Lcom/appstractive/jwt/Signer;
+}
+
+public final class com/appstractive/jwt/UnsignedJWT {
+	public fun <init> (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;)V
+	public final fun component1 ()Lcom/appstractive/jwt/Header;
+	public final fun component2 ()Lkotlinx/serialization/json/JsonObject;
+	public final fun copy (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;)Lcom/appstractive/jwt/UnsignedJWT;
+	public static synthetic fun copy$default (Lcom/appstractive/jwt/UnsignedJWT;Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;ILjava/lang/Object;)Lcom/appstractive/jwt/UnsignedJWT;
+	public fun equals (Ljava/lang/Object;)Z
+	public final fun getClaims ()Lkotlinx/serialization/json/JsonObject;
+	public final fun getHeader ()Lcom/appstractive/jwt/Header;
+	public fun hashCode ()I
+	public fun toString ()Ljava/lang/String;
+}
+
+public abstract interface class com/appstractive/jwt/VerificationAlgorithm {
+	public abstract fun verifier (Lcom/appstractive/jwt/JWT;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public abstract fun verify (Lcom/appstractive/jwt/JWT;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/appstractive/jwt/VerificationAlgorithm$DefaultImpls {
+	public static fun verify (Lcom/appstractive/jwt/VerificationAlgorithm;Lcom/appstractive/jwt/JWT;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/appstractive/jwt/VerificationKt {
+	public static final fun jwtVerifier (Lkotlin/jvm/functions/Function1;)Lcom/appstractive/jwt/Verifier;
+	public static final fun verify (Lcom/appstractive/jwt/JWT;Lcom/appstractive/jwt/Verifier;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public static final fun verify (Lcom/appstractive/jwt/JWT;Lkotlin/jvm/functions/Function1;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+}
+
+public final class com/appstractive/jwt/Verifier {
+	public fun <init> ()V
+	public final fun algorithm (Lcom/appstractive/jwt/Algorithm;Lcom/appstractive/jwt/VerificationAlgorithm;)V
+	public final fun audience ([Ljava/lang/String;)V
+	public final fun expiresAt (Lkotlinx/datetime/Instant;)V
+	public static synthetic fun expiresAt$default (Lcom/appstractive/jwt/Verifier;Lkotlinx/datetime/Instant;ILjava/lang/Object;)V
+	public final fun issuer ([Ljava/lang/String;)V
+	public final fun notBefore (Lkotlinx/datetime/Instant;)V
+	public static synthetic fun notBefore$default (Lcom/appstractive/jwt/Verifier;Lkotlinx/datetime/Instant;ILjava/lang/Object;)V
+}
+
+public final class com/appstractive/jwt/utils/Base64UtilsKt {
+	public static final fun urlDecodedBytes (Ljava/lang/String;)[B
+	public static final fun urlDecodedString (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun urlEncoded (Lcom/appstractive/jwt/Header;)Ljava/lang/String;
+	public static final fun urlEncoded (Lcom/appstractive/jwt/JWT;)Ljava/lang/String;
+	public static final fun urlEncoded (Lcom/appstractive/jwt/UnsignedJWT;)Ljava/lang/String;
+	public static final fun urlEncoded (Ljava/lang/String;)Ljava/lang/String;
+	public static final fun urlEncoded (Lkotlinx/serialization/json/JsonObject;)Ljava/lang/String;
+	public static final fun urlEncoded ([B)Ljava/lang/String;
+}
+
+public final class com/appstractive/jwt/utils/ClaimsExtKt {
+	public static final fun instantOrNull (Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;)Lkotlinx/datetime/Instant;
+}
+

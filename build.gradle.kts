@@ -1,9 +1,10 @@
-import java.util.*
+import java.util.Properties
 
 plugins {
   alias(libs.plugins.multiplatform) apply false
   alias(libs.plugins.android.library) apply false
   alias(libs.plugins.kotlinx.serialization) apply false
+  alias(libs.plugins.kotlinx.binary.compatibility) apply false
   alias(libs.plugins.nexus)
 }
 
@@ -25,15 +26,33 @@ val signingKey by
             ?: "",
     )
 val signingPassword by
-    extra(localProps.getOrDefault("signing.password", System.getenv("SIGNING_PASSWORD") ?: ""))
+    extra(
+        localProps.getOrDefault(
+            "signing.password",
+            System.getenv("SIGNING_PASSWORD") ?: "",
+        ),
+    )
 val ossrhUsername by
-    extra(localProps.getOrDefault("ossrhUsername", System.getenv("OSSRH_USERNAME") ?: ""))
+    extra(
+        localProps.getOrDefault(
+            "ossrhUsername",
+            System.getenv("OSSRH_USERNAME") ?: "",
+        ),
+    )
 val ossrhPassword by
-    extra(localProps.getOrDefault("ossrhPassword", System.getenv("OSSRH_PASSWORD") ?: ""))
+    extra(
+        localProps.getOrDefault(
+            "ossrhPassword",
+            System.getenv("OSSRH_PASSWORD") ?: "",
+        ),
+    )
 val sonatypeStagingProfileId by
     extra(
         localProps.getOrDefault(
-            "sonatypeStagingProfileId", System.getenv("SONATYPE_STAGING_PROFILE_ID") ?: ""))
+            "sonatypeStagingProfileId",
+            System.getenv("SONATYPE_STAGING_PROFILE_ID") ?: "",
+        ),
+    )
 
 nexusPublishing {
   this.repositories {

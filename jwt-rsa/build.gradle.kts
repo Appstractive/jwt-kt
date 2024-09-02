@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
 plugins {
   alias(libs.plugins.multiplatform)
   alias(libs.plugins.android.library)
+  alias(libs.plugins.kotlinx.binary.compatibility)
   id("jwt.publication")
 }
 

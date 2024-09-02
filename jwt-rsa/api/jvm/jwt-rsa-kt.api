@@ -1,0 +1,34 @@
+public final class com/appstractive/jwt/signatures/PKCS1Kt {
+	public static final fun rs256 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun rs256 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+	public static final fun rs384 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun rs384 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+	public static final fun rs512 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun rs512 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/appstractive/jwt/signatures/PSSKt {
+	public static final fun ps256 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun ps256 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+	public static final fun ps384 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun ps384 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+	public static final fun ps512 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun ps512 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+}
+
+public final class com/appstractive/jwt/signatures/RSASigningConfig {
+	public fun <init> ()V
+	public final fun der (Ljava/lang/String;)V
+	public final fun der ([B)V
+	public final fun pem (Ljava/lang/String;)V
+	public final fun pem ([B)V
+}
+
+public final class com/appstractive/jwt/signatures/RSAVerifierConfig {
+	public fun <init> ()V
+	public final fun der (Ljava/lang/String;)V
+	public final fun der ([B)V
+	public final fun pem (Ljava/lang/String;)V
+	public final fun pem ([B)V
+}
+
