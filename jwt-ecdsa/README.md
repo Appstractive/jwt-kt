@@ -25,8 +25,8 @@ Gradle:
 
 ```
 commonMain.dependencies {
-    implementation("com.appstractive:jwt-kt:1.0.0")
-    implementation("com.appstractive:jwt-ecdsa-kt:1.0.0")
+    implementation("com.appstractive:jwt-kt:1.0.1")
+    implementation("com.appstractive:jwt-ecdsa-kt:1.0.1")
 }
 ```
 
