@@ -1,4 +1,4 @@
-﻿@file:OptIn(ExperimentalEncodingApi::class)
+﻿@file:OptIn(ExperimentalEncodingApi::class, ExperimentalEncodingApi::class)
 
 package com.appstractive.jwt.utils
 
@@ -6,11 +6,14 @@ import com.appstractive.jwt.Claims
 import com.appstractive.jwt.Header
 import com.appstractive.jwt.JWT
 import com.appstractive.jwt.UnsignedJWT
+import kotlin.io.encoding.Base64
 import kotlin.io.encoding.Base64.Default.UrlSafe
 import kotlin.io.encoding.ExperimentalEncodingApi
 import kotlinx.serialization.encodeToString
 
 fun UnsignedJWT.urlEncoded(): String = "${header.urlEncoded()}.${claims.urlEncoded()}"
+
+private val base64 = UrlSafe.withPadding(Base64.PaddingOption.ABSENT)
 
 fun JWT.urlEncoded(): String = "${header.urlEncoded()}.${claims.urlEncoded()}"
 
@@ -27,13 +30,13 @@ fun urlEncoded(source: String): String {
 }
 
 fun urlEncoded(source: ByteArray): String {
-  return UrlSafe.encode(source).replace("=", "")
+  return base64.encode(source)
 }
 
 fun String.urlDecodedString(): String {
-  return UrlSafe.decode(this).decodeToString()
+  return base64.decode(this).decodeToString()
 }
 
 fun String.urlDecodedBytes(): ByteArray {
-  return UrlSafe.decode(this)
+  return base64.decode(this)
 }
