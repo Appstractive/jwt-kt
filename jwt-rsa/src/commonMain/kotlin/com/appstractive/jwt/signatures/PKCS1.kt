@@ -9,7 +9,7 @@ import dev.whyoleg.cryptography.operations.signature.SignatureGenerator
 import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 
 private val provider by lazy { CryptographyProvider.Default }
-internal val pkcs1: RSA<RSA.PKCS1.PublicKey, RSA.PKCS1.PrivateKey, RSA.PKCS1.KeyPair> by lazy {
+internal val pkcs1: RSA.PKCS1 by lazy {
   provider.get(RSA.PKCS1)
 }
 

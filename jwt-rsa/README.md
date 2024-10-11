@@ -39,7 +39,7 @@ commonMain.dependencies {
 
 ```kotlin
 val provider = CryptographyProvider.Default
-val pkcs1: RSA.PSS = rovider.get(RSA.PKCS1)
+val pkcs1: RSA.PKCS1 = provider.get(RSA.PKCS1)
 
 val jwt: UnsignedJWT = jwt {
     claims { issuer = "example.com" }
@@ -60,7 +60,7 @@ val signedJWT = jwt.sign {
 
 ```kotlin
 val provider = CryptographyProvider.Default
-val pss: RSA.PSS = rovider.get(RSA.PSS)
+val pss: RSA.PSS = provider.get(RSA.PSS)
 
 val jwt: UnsignedJWT = jwt {
     claims { issuer = "example.com" }
