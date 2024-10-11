@@ -1,6 +1,6 @@
 [versions]
 kotlin = "2.0.20" # https://kotlinlang.org/docs/releases.html#release-details
-agp = "8.2.2" # https://developer.android.com/studio/releases/gradle-plugin
+agp = "8.7.0" # https://developer.android.com/studio/releases/gradle-plugin
 
 compileSdk = "34"
 minSdk = "26"
