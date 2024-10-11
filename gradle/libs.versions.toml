@@ -5,7 +5,7 @@ agp = "8.2.2" # https://developer.android.com/studio/releases/gradle-plugin
 compileSdk = "34"
 minSdk = "26"
 
-ktor = "2.3.12"
+ktor = "3.0.0"
 
 kotlin-datetime = "0.6.0"
 kotlin-serialization = "1.7.1"
