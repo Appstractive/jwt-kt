@@ -8,10 +8,12 @@ import com.appstractive.jwt.JWT
 import com.appstractive.jwt.Verifier
 import com.appstractive.jwt.from
 import com.appstractive.jwt.verify
-import io.ktor.http.auth.*
-import io.ktor.server.application.*
-import io.ktor.server.auth.*
-import io.ktor.server.request.*
+import io.ktor.http.auth.HttpAuthHeader
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.auth.AuthenticationContext
+import io.ktor.server.auth.AuthenticationFailedCause
+import io.ktor.server.auth.parseAuthorizationHeader
+import io.ktor.server.request.ApplicationRequest
 
 internal fun AuthenticationContext.bearerChallenge(
     cause: AuthenticationFailedCause,
@@ -32,8 +34,8 @@ internal suspend fun verifyAndValidate(
     jwtVerifier: Verifier?,
     token: HttpAuthHeader,
     schemes: JWTAuthSchemes,
-    validate: suspend ApplicationCall.(JWTCredential) -> Principal?
-): Principal? {
+    validate: suspend ApplicationCall.(JWTCredential) -> Any?
+): Any? {
   val jwt = token.getBlob(schemes)?.let { JWT.from(it) } ?: return null
 
   jwtVerifier?.let { verifier ->

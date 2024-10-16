@@ -2,7 +2,7 @@
 kotlin = "2.0.21" # https://kotlinlang.org/docs/releases.html#release-details
 agp = "8.7.1" # https://developer.android.com/studio/releases/gradle-plugin
 
-compileSdk = "34"
+compileSdk = "35"
 minSdk = "26"
 
 ktor = "3.0.0"
