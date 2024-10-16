@@ -7,7 +7,7 @@ minSdk = "26"
 
 ktor = "2.3.12"
 
-kotlin-datetime = "0.6.0"
+kotlin-datetime = "0.6.1"
 kotlin-serialization = "1.7.1"
 kotlin-coroutines = "1.8.1"
 
