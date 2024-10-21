@@ -47,7 +47,7 @@ crypto-pem = { module = "dev.whyoleg.cryptography:cryptography-serialization-pem
 crypto-asn = { module = "dev.whyoleg.cryptography:cryptography-serialization-asn1", version.ref = "cryptography" }
 
 test-kotlin = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
-test-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.8.1" }
+test-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.9.0" }
 test-ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 
 junit = "junit:junit:4.13.2"
