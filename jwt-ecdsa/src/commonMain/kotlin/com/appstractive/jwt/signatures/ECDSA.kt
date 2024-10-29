@@ -12,50 +12,50 @@ import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 internal val provider by lazy { CryptographyProvider.Default }
 internal val ecdsa: ECDSA by lazy { provider.get(ECDSA) }
 
-fun Signer.ec256(configure: ECDSASignerConfig.() -> Unit) {
+fun Signer.es256(configure: ECDSASignerConfig.() -> Unit) {
   val config = ECDSASignerConfig().apply(configure)
   algorithm(
       algorithm = ECDSASigner(config = config),
-      type = Algorithm.EC256,
+      type = Algorithm.ES256,
   )
 }
 
-fun Signer.ec384(configure: ECDSASignerConfig.() -> Unit) {
+fun Signer.es384(configure: ECDSASignerConfig.() -> Unit) {
   val config = ECDSASignerConfig().apply(configure)
   algorithm(
       algorithm = ECDSASigner(config = config),
-      type = Algorithm.EC384,
+      type = Algorithm.ES384,
   )
 }
 
-fun Signer.ec512(configure: ECDSASignerConfig.() -> Unit) {
+fun Signer.es512(configure: ECDSASignerConfig.() -> Unit) {
   val config = ECDSASignerConfig().apply(configure)
   algorithm(
       algorithm = ECDSASigner(config = config),
-      type = Algorithm.EC512,
+      type = Algorithm.ES512,
   )
 }
 
-fun Verifier.ec256(configure: ECDSAVerifierConfig.() -> Unit) {
+fun Verifier.es256(configure: ECDSAVerifierConfig.() -> Unit) {
   val config = ECDSAVerifierConfig().apply(configure)
   algorithm(
-      type = Algorithm.EC256,
+      type = Algorithm.ES256,
       algorithm = ECDSAVerifier(config = config),
   )
 }
 
-fun Verifier.ec384(configure: ECDSAVerifierConfig.() -> Unit) {
+fun Verifier.es384(configure: ECDSAVerifierConfig.() -> Unit) {
   val config = ECDSAVerifierConfig().apply(configure)
   algorithm(
-      type = Algorithm.EC384,
+      type = Algorithm.ES384,
       algorithm = ECDSAVerifier(config = config),
   )
 }
 
-fun Verifier.ec512(configure: ECDSAVerifierConfig.() -> Unit) {
+fun Verifier.es512(configure: ECDSAVerifierConfig.() -> Unit) {
   val config = ECDSAVerifierConfig().apply(configure)
   algorithm(
-      type = Algorithm.EC512,
+      type = Algorithm.ES512,
       algorithm = ECDSAVerifier(config = config),
   )
 }

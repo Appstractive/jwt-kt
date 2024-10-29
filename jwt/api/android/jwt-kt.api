@@ -1,7 +1,7 @@
 public final class com/appstractive/jwt/Algorithm : java/lang/Enum {
-	public static final field EC256 Lcom/appstractive/jwt/Algorithm;
-	public static final field EC384 Lcom/appstractive/jwt/Algorithm;
-	public static final field EC512 Lcom/appstractive/jwt/Algorithm;
+	public static final field ES256 Lcom/appstractive/jwt/Algorithm;
+	public static final field ES384 Lcom/appstractive/jwt/Algorithm;
+	public static final field ES512 Lcom/appstractive/jwt/Algorithm;
 	public static final field HS256 Lcom/appstractive/jwt/Algorithm;
 	public static final field HS384 Lcom/appstractive/jwt/Algorithm;
 	public static final field HS512 Lcom/appstractive/jwt/Algorithm;
