@@ -107,16 +107,18 @@ public final class com/appstractive/jwt/HeaderBuilder {
 
 public final class com/appstractive/jwt/JWT {
 	public static final field Companion Lcom/appstractive/jwt/JWT$Companion;
-	public fun <init> (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;[B)V
+	public fun <init> (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;[B)V
 	public final fun component1 ()Lcom/appstractive/jwt/Header;
 	public final fun component2 ()Lkotlinx/serialization/json/JsonObject;
-	public final fun component3 ()[B
-	public final fun copy (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;[B)Lcom/appstractive/jwt/JWT;
-	public static synthetic fun copy$default (Lcom/appstractive/jwt/JWT;Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;[BILjava/lang/Object;)Lcom/appstractive/jwt/JWT;
+	public final fun component3 ()Ljava/lang/String;
+	public final fun component4 ()[B
+	public final fun copy (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;[B)Lcom/appstractive/jwt/JWT;
+	public static synthetic fun copy$default (Lcom/appstractive/jwt/JWT;Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;[BILjava/lang/Object;)Lcom/appstractive/jwt/JWT;
 	public fun equals (Ljava/lang/Object;)Z
 	public final fun getClaims ()Lkotlinx/serialization/json/JsonObject;
 	public final fun getHeader ()Lcom/appstractive/jwt/Header;
 	public final fun getSignature ()[B
+	public final fun getSignedData ()Ljava/lang/String;
 	public fun hashCode ()I
 	public fun toString ()Ljava/lang/String;
 }
@@ -207,7 +209,6 @@ public final class com/appstractive/jwt/utils/Base64UtilsKt {
 	public static final fun urlDecodedBytes (Ljava/lang/String;)[B
 	public static final fun urlDecodedString (Ljava/lang/String;)Ljava/lang/String;
 	public static final fun urlEncoded (Lcom/appstractive/jwt/Header;)Ljava/lang/String;
-	public static final fun urlEncoded (Lcom/appstractive/jwt/JWT;)Ljava/lang/String;
 	public static final fun urlEncoded (Lcom/appstractive/jwt/UnsignedJWT;)Ljava/lang/String;
 	public static final fun urlEncoded (Ljava/lang/String;)Ljava/lang/String;
 	public static final fun urlEncoded (Lkotlinx/serialization/json/JsonObject;)Ljava/lang/String;

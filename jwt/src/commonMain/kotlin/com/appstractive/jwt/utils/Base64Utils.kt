@@ -4,7 +4,6 @@ package com.appstractive.jwt.utils
 
 import com.appstractive.jwt.Claims
 import com.appstractive.jwt.Header
-import com.appstractive.jwt.JWT
 import com.appstractive.jwt.UnsignedJWT
 import kotlin.io.encoding.Base64
 import kotlin.io.encoding.Base64.Default.UrlSafe
@@ -14,8 +13,6 @@ import kotlinx.serialization.encodeToString
 fun UnsignedJWT.urlEncoded(): String = "${header.urlEncoded()}.${claims.urlEncoded()}"
 
 private val base64 = UrlSafe.withPadding(Base64.PaddingOption.ABSENT)
-
-fun JWT.urlEncoded(): String = "${header.urlEncoded()}.${claims.urlEncoded()}"
 
 fun Header.urlEncoded(): String {
   return urlEncoded(json.encodeToString(this))

@@ -46,12 +46,13 @@ val Algorithm.digest: CryptographyAlgorithmId<Digest>
 interface SigningAlgorithm {
   suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator
 
-  suspend fun sign(header: Header, claims: JsonObject): ByteArray {
+  suspend fun sign(header: Header, claims: JsonObject): Pair<ByteArray, ByteArray> {
     val headerEncoded = header.urlEncoded()
     val claimsEncoded = claims.urlEncoded()
+    val tbsData = "$headerEncoded.$claimsEncoded".encodeToByteArray()
 
     return generator(digest = header.alg.digest)
-        .generateSignature("$headerEncoded.$claimsEncoded".encodeToByteArray())
+        .generateSignature(tbsData) to tbsData
   }
 }
 
@@ -67,7 +68,7 @@ class Signer {
     this.type = type
   }
 
-  internal suspend fun sign(header: Header, claims: JsonObject): ByteArray {
+  internal suspend fun sign(header: Header, claims: JsonObject): Pair<ByteArray, ByteArray> {
     return algorithm?.sign(
         header = header,
         claims = claims,
@@ -89,13 +90,14 @@ suspend fun UnsignedJWT.sign(kid: String? = null, signer: Signer): JWT {
           alg = checkNotNull(signer.type) { "No algorithm configured" },
           kid = kid,
       )
+  val (signature, signedData) = signer.sign(
+      header = finalHeader,
+      claims = claims,
+  )
   return JWT(
       header = finalHeader,
       claims = claims,
-      signature =
-          signer.sign(
-              header = finalHeader,
-              claims = claims,
-          ),
+      signedData = signedData.decodeToString(),
+      signature = signature,
   )
 }

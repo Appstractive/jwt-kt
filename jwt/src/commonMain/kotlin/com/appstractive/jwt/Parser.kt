@@ -9,11 +9,13 @@ fun JWT.Companion.from(jwt: String): JWT {
   check(parts.size == 3) { "JWT expects 3 parts but got ${parts.size}" }
   val header = json.decodeFromString<Header>(parts[0].urlDecodedString())
   val claims = json.decodeFromString<Claims>(parts[1].urlDecodedString())
+  val signedData = "${parts[0]}.${parts[1]}"
   val signature = parts[2].urlDecodedBytes()
 
   return JWT(
       header = header,
       claims = claims,
+      signedData = signedData,
       signature = signature,
   )
 }
