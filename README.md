@@ -34,7 +34,7 @@ Gradle:
 
 ```
 commonMain.dependencies { 
-    implementation("com.appstractive:jwt-kt:1.0.1")
+    implementation("com.appstractive:jwt-kt:1.0.2")
 }
 ```
 
