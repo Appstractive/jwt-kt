@@ -13,9 +13,9 @@ Sign and verify JWTs using ECDSA algorithm.
 
 ## Supported Algorithms
 
-- E2256
-- E2384
-- E2512
+- ES256
+- ES384
+- ES512
 
 ## Usage
 
