@@ -13,9 +13,9 @@ Sign and verify JWTs using ECDSA algorithm.
 
 ## Supported Algorithms
 
-- EC256
-- EC384
-- EC512
+- ES256
+- ES384
+- ES512
 
 ## Usage
 
@@ -40,10 +40,10 @@ val keys = CryptographyProvider.Default.get(ECDSA).keyPairGenerator(curve).gener
 val privateKey = keys.privateKey.encodeTo(EC.PrivateKey.Format.PEM)
 
 val signedJWT = jwt.sign {
-    ec256 { secret = pem(privateKey) }
+    es256 { secret = pem(privateKey) }
     // or with different hashing
-    // ec384 { secret = pem(privateKey) }
-    // ec512 { secret = pem(privateKey) }
+    // es384 { secret = pem(privateKey) }
+    // es512 { secret = pem(privateKey) }
 }
 ```
 
@@ -55,10 +55,10 @@ val keys = CryptographyProvider.Default.get(ECDSA).keyPairGenerator(curve).gener
 val publicKey = keys.publicKey.encodeTo(EC.PublicKey.Format.PEM)
 
 val isValid = jwt.verify {
-    ec256 { secret = pem(publicKey) }
+    es256 { secret = pem(publicKey) }
     // or with different hashing
-    // ec384 { secret = pem(publicKey) }
-    // ec512 { secret = pem(publicKey) }
+    // es384 { secret = pem(publicKey) }
+    // es512 { secret = pem(publicKey) }
 
     // verify issuer
     issuer("example.com")

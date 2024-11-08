@@ -11,36 +11,36 @@ import kotlinx.coroutines.test.runTest
 class JwtVerifierTests {
 
   @Test
-  fun createJwtEC256() = runTest {
+  fun createJwtES256() = runTest {
     val jwt =
         createJwtEC(
-            builder = { ec256 { pem(it) } },
-            verifier = { ec256 { pem(it) } },
+            builder = { es256 { pem(it) } },
+            verifier = { es256 { pem(it) } },
         )
 
-    assertEquals(Algorithm.EC256, jwt.header.alg)
+    assertEquals(Algorithm.ES256, jwt.header.alg)
   }
 
   @Test
-  fun createJwtEC384() = runTest {
+  fun createJwtES384() = runTest {
     val jwt =
         createJwtEC(
-            builder = { ec384 { pem(it) } },
-            verifier = { ec384 { pem(it) } },
+            builder = { es384 { pem(it) } },
+            verifier = { es384 { pem(it) } },
         )
 
-    assertEquals(Algorithm.EC384, jwt.header.alg)
+    assertEquals(Algorithm.ES384, jwt.header.alg)
   }
 
   @Test
-  fun createJwtEC512() = runTest {
+  fun createJwtES512() = runTest {
     val jwt =
         createJwtEC(
-            builder = { ec512 { pem(it) } },
-            verifier = { ec512 { pem(it) } },
+            builder = { es512 { pem(it) } },
+            verifier = { es512 { pem(it) } },
         )
 
-    assertEquals(Algorithm.EC512, jwt.header.alg)
+    assertEquals(Algorithm.ES512, jwt.header.alg)
   }
 
   private suspend fun createJwtEC(

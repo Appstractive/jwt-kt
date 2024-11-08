@@ -1,10 +1,10 @@
 public final class com/appstractive/jwt/signatures/ECDSAKt {
-	public static final fun ec256 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
-	public static final fun ec256 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
-	public static final fun ec384 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
-	public static final fun ec384 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
-	public static final fun ec512 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
-	public static final fun ec512 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+	public static final fun es256 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun es256 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+	public static final fun es384 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun es384 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
+	public static final fun es512 (Lcom/appstractive/jwt/Signer;Lkotlin/jvm/functions/Function1;)V
+	public static final fun es512 (Lcom/appstractive/jwt/Verifier;Lkotlin/jvm/functions/Function1;)V
 }
 
 public final class com/appstractive/jwt/signatures/ECDSASignerConfig {

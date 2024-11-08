@@ -19,25 +19,25 @@ enum class Algorithm {
   PS256,
   PS384,
   PS512,
-  EC256,
-  EC384,
-  EC512,
+  ES256,
+  ES384,
+  ES512,
 }
 
 val Algorithm.digest: CryptographyAlgorithmId<Digest>
   get() =
       when (this) {
-        Algorithm.EC256,
+        Algorithm.ES256,
         Algorithm.PS256,
         Algorithm.RS256,
         Algorithm.HS256 -> SHA256
 
-        Algorithm.EC384,
+        Algorithm.ES384,
         Algorithm.RS384,
         Algorithm.PS384,
         Algorithm.HS384 -> SHA384
 
-        Algorithm.EC512,
+        Algorithm.ES512,
         Algorithm.HS512,
         Algorithm.RS512,
         Algorithm.PS512 -> SHA512
