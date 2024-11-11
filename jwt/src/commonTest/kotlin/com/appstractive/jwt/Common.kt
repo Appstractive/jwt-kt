@@ -2,6 +2,7 @@
 
 import com.appstractive.jwt.utils.claim
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
+import dev.whyoleg.cryptography.CryptographyProvider
 import dev.whyoleg.cryptography.CryptographyProviderApi
 import dev.whyoleg.cryptography.algorithms.digest.Digest
 import dev.whyoleg.cryptography.operations.signature.SignatureGenerator
@@ -29,6 +30,20 @@ object MockSignerVerifier : VerificationAlgorithm, SigningAlgorithm {
     return object : SignatureGenerator {
       override fun generateSignatureBlocking(dataInput: ByteArray): ByteArray {
         return "123456".encodeToByteArray()
+      }
+    }
+  }
+}
+
+@OptIn(CryptographyProviderApi::class)
+open class MockHashingVerifier(val referenceHash: ByteArray, val hashAlg: CryptographyAlgorithmId<Digest>) : VerificationAlgorithm {
+  override suspend fun verifier(jwt: JWT): SignatureVerifier {
+    return object : SignatureVerifier {
+      override fun verifySignatureBlocking(
+        dataInput: ByteArray,
+        signatureInput: ByteArray
+      ): Boolean {
+        return referenceHash contentEquals CryptographyProvider.Default.get(hashAlg).hasher().hashBlocking(dataInput)
       }
     }
   }

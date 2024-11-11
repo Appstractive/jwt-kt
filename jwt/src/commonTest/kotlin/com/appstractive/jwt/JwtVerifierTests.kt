@@ -1,5 +1,7 @@
 ﻿package com.appstractive.jwt
 
+import com.appstractive.jwt.utils.urlEncoded
+import dev.whyoleg.cryptography.CryptographyProvider
 import kotlin.test.Test
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -183,5 +185,28 @@ class JwtVerifierTests {
         }
 
     assertFalse(result)
+  }
+
+  @Test
+  fun testVerifyDifferentHeaderOrderSuccess() = runTest {
+    val signedHeaderNormal = urlEncoded("""{"alg":"ES256","typ":"JWT"}""")
+    assertTrue { checkSignatureHash(signedHeaderNormal, Algorithm.ES256) }
+    val signedHeaderReverse = urlEncoded("""{"typ":"JWT","alg":"ES256"}""")
+    assertTrue { checkSignatureHash(signedHeaderReverse, Algorithm.ES256) }
+  }
+
+  private suspend fun checkSignatureHash(signedHeader: String, sigAlg: Algorithm): Boolean {
+    val signedBody = urlEncoded("{}")
+    val signedPart = "$signedHeader.$signedBody"
+    val signaturePart = urlEncoded("don't care")
+    val expectedHash = CryptographyProvider.Default.get(sigAlg.digest).hasher().hash(signedPart.encodeToByteArray())
+    val jwt = JWT.from("$signedPart.$signaturePart")
+
+    return jwt.verify {
+      this.algorithm(
+          type = sigAlg,
+          algorithm = MockHashingVerifier(expectedHash, sigAlg.digest),
+      )
+    }
   }
 }
