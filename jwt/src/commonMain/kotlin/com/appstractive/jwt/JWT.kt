@@ -50,7 +50,9 @@ data class JWT(
   }
 
   override fun hashCode(): Int {
-    var result = signedData.hashCode()
+    var result = header.hashCode()
+    result = 31 * result + claims.hashCode()
+    result = 31 * result + signedData.hashCode()
     result = 31 * result + signature.contentHashCode()
     return result
   }
