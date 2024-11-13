@@ -23,13 +23,13 @@ data class UnsignedJWT(
 data class JWT(
     val header: Header,
     val claims: Claims,
+    val signedData: String,
     val signature: ByteArray,
 ) {
 
   override fun toString(): String {
     return listOf(
-            header.urlEncoded(),
-            claims.urlEncoded(),
+            signedData,
             urlEncoded(signature),
         )
         .joinToString(".")
@@ -41,6 +41,7 @@ data class JWT(
 
     other as JWT
 
+    if (signedData != other.signedData) return false
     if (header != other.header) return false
     if (claims != other.claims) return false
     if (!signature.contentEquals(other.signature)) return false
@@ -51,6 +52,7 @@ data class JWT(
   override fun hashCode(): Int {
     var result = header.hashCode()
     result = 31 * result + claims.hashCode()
+    result = 31 * result + signedData.hashCode()
     result = 31 * result + signature.contentHashCode()
     return result
   }

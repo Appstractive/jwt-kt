@@ -1,6 +1,5 @@
 ﻿package com.appstractive.jwt
 
-import com.appstractive.jwt.utils.urlEncoded
 import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
 import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
@@ -9,7 +8,7 @@ interface VerificationAlgorithm {
   suspend fun verifier(jwt: JWT): SignatureVerifier
 
   suspend fun verify(jwt: JWT): Boolean {
-    return verifier(jwt = jwt).verifySignature(jwt.urlEncoded().encodeToByteArray(), jwt.signature)
+    return verifier(jwt = jwt).verifySignature(jwt.signedData.encodeToByteArray(), jwt.signature)
   }
 }
 
