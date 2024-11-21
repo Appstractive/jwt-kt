@@ -1,10 +1,10 @@
-public final class com/appstractive/jwt/CurveType : java/lang/Enum {
-	public static final field P256 Lcom/appstractive/jwt/CurveType;
-	public static final field P384 Lcom/appstractive/jwt/CurveType;
-	public static final field P521 Lcom/appstractive/jwt/CurveType;
+public final class com/appstractive/jwt/Curve : java/lang/Enum {
+	public static final field P256 Lcom/appstractive/jwt/Curve;
+	public static final field P384 Lcom/appstractive/jwt/Curve;
+	public static final field P521 Lcom/appstractive/jwt/Curve;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
-	public static fun valueOf (Ljava/lang/String;)Lcom/appstractive/jwt/CurveType;
-	public static fun values ()[Lcom/appstractive/jwt/CurveType;
+	public static fun valueOf (Ljava/lang/String;)Lcom/appstractive/jwt/Curve;
+	public static fun values ()[Lcom/appstractive/jwt/Curve;
 }
 
 public abstract interface class com/appstractive/jwt/JSONWebKey {
@@ -19,19 +19,19 @@ public final class com/appstractive/jwt/JSONWebKey$Companion {
 
 public final class com/appstractive/jwt/JSONWebKeyEC : com/appstractive/jwt/JSONWebKey {
 	public static final field Companion Lcom/appstractive/jwt/JSONWebKeyEC$Companion;
-	public fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/CurveType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
-	public synthetic fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/CurveType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
+	public fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/Curve;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V
+	public synthetic fun <init> (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/Curve;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILkotlin/jvm/internal/DefaultConstructorMarker;)V
 	public final fun component1 ()Lcom/appstractive/jwt/Algorithm;
 	public final fun component2 ()Ljava/lang/String;
-	public final fun component3 ()Lcom/appstractive/jwt/CurveType;
+	public final fun component3 ()Lcom/appstractive/jwt/Curve;
 	public final fun component4 ()Ljava/lang/String;
 	public final fun component5 ()Ljava/lang/String;
 	public final fun component6 ()Ljava/lang/String;
-	public final fun copy (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/CurveType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/appstractive/jwt/JSONWebKeyEC;
-	public static synthetic fun copy$default (Lcom/appstractive/jwt/JSONWebKeyEC;Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/CurveType;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/appstractive/jwt/JSONWebKeyEC;
+	public final fun copy (Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/Curve;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Lcom/appstractive/jwt/JSONWebKeyEC;
+	public static synthetic fun copy$default (Lcom/appstractive/jwt/JSONWebKeyEC;Lcom/appstractive/jwt/Algorithm;Ljava/lang/String;Lcom/appstractive/jwt/Curve;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)Lcom/appstractive/jwt/JSONWebKeyEC;
 	public fun equals (Ljava/lang/Object;)Z
 	public fun getAlg ()Lcom/appstractive/jwt/Algorithm;
-	public final fun getCrv ()Lcom/appstractive/jwt/CurveType;
+	public final fun getCrv ()Lcom/appstractive/jwt/Curve;
 	public final fun getD ()Ljava/lang/String;
 	public fun getKid ()Ljava/lang/String;
 	public final fun getX ()Ljava/lang/String;
@@ -94,7 +94,7 @@ public final class com/appstractive/jwt/JSONWebKeyHMAC$Companion {
 }
 
 public final class com/appstractive/jwt/JSONWebKeyKt {
-	public static final fun getCurve (Lcom/appstractive/jwt/CurveType;)Ljava/lang/String;
+	public static final fun getCurve (Lcom/appstractive/jwt/Curve;)Ljava/lang/String;
 }
 
 public final class com/appstractive/jwt/JSONWebKeyRSA : com/appstractive/jwt/JSONWebKey {
