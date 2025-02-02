@@ -3,10 +3,10 @@
 import com.appstractive.jwt.*
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
 import dev.whyoleg.cryptography.CryptographyProvider
-import dev.whyoleg.cryptography.algorithms.digest.Digest
-import dev.whyoleg.cryptography.algorithms.symmetric.HMAC
-import dev.whyoleg.cryptography.operations.signature.SignatureGenerator
-import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
+import dev.whyoleg.cryptography.algorithms.Digest
+import dev.whyoleg.cryptography.algorithms.HMAC
+import dev.whyoleg.cryptography.operations.SignatureGenerator
+import dev.whyoleg.cryptography.operations.SignatureVerifier
 
 internal val provider by lazy { CryptographyProvider.Default }
 internal val hmac by lazy { provider.get(HMAC) }
@@ -66,14 +66,14 @@ class Hmac(
   override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
     return hmac
         .keyDecoder(digest)
-        .decodeFrom(HMAC.Key.Format.RAW, config.secret)
+        .decodeFromByteArray(HMAC.Key.Format.RAW, config.secret)
         .signatureGenerator()
   }
 
   override suspend fun verifier(jwt: JWT): SignatureVerifier {
     return hmac
         .keyDecoder(jwt.header.alg.digest)
-        .decodeFrom(HMAC.Key.Format.RAW, config.secret)
+        .decodeFromByteArray(HMAC.Key.Format.RAW, config.secret)
         .signatureVerifier()
   }
 

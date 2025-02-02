@@ -1,17 +1,17 @@
 [versions]
-kotlin = "2.0.21" # https://kotlinlang.org/docs/releases.html#release-details
-agp = "8.7.2" # https://developer.android.com/studio/releases/gradle-plugin
+kotlin = "2.1.0" # https://kotlinlang.org/docs/releases.html#release-details
+agp = "8.7.3" # https://developer.android.com/studio/releases/gradle-plugin
 
 compileSdk = "35"
 minSdk = "26"
 
-ktor = "3.0.1"
+ktor = "3.0.3"
 
 kotlin-datetime = "0.6.1"
 kotlin-serialization = "1.7.3"
-kotlin-coroutines = "1.9.0"
+kotlin-coroutines = "1.10.1"
 
-cryptography = "0.3.1"
+cryptography = "0.4.0"
 
 [libraries]
 
@@ -47,7 +47,7 @@ crypto-pem = { module = "dev.whyoleg.cryptography:cryptography-serialization-pem
 crypto-asn = { module = "dev.whyoleg.cryptography:cryptography-serialization-asn1", version.ref = "cryptography" }
 
 test-kotlin = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
-test-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.9.0" }
+test-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version = "1.10.1" }
 test-ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 
 junit = "junit:junit:4.13.2"

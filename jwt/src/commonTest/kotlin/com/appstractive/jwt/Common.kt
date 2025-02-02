@@ -4,9 +4,11 @@ import com.appstractive.jwt.utils.claim
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
 import dev.whyoleg.cryptography.CryptographyProvider
 import dev.whyoleg.cryptography.CryptographyProviderApi
-import dev.whyoleg.cryptography.algorithms.digest.Digest
-import dev.whyoleg.cryptography.operations.signature.SignatureGenerator
-import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
+import dev.whyoleg.cryptography.algorithms.Digest
+import dev.whyoleg.cryptography.operations.SignFunction
+import dev.whyoleg.cryptography.operations.SignatureGenerator
+import dev.whyoleg.cryptography.operations.SignatureVerifier
+import dev.whyoleg.cryptography.operations.VerifyFunction
 import kotlin.time.Duration.Companion.hours
 import kotlinx.datetime.Clock
 import kotlinx.serialization.ExperimentalSerializationApi
@@ -17,19 +19,42 @@ import kotlinx.serialization.json.JsonPrimitive
 object MockSignerVerifier : VerificationAlgorithm, SigningAlgorithm {
   override suspend fun verifier(jwt: JWT): SignatureVerifier {
     return object : SignatureVerifier {
-      override fun verifySignatureBlocking(
-          dataInput: ByteArray,
-          signatureInput: ByteArray
-      ): Boolean {
-        return true
+      override fun createVerifyFunction(): VerifyFunction {
+        return object: VerifyFunction {
+          override fun tryVerify(signature: ByteArray, startIndex: Int, endIndex: Int): Boolean {
+            return true
+          }
+
+          override fun close() = Unit
+
+          override fun reset() = Unit
+
+          override fun update(source: ByteArray, startIndex: Int, endIndex: Int) = Unit
+
+          override fun verify(signature: ByteArray, startIndex: Int, endIndex: Int) = Unit
+        }
       }
     }
   }
 
   override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
     return object : SignatureGenerator {
-      override fun generateSignatureBlocking(dataInput: ByteArray): ByteArray {
-        return "123456".encodeToByteArray()
+      override fun createSignFunction(): SignFunction {
+        return object: SignFunction {
+          override fun signIntoByteArray(destination: ByteArray, destinationOffset: Int): Int {
+            return 0
+          }
+
+          override fun close() = Unit
+
+          override fun reset() = Unit
+
+          override fun signToByteArray(): ByteArray {
+            return "123456".encodeToByteArray()
+          }
+
+          override fun update(source: ByteArray, startIndex: Int, endIndex: Int) = Unit
+        }
       }
     }
   }
@@ -39,11 +64,22 @@ object MockSignerVerifier : VerificationAlgorithm, SigningAlgorithm {
 open class MockHashingVerifier(val referenceHash: ByteArray, val hashAlg: CryptographyAlgorithmId<Digest>) : VerificationAlgorithm {
   override suspend fun verifier(jwt: JWT): SignatureVerifier {
     return object : SignatureVerifier {
-      override fun verifySignatureBlocking(
-        dataInput: ByteArray,
-        signatureInput: ByteArray
-      ): Boolean {
-        return referenceHash contentEquals CryptographyProvider.Default.get(hashAlg).hasher().hashBlocking(dataInput)
+      override fun createVerifyFunction(): VerifyFunction {
+        return object: VerifyFunction {
+          override fun tryVerify(signature: ByteArray, startIndex: Int, endIndex: Int): Boolean {
+            return referenceHash contentEquals CryptographyProvider.Default.get(hashAlg).hasher().hashBlocking(jwt.signedData.encodeToByteArray())
+          }
+
+          override fun close() = Unit
+
+          override fun reset() = Unit
+
+          override fun update(source: ByteArray, startIndex: Int, endIndex: Int) = Unit
+
+          override fun verify(signature: ByteArray, startIndex: Int, endIndex: Int) {
+            check(tryVerify(signature = signature, startIndex = startIndex, endIndex = endIndex))
+          }
+        }
       }
     }
   }

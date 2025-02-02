@@ -9,25 +9,25 @@ public final class com/appstractive/jwt/signatures/ECDSAKt {
 
 public final class com/appstractive/jwt/signatures/ECDSASignerConfig {
 	public fun <init> ()V
-	public final fun der-3mCpTWo (Ljava/lang/String;Ljava/lang/String;)V
-	public final fun der-3mCpTWo ([BLjava/lang/String;)V
-	public static synthetic fun der-3mCpTWo$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
-	public static synthetic fun der-3mCpTWo$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;[BLjava/lang/String;ILjava/lang/Object;)V
-	public final fun pem-3mCpTWo (Ljava/lang/String;Ljava/lang/String;)V
-	public final fun pem-3mCpTWo ([BLjava/lang/String;)V
-	public static synthetic fun pem-3mCpTWo$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
-	public static synthetic fun pem-3mCpTWo$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;[BLjava/lang/String;ILjava/lang/Object;)V
+	public final fun der-txG9UtI (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun der-txG9UtI ([BLjava/lang/String;)V
+	public static synthetic fun der-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
+	public static synthetic fun der-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;[BLjava/lang/String;ILjava/lang/Object;)V
+	public final fun pem-txG9UtI (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun pem-txG9UtI ([BLjava/lang/String;)V
+	public static synthetic fun pem-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
+	public static synthetic fun pem-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;[BLjava/lang/String;ILjava/lang/Object;)V
 }
 
 public final class com/appstractive/jwt/signatures/ECDSAVerifierConfig {
 	public fun <init> ()V
-	public final fun der-3mCpTWo (Ljava/lang/String;Ljava/lang/String;)V
-	public final fun der-3mCpTWo ([BLjava/lang/String;)V
-	public static synthetic fun der-3mCpTWo$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
-	public static synthetic fun der-3mCpTWo$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;[BLjava/lang/String;ILjava/lang/Object;)V
-	public final fun pem-3mCpTWo (Ljava/lang/String;Ljava/lang/String;)V
-	public final fun pem-3mCpTWo ([BLjava/lang/String;)V
-	public static synthetic fun pem-3mCpTWo$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
-	public static synthetic fun pem-3mCpTWo$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;[BLjava/lang/String;ILjava/lang/Object;)V
+	public final fun der-txG9UtI (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun der-txG9UtI ([BLjava/lang/String;)V
+	public static synthetic fun der-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
+	public static synthetic fun der-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;[BLjava/lang/String;ILjava/lang/Object;)V
+	public final fun pem-txG9UtI (Ljava/lang/String;Ljava/lang/String;)V
+	public final fun pem-txG9UtI ([BLjava/lang/String;)V
+	public static synthetic fun pem-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
+	public static synthetic fun pem-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;[BLjava/lang/String;ILjava/lang/Object;)V
 }
 
