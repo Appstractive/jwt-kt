@@ -10,7 +10,7 @@ plugins {
 
 group = "com.appstractive"
 
-version = "1.0.3"
+version = "1.1.0"
 
 val localProps = Properties()
 val localPropertiesFile = rootProject.file("local.properties")

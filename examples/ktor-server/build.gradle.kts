@@ -8,7 +8,7 @@ plugins {
 
 group = "com.appstractive.jwt"
 
-version = "1.0.3"
+version = "1.1.0"
 
 kotlin {
   jvm { compilerOptions { jvmTarget.set(JvmTarget.JVM_17) } }
