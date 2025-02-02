@@ -16,10 +16,10 @@ import io.ktor.server.auth.parseAuthorizationHeader
 import io.ktor.server.request.ApplicationRequest
 
 internal fun AuthenticationContext.bearerChallenge(
-    cause: AuthenticationFailedCause,
-    realm: String,
-    schemes: JWTAuthSchemes,
-    challengeFunction: JWTAuthChallengeFunction
+  cause: AuthenticationFailedCause,
+  realm: String,
+  schemes: JWTAuthSchemes,
+  challengeFunction: JWTAuthChallengeFunction
 ) {
   challenge(JWTAuthKey, cause) { challenge, call ->
     challengeFunction(JWTChallengeContext(call), schemes.defaultScheme, realm)
@@ -30,11 +30,11 @@ internal fun AuthenticationContext.bearerChallenge(
 }
 
 internal suspend fun verifyAndValidate(
-    call: ApplicationCall,
-    jwtVerifier: Verifier?,
-    token: HttpAuthHeader,
-    schemes: JWTAuthSchemes,
-    validate: suspend ApplicationCall.(JWTCredential) -> Any?
+  call: ApplicationCall,
+  jwtVerifier: Verifier?,
+  token: HttpAuthHeader,
+  schemes: JWTAuthSchemes,
+  validate: suspend ApplicationCall.(JWTCredential) -> Any?
 ): Any? {
   val jwt = token.getBlob(schemes)?.let { JWT.from(it) } ?: return null
 

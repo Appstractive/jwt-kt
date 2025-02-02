@@ -37,7 +37,7 @@ public class JWTPrincipal(val claims: Claims)
  * @see [jwt]
  */
 public class JWTAuthenticationProvider internal constructor(config: Config) :
-    AuthenticationProvider(config) {
+  AuthenticationProvider(config) {
 
   private val realm: String = config.realm
   private val schemes: JWTAuthSchemes = config.schemes
@@ -51,7 +51,8 @@ public class JWTAuthenticationProvider internal constructor(config: Config) :
     val token = authHeader(call)
     if (token == null) {
       context.bearerChallenge(
-          AuthenticationFailedCause.NoCredentials, realm, schemes, challengeFunction)
+          AuthenticationFailedCause.NoCredentials, realm, schemes, challengeFunction,
+      )
       return
     }
 
@@ -70,7 +71,8 @@ public class JWTAuthenticationProvider internal constructor(config: Config) :
       }
 
       context.bearerChallenge(
-          AuthenticationFailedCause.InvalidCredentials, realm, schemes, challengeFunction)
+          AuthenticationFailedCause.InvalidCredentials, realm, schemes, challengeFunction,
+      )
     } catch (cause: Throwable) {
       val message = cause.message ?: cause.toString()
       context.error(JWTAuthKey, AuthenticationFailedCause.Error(message))
@@ -81,7 +83,8 @@ public class JWTAuthenticationProvider internal constructor(config: Config) :
   public class Config internal constructor(name: String?) : AuthenticationProvider.Config(name) {
     internal var authenticationFunction: AuthenticationFunction<JWTCredential> = {
       throw NotImplementedError(
-          "JWT auth validate function is not specified. Use jwt { validate { ... } } to fix.")
+          "JWT auth validate function is not specified. Use jwt { validate { ... } } to fix.",
+      )
     }
 
     internal var schemes = JWTAuthSchemes("Bearer")
@@ -96,7 +99,10 @@ public class JWTAuthenticationProvider internal constructor(config: Config) :
       call.respond(
           UnauthorizedResponse(
               HttpAuthHeader.Parameterized(
-                  scheme, mapOf(HttpAuthHeader.Parameters.Realm to realm))))
+                  scheme, mapOf(HttpAuthHeader.Parameters.Realm to realm),
+              ),
+          ),
+      )
     }
 
     /** Specifies a JWT realm to be passed in `WWW-Authenticate` header. */
@@ -174,8 +180,8 @@ public class JWTAuthenticationProvider internal constructor(config: Config) :
  * configure it, see [JSON Web Tokens](https://ktor.io/docs/jwt.html).
  */
 public fun AuthenticationConfig.jwt(
-    name: String? = null,
-    configure: JWTAuthenticationProvider.Config.() -> Unit
+  name: String? = null,
+  configure: JWTAuthenticationProvider.Config.() -> Unit
 ) {
   val provider = JWTAuthenticationProvider.Config(name).apply(configure).build()
   register(provider)

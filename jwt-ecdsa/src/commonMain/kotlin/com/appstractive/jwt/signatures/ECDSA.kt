@@ -1,6 +1,12 @@
 ﻿package com.appstractive.jwt.signatures
 
-import com.appstractive.jwt.*
+import com.appstractive.jwt.Algorithm
+import com.appstractive.jwt.JWT
+import com.appstractive.jwt.Signer
+import com.appstractive.jwt.SigningAlgorithm
+import com.appstractive.jwt.VerificationAlgorithm
+import com.appstractive.jwt.Verifier
+import com.appstractive.jwt.digest
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
 import dev.whyoleg.cryptography.CryptographyProvider
 import dev.whyoleg.cryptography.algorithms.Digest
@@ -62,7 +68,7 @@ fun Verifier.es512(configure: ECDSAVerifierConfig.() -> Unit) {
 }
 
 internal class ECDSASigner(
-    private val config: ECDSASignerConfig,
+  private val config: ECDSASignerConfig,
 ) : SigningAlgorithm {
 
   override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
@@ -74,7 +80,7 @@ internal class ECDSASigner(
 }
 
 internal class ECDSAVerifier(
-    private val config: ECDSAVerifierConfig,
+  private val config: ECDSAVerifierConfig,
 ) : VerificationAlgorithm {
   override suspend fun verifier(jwt: JWT): SignatureVerifier {
     return ecdsa

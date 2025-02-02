@@ -2,6 +2,8 @@
 
 import dev.whyoleg.cryptography.CryptographyProvider
 import dev.whyoleg.cryptography.CryptographyProviderApi
+import dev.whyoleg.cryptography.algorithms.ECDSA
+import dev.whyoleg.cryptography.algorithms.HMAC
 import dev.whyoleg.cryptography.algorithms.asymmetric.ECDSA
 import dev.whyoleg.cryptography.algorithms.asymmetric.RSA
 import dev.whyoleg.cryptography.algorithms.symmetric.HMAC
@@ -27,7 +29,7 @@ internal val pss: RSA.PSS by lazy { provider.get(RSA.PSS) }
 
 @OptIn(CryptographyProviderApi::class)
 internal class JwksVerifier(
-    private val config: JwksConfig,
+  private val config: JwksConfig,
 ) : VerificationAlgorithm {
 
   private var keySet: JSONWebKeySet = JSONWebKeySet(emptyList())
@@ -48,11 +50,12 @@ internal class JwksVerifier(
 
     return object : SignatureVerifier {
       override fun verifySignatureBlocking(
-          dataInput: ByteArray,
-          signatureInput: ByteArray
+        dataInput: ByteArray,
+        signatureInput: ByteArray
       ): Boolean {
         return verifier.verifySignatureBlocking(
-            dataInput = dataInput, signatureInput = signatureInput)
+            dataInput = dataInput, signatureInput = signatureInput,
+        )
       }
     }
   }

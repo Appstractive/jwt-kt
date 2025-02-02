@@ -5,8 +5,8 @@
 ![badge][badge-jvm]
 ![badge][badge-linux]
 
-A fork of the [KTOR Server Auth JWT Plugin](https://ktor.io/docs/server-jwt.html) supporting more platforms than just
-JVM.
+A fork of the [KTOR Server Auth JWT Plugin](https://ktor.io/docs/server-jwt.html) supporting more
+platforms than just JVM.
 
 ## Usage
 

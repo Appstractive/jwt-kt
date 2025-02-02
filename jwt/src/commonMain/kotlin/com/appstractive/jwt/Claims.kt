@@ -128,7 +128,8 @@ class ClaimsBuilder {
           issuedAt?.let { put("iat", JsonPrimitive(it.epochSeconds)) }
           id?.let { put("jti", JsonPrimitive(it)) }
           putAll(additionalClaims)
-        })
+        },
+    )
   }
 }
 

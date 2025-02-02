@@ -1,6 +1,12 @@
 ﻿package com.appstractive.jwt.signatures
 
-import com.appstractive.jwt.*
+import com.appstractive.jwt.Algorithm
+import com.appstractive.jwt.JWT
+import com.appstractive.jwt.Signer
+import com.appstractive.jwt.SigningAlgorithm
+import com.appstractive.jwt.VerificationAlgorithm
+import com.appstractive.jwt.Verifier
+import com.appstractive.jwt.digest
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
 import dev.whyoleg.cryptography.CryptographyProvider
 import dev.whyoleg.cryptography.algorithms.Digest
@@ -60,7 +66,7 @@ fun Verifier.ps512(configure: RSAVerifierConfig.() -> Unit) {
 }
 
 internal class PSSSigner(
-    private val config: RSASigningConfig,
+  private val config: RSASigningConfig,
 ) : SigningAlgorithm {
   override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
     return pss.privateKeyDecoder(digest)
@@ -70,7 +76,7 @@ internal class PSSSigner(
 }
 
 internal class PSSVerifier(
-    private val config: RSAVerifierConfig,
+  private val config: RSAVerifierConfig,
 ) : VerificationAlgorithm {
   override suspend fun verifier(jwt: JWT): SignatureVerifier {
     return pss.publicKeyDecoder(digest = jwt.header.alg.digest)

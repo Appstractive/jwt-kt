@@ -1,6 +1,12 @@
 ﻿package com.appstractive.jwt.signatures
 
-import com.appstractive.jwt.*
+import com.appstractive.jwt.Algorithm
+import com.appstractive.jwt.JWT
+import com.appstractive.jwt.Signer
+import com.appstractive.jwt.Verifier
+import com.appstractive.jwt.jwt
+import com.appstractive.jwt.sign
+import com.appstractive.jwt.verify
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
 import dev.whyoleg.cryptography.algorithms.Digest
 import dev.whyoleg.cryptography.algorithms.RSA
@@ -107,9 +113,9 @@ class JwtVerifierTests {
   }
 
   private suspend fun createJwtPS(
-      digest: CryptographyAlgorithmId<Digest>,
-      builder: Signer.(ByteArray) -> Unit,
-      verifier: Verifier.(ByteArray) -> Unit,
+    digest: CryptographyAlgorithmId<Digest>,
+    builder: Signer.(ByteArray) -> Unit,
+    verifier: Verifier.(ByteArray) -> Unit,
   ): JWT {
     val unsignedJwt = jwt { claims { issuer = "someone" } }
     val keys = pss.keyPairGenerator(digest = digest).generateKey()

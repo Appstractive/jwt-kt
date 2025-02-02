@@ -4,9 +4,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Header(
-    val alg: Algorithm = Algorithm.HS256,
-    val typ: String,
-    val kid: String? = null,
+  val alg: Algorithm = Algorithm.HS256,
+  val typ: String,
+  val kid: String? = null,
 )
 
 @JwtDsl

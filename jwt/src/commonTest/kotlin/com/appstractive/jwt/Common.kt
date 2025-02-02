@@ -20,7 +20,7 @@ object MockSignerVerifier : VerificationAlgorithm, SigningAlgorithm {
   override suspend fun verifier(jwt: JWT): SignatureVerifier {
     return object : SignatureVerifier {
       override fun createVerifyFunction(): VerifyFunction {
-        return object: VerifyFunction {
+        return object : VerifyFunction {
           override fun tryVerify(signature: ByteArray, startIndex: Int, endIndex: Int): Boolean {
             return true
           }
@@ -40,7 +40,7 @@ object MockSignerVerifier : VerificationAlgorithm, SigningAlgorithm {
   override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
     return object : SignatureGenerator {
       override fun createSignFunction(): SignFunction {
-        return object: SignFunction {
+        return object : SignFunction {
           override fun signIntoByteArray(destination: ByteArray, destinationOffset: Int): Int {
             return 0
           }
@@ -65,7 +65,7 @@ open class MockHashingVerifier(val referenceHash: ByteArray, val hashAlg: Crypto
   override suspend fun verifier(jwt: JWT): SignatureVerifier {
     return object : SignatureVerifier {
       override fun createVerifyFunction(): VerifyFunction {
-        return object: VerifyFunction {
+        return object : VerifyFunction {
           override fun tryVerify(signature: ByteArray, startIndex: Int, endIndex: Int): Boolean {
             return referenceHash contentEquals CryptographyProvider.Default.get(hashAlg).hasher().hashBlocking(jwt.signedData.encodeToByteArray())
           }
@@ -93,15 +93,15 @@ private enum class TestEnum {
 
 @Serializable
 private data class TestClass(
-    val long: Long,
-    val int: Int,
-    val double: Double,
-    val float: Float,
-    val bool: Boolean,
-    val string: String,
-    val enum: TestEnum,
-    val list: List<TestClass>,
-    val nullable: Nothing? = null,
+  val long: Long,
+  val int: Int,
+  val double: Double,
+  val float: Float,
+  val bool: Boolean,
+  val string: String,
+  val enum: TestEnum,
+  val list: List<TestClass>,
+  val nullable: Nothing? = null,
 )
 
 @OptIn(ExperimentalSerializationApi::class)
@@ -130,34 +130,34 @@ fun unsignedJwt(): UnsignedJWT = jwt {
     claim(
         key = "complex",
         value =
-            TestClass(
-                long = 123443543642353L,
-                int = 1,
-                double = 124321412.325325,
-                float = 1.2414f,
-                bool = true,
-                string = "test",
-                enum = TestEnum.VALUE1,
-                list =
-                    listOf(
-                        TestClass(
-                            long = 123443543642353L,
-                            int = 1,
-                            double = 124321412.325325,
-                            float = 1.2414f,
-                            bool = false,
-                            string = "test2",
-                            enum = TestEnum.VALUE2,
-                            list = emptyList(),
-                        ),
-                    ),
+        TestClass(
+            long = 123443543642353L,
+            int = 1,
+            double = 124321412.325325,
+            float = 1.2414f,
+            bool = true,
+            string = "test",
+            enum = TestEnum.VALUE1,
+            list =
+            listOf(
+                TestClass(
+                    long = 123443543642353L,
+                    int = 1,
+                    double = 124321412.325325,
+                    float = 1.2414f,
+                    bool = false,
+                    string = "test2",
+                    enum = TestEnum.VALUE2,
+                    list = emptyList(),
+                ),
             ),
+        ),
     )
   }
 }
 
 suspend fun signedJwt(
-    builder: Signer.() -> Unit,
+  builder: Signer.() -> Unit,
 ): JWT {
   return unsignedJwt().sign(builder = builder)
 }

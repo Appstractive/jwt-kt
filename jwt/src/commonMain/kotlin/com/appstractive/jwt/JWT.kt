@@ -2,36 +2,38 @@
 
 import com.appstractive.jwt.utils.urlEncoded
 
-@DslMarker @Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE) annotation class JwtDsl
+@DslMarker
+@Target(AnnotationTarget.CLASS, AnnotationTarget.TYPE)
+annotation class JwtDsl
 
 /** @see <a href="https://www.rfc-editor.org/rfc/rfc7519.html">JSON Web Token (JWT)</a> */
 data class UnsignedJWT(
-    val header: Header,
-    val claims: Claims,
+  val header: Header,
+  val claims: Claims,
 ) {
   override fun toString(): String {
     return listOf(
-            header.urlEncoded(),
-            claims.urlEncoded(),
-            "",
-        )
+        header.urlEncoded(),
+        claims.urlEncoded(),
+        "",
+    )
         .joinToString(".")
   }
 }
 
 /** @see <a href="https://www.rfc-editor.org/rfc/rfc7519.html">JSON Web Token (JWT)</a> */
 data class JWT(
-    val header: Header,
-    val claims: Claims,
-    val signedData: String,
-    val signature: ByteArray,
+  val header: Header,
+  val claims: Claims,
+  val signedData: String,
+  val signature: ByteArray,
 ) {
 
   override fun toString(): String {
     return listOf(
-            signedData,
-            urlEncoded(signature),
-        )
+        signedData,
+        urlEncoded(signature),
+    )
         .joinToString(".")
   }
 

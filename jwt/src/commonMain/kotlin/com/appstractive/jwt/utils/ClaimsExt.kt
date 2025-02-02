@@ -15,10 +15,11 @@ fun JsonObject.instantOrNull(claim: String): Instant? =
     this[claim]?.jsonPrimitive?.longOrNull?.let { Instant.fromEpochSeconds(it) }
 
 inline fun <reified T> ClaimsBuilder.claim(
-    key: String,
-    value: T,
-    serializer: StringFormat = Json,
+  key: String,
+  value: T,
+  serializer: StringFormat = Json,
 ) {
   claim(
-      key = key, value = serializer.decodeFromString<JsonElement>(serializer.encodeToString(value)))
+      key = key, value = serializer.decodeFromString<JsonElement>(serializer.encodeToString(value)),
+  )
 }

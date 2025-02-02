@@ -7,18 +7,21 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonClassDiscriminator
 
 enum class Curve {
-  @SerialName("P-256") P256,
-  @SerialName("P-384") P384,
-  @SerialName("P-521") P521,
+  @SerialName("P-256")
+  P256,
+  @SerialName("P-384")
+  P384,
+  @SerialName("P-521")
+  P521,
 }
 
 val Curve.curve: EC.Curve
   get() =
-      when (this) {
-        Curve.P256 -> EC.Curve.P256
-        Curve.P384 -> EC.Curve.P384
-        Curve.P521 -> EC.Curve.P521
-      }
+    when (this) {
+      Curve.P256 -> EC.Curve.P256
+      Curve.P384 -> EC.Curve.P384
+      Curve.P521 -> EC.Curve.P521
+    }
 
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable
@@ -31,17 +34,17 @@ sealed interface JSONWebKey {
 @Serializable
 @SerialName("RSA")
 data class JSONWebKeyRSA(
-    override val alg: Algorithm? = null,
-    override val kid: String,
-    val use: String,
-    val n: String,
-    val e: String,
-    val d: String? = null,
-    val p: String? = null,
-    val q: String? = null,
-    val dp: String? = null,
-    val dq: String? = null,
-    val qi: String? = null,
+  override val alg: Algorithm? = null,
+  override val kid: String,
+  val use: String,
+  val n: String,
+  val e: String,
+  val d: String? = null,
+  val p: String? = null,
+  val q: String? = null,
+  val dp: String? = null,
+  val dq: String? = null,
+  val qi: String? = null,
 ) : JSONWebKey
 
 @Serializable
@@ -58,12 +61,12 @@ data class JSONWebKeyEC(
 @Serializable
 @SerialName("oct")
 data class JSONWebKeyHMAC(
-    override val alg: Algorithm? = null,
-    override val kid: String,
-    val k: String,
+  override val alg: Algorithm? = null,
+  override val kid: String,
+  val k: String,
 ) : JSONWebKey
 
 @Serializable
 data class JSONWebKeySet(
-    val keys: List<JSONWebKey>,
+  val keys: List<JSONWebKey>,
 )

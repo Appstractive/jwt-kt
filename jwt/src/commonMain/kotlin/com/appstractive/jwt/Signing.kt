@@ -26,22 +26,22 @@ enum class Algorithm {
 
 val Algorithm.digest: CryptographyAlgorithmId<Digest>
   get() =
-      when (this) {
-        Algorithm.ES256,
-        Algorithm.PS256,
-        Algorithm.RS256,
-        Algorithm.HS256 -> SHA256
+    when (this) {
+      Algorithm.ES256,
+      Algorithm.PS256,
+      Algorithm.RS256,
+      Algorithm.HS256 -> SHA256
 
-        Algorithm.ES384,
-        Algorithm.RS384,
-        Algorithm.PS384,
-        Algorithm.HS384 -> SHA384
+      Algorithm.ES384,
+      Algorithm.RS384,
+      Algorithm.PS384,
+      Algorithm.HS384 -> SHA384
 
-        Algorithm.ES512,
-        Algorithm.HS512,
-        Algorithm.RS512,
-        Algorithm.PS512 -> SHA512
-      }
+      Algorithm.ES512,
+      Algorithm.HS512,
+      Algorithm.RS512,
+      Algorithm.PS512 -> SHA512
+    }
 
 interface SigningAlgorithm {
   suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator

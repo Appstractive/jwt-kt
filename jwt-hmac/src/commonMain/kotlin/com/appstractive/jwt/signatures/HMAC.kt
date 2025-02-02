@@ -1,6 +1,12 @@
 ﻿package com.appstractive.jwt.signatures
 
-import com.appstractive.jwt.*
+import com.appstractive.jwt.Algorithm
+import com.appstractive.jwt.JWT
+import com.appstractive.jwt.Signer
+import com.appstractive.jwt.SigningAlgorithm
+import com.appstractive.jwt.VerificationAlgorithm
+import com.appstractive.jwt.Verifier
+import com.appstractive.jwt.digest
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
 import dev.whyoleg.cryptography.CryptographyProvider
 import dev.whyoleg.cryptography.algorithms.Digest
@@ -60,7 +66,7 @@ fun Verifier.hs512(configure: Hmac.Config.() -> Unit) {
 }
 
 class Hmac(
-    private val config: Config,
+  private val config: Config,
 ) : SigningAlgorithm, VerificationAlgorithm {
 
   override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {

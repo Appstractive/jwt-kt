@@ -28,18 +28,18 @@ kotlin {
   @OptIn(ExperimentalWasmDsl::class) wasmJs()
 
   listOf(
-          iosX64(),
-          iosArm64(),
-          iosSimulatorArm64(),
-          macosX64(),
-          macosArm64(),
-          tvosX64(),
-          tvosArm64(),
-          tvosSimulatorArm64(),
-          watchosX64(),
-          watchosArm64(),
-          watchosSimulatorArm64(),
-      )
+      iosX64(),
+      iosArm64(),
+      iosSimulatorArm64(),
+      macosX64(),
+      macosArm64(),
+      tvosX64(),
+      tvosArm64(),
+      tvosSimulatorArm64(),
+      watchosX64(),
+      watchosArm64(),
+      watchosSimulatorArm64(),
+  )
       .forEach {
         it.binaries.framework {
           baseName = "JWT-HMAC-KT"

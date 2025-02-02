@@ -55,9 +55,9 @@ class JwtVerifierTests {
 
   @OptIn(ExperimentalEncodingApi::class)
   private suspend fun createJwtHmac(
-      secret: ByteArray = CryptographyRandom.nextBytes(64),
-      builder: Signer.(ByteArray) -> Unit,
-      verifier: Verifier.(ByteArray) -> Unit,
+    secret: ByteArray = CryptographyRandom.nextBytes(64),
+    builder: Signer.(ByteArray) -> Unit,
+    verifier: Verifier.(ByteArray) -> Unit,
   ): JWT {
     val unsignedJwt = jwt { claims { issuer = "someone" } }
 

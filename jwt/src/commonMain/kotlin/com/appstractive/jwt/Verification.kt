@@ -67,7 +67,7 @@ class Verifier {
     }
 
     return algorithms[jwt.header.alg]?.verify(jwt = jwt)
-        ?: throw IllegalStateException("No verifier configured for ${jwt.header.alg}")
+      ?: throw IllegalStateException("No verifier configured for ${jwt.header.alg}")
   }
 }
 
