@@ -3,10 +3,10 @@
 import com.appstractive.jwt.*
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
 import dev.whyoleg.cryptography.CryptographyProvider
-import dev.whyoleg.cryptography.algorithms.asymmetric.RSA
-import dev.whyoleg.cryptography.algorithms.digest.Digest
-import dev.whyoleg.cryptography.operations.signature.SignatureGenerator
-import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
+import dev.whyoleg.cryptography.algorithms.Digest
+import dev.whyoleg.cryptography.algorithms.RSA
+import dev.whyoleg.cryptography.operations.SignatureGenerator
+import dev.whyoleg.cryptography.operations.SignatureVerifier
 
 private val provider by lazy { CryptographyProvider.Default }
 internal val pkcs1: RSA.PKCS1 by lazy {
@@ -67,7 +67,7 @@ internal class PKCS1Signer(
   override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
     return pkcs1
         .privateKeyDecoder(digest)
-        .decodeFrom(checkNotNull(config.format), checkNotNull(config.privateKey))
+        .decodeFromByteArray(checkNotNull(config.format), checkNotNull(config.privateKey))
         .signatureGenerator()
   }
 }
@@ -78,7 +78,7 @@ internal class PKCS1Verifier(
   override suspend fun verifier(jwt: JWT): SignatureVerifier {
     return pkcs1
         .publicKeyDecoder(digest = jwt.header.alg.digest)
-        .decodeFrom(checkNotNull(config.format), checkNotNull(config.publicKey))
+        .decodeFromByteArray(checkNotNull(config.format), checkNotNull(config.publicKey))
         .signatureVerifier()
   }
 }

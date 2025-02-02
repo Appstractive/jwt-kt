@@ -3,11 +3,12 @@
 import com.appstractive.jwt.*
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
 import dev.whyoleg.cryptography.CryptographyProvider
-import dev.whyoleg.cryptography.algorithms.asymmetric.EC
-import dev.whyoleg.cryptography.algorithms.asymmetric.ECDSA
-import dev.whyoleg.cryptography.algorithms.digest.Digest
-import dev.whyoleg.cryptography.operations.signature.SignatureGenerator
-import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
+import dev.whyoleg.cryptography.algorithms.Digest
+import dev.whyoleg.cryptography.algorithms.EC
+import dev.whyoleg.cryptography.algorithms.ECDSA
+import dev.whyoleg.cryptography.algorithms.ECDSA.SignatureFormat
+import dev.whyoleg.cryptography.operations.SignatureGenerator
+import dev.whyoleg.cryptography.operations.SignatureVerifier
 
 internal val provider by lazy { CryptographyProvider.Default }
 internal val ecdsa: ECDSA by lazy { provider.get(ECDSA) }
@@ -67,8 +68,8 @@ internal class ECDSASigner(
   override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
     return ecdsa
         .privateKeyDecoder(config.curve)
-        .decodeFrom(checkNotNull(config.format), checkNotNull(config.privateKey))
-        .signatureGenerator(digest)
+        .decodeFromByteArray(checkNotNull(config.privateKeyFormat), checkNotNull(config.privateKey))
+        .signatureGenerator(digest = digest, format = config.signatureFormat)
   }
 }
 
@@ -78,67 +79,69 @@ internal class ECDSAVerifier(
   override suspend fun verifier(jwt: JWT): SignatureVerifier {
     return ecdsa
         .publicKeyDecoder(curve = config.curve)
-        .decodeFrom(checkNotNull(config.format), checkNotNull(config.publicKey))
-        .signatureVerifier(digest = jwt.header.alg.digest)
+        .decodeFromByteArray(checkNotNull(config.publicKeyFormat), checkNotNull(config.publicKey))
+        .signatureVerifier(digest = jwt.header.alg.digest, format = config.signatureFormat)
   }
 }
 
 class ECDSASignerConfig {
   internal var privateKey: ByteArray? = null
-  internal var format: EC.PrivateKey.Format? = null
+  internal var privateKeyFormat: EC.PrivateKey.Format? = null
   internal var curve: EC.Curve = EC.Curve.P256
+  internal var signatureFormat: SignatureFormat = SignatureFormat.RAW
 
   fun pem(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
     privateKey = key
-    format = EC.PrivateKey.Format.PEM
+    privateKeyFormat = EC.PrivateKey.Format.PEM
     this.curve = curve
   }
 
   fun pem(key: String, curve: EC.Curve = EC.Curve.P256) {
     privateKey = key.encodeToByteArray()
-    format = EC.PrivateKey.Format.PEM
+    privateKeyFormat = EC.PrivateKey.Format.PEM
     this.curve = curve
   }
 
   fun der(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
     privateKey = key
-    format = EC.PrivateKey.Format.DER
+    privateKeyFormat = EC.PrivateKey.Format.DER
     this.curve = curve
   }
 
   fun der(key: String, curve: EC.Curve = EC.Curve.P256) {
     privateKey = key.encodeToByteArray()
-    format = EC.PrivateKey.Format.DER
+    privateKeyFormat = EC.PrivateKey.Format.DER
     this.curve = curve
   }
 }
 
 class ECDSAVerifierConfig {
   internal var publicKey: ByteArray? = null
-  internal var format: EC.PublicKey.Format? = null
+  internal var publicKeyFormat: EC.PublicKey.Format? = null
   internal var curve: EC.Curve = EC.Curve.P256
+  internal var signatureFormat: SignatureFormat = SignatureFormat.RAW
 
   fun pem(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
     publicKey = key
-    format = EC.PublicKey.Format.PEM
+    publicKeyFormat = EC.PublicKey.Format.PEM
     this.curve = curve
   }
 
   fun pem(key: String, curve: EC.Curve = EC.Curve.P256) {
     publicKey = key.encodeToByteArray()
-    format = EC.PublicKey.Format.PEM
+    publicKeyFormat = EC.PublicKey.Format.PEM
     this.curve = curve
   }
 
   fun der(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
     publicKey = key
-    format = EC.PublicKey.Format.DER
+    publicKeyFormat = EC.PublicKey.Format.DER
     this.curve = curve
   }
 
   fun der(key: String, curve: EC.Curve = EC.Curve.P256) {
     publicKey = key.encodeToByteArray()
-    format = EC.PublicKey.Format.DER
+    publicKeyFormat = EC.PublicKey.Format.DER
     this.curve = curve
   }
 }

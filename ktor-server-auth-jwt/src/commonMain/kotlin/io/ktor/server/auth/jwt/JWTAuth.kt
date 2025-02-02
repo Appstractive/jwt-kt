@@ -21,7 +21,7 @@ internal val JWTAuthKey: Any = "JWTAuthNative"
  * @param claims JWT
  * @see Claims
  */
-public class JWTCredential(val claims: Claims) : Credential
+public class JWTCredential(val claims: Claims)
 
 /**
  * A JWT principal that consists of the specified [claims].
@@ -29,7 +29,7 @@ public class JWTCredential(val claims: Claims) : Credential
  * @param payload JWT
  * @see Payload
  */
-public class JWTPrincipal(val claims: Claims) : Principal
+public class JWTPrincipal(val claims: Claims)
 
 /**
  * A JWT [Authentication] provider.
@@ -155,7 +155,7 @@ public class JWTAuthenticationProvider internal constructor(config: Config) :
      *
      * @return a principal (usually an instance of [JWTPrincipal]) or `null`
      */
-    public fun validate(validate: suspend ApplicationCall.(JWTCredential) -> Principal?) {
+    public fun validate(validate: suspend ApplicationCall.(JWTCredential) -> Any?) {
       authenticationFunction = validate
     }
 

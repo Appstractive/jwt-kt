@@ -2,11 +2,11 @@
 
 import com.appstractive.jwt.utils.urlEncoded
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
-import dev.whyoleg.cryptography.algorithms.digest.Digest
-import dev.whyoleg.cryptography.algorithms.digest.SHA256
-import dev.whyoleg.cryptography.algorithms.digest.SHA384
-import dev.whyoleg.cryptography.algorithms.digest.SHA512
-import dev.whyoleg.cryptography.operations.signature.SignatureGenerator
+import dev.whyoleg.cryptography.algorithms.Digest
+import dev.whyoleg.cryptography.algorithms.SHA256
+import dev.whyoleg.cryptography.algorithms.SHA384
+import dev.whyoleg.cryptography.algorithms.SHA512
+import dev.whyoleg.cryptography.operations.SignatureGenerator
 import kotlinx.serialization.json.JsonObject
 
 enum class Algorithm {

@@ -2,11 +2,11 @@
 
 import com.appstractive.jwt.*
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
-import dev.whyoleg.cryptography.algorithms.asymmetric.RSA
-import dev.whyoleg.cryptography.algorithms.digest.Digest
-import dev.whyoleg.cryptography.algorithms.digest.SHA256
-import dev.whyoleg.cryptography.algorithms.digest.SHA384
-import dev.whyoleg.cryptography.algorithms.digest.SHA512
+import dev.whyoleg.cryptography.algorithms.Digest
+import dev.whyoleg.cryptography.algorithms.RSA
+import dev.whyoleg.cryptography.algorithms.SHA256
+import dev.whyoleg.cryptography.algorithms.SHA384
+import dev.whyoleg.cryptography.algorithms.SHA512
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -86,14 +86,14 @@ class JwtVerifierTests {
   }
 
   private suspend fun createJwtRS(
-      digest: CryptographyAlgorithmId<Digest>,
-      builder: Signer.(ByteArray) -> Unit,
-      verifier: Verifier.(ByteArray) -> Unit,
+    digest: CryptographyAlgorithmId<Digest>,
+    builder: Signer.(ByteArray) -> Unit,
+    verifier: Verifier.(ByteArray) -> Unit,
   ): JWT {
     val unsignedJwt = jwt { claims { issuer = "someone" } }
     val keys = pkcs1.keyPairGenerator(digest = digest).generateKey()
-    val privateKey = keys.privateKey.encodeTo(RSA.PrivateKey.Format.PEM.Generic)
-    val publicKey = keys.publicKey.encodeTo(RSA.PublicKey.Format.PEM.Generic)
+    val privateKey = keys.privateKey.encodeToByteArray(RSA.PrivateKey.Format.PEM.Generic)
+    val publicKey = keys.publicKey.encodeToByteArray(RSA.PublicKey.Format.PEM.Generic)
     println(privateKey.decodeToString())
     println(publicKey.decodeToString())
 
@@ -113,8 +113,8 @@ class JwtVerifierTests {
   ): JWT {
     val unsignedJwt = jwt { claims { issuer = "someone" } }
     val keys = pss.keyPairGenerator(digest = digest).generateKey()
-    val privateKey = keys.privateKey.encodeTo(RSA.PrivateKey.Format.PEM.Generic)
-    val publicKey = keys.publicKey.encodeTo(RSA.PublicKey.Format.PEM.Generic)
+    val privateKey = keys.privateKey.encodeToByteArray(RSA.PrivateKey.Format.PEM.Generic)
+    val publicKey = keys.publicKey.encodeToByteArray(RSA.PublicKey.Format.PEM.Generic)
     println(privateKey.decodeToString())
     println(publicKey.decodeToString())
 
@@ -128,7 +128,7 @@ class JwtVerifierTests {
         pss.keyPairGenerator(digest = digest)
             .generateKey()
             .publicKey
-            .encodeTo(RSA.PublicKey.Format.PEM.Generic)
+            .encodeToByteArray(RSA.PublicKey.Format.PEM.Generic)
     assertFalse(signedJwt.verify { verifier(wrongKey) })
 
     return signedJwt
