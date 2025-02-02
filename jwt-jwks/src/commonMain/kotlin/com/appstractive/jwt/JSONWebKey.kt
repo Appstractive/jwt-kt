@@ -1,6 +1,6 @@
 ﻿package com.appstractive.jwt
 
-import dev.whyoleg.cryptography.algorithms.asymmetric.EC
+import dev.whyoleg.cryptography.algorithms.EC
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

@@ -4,10 +4,9 @@ import dev.whyoleg.cryptography.CryptographyProvider
 import dev.whyoleg.cryptography.CryptographyProviderApi
 import dev.whyoleg.cryptography.algorithms.ECDSA
 import dev.whyoleg.cryptography.algorithms.HMAC
-import dev.whyoleg.cryptography.algorithms.asymmetric.ECDSA
-import dev.whyoleg.cryptography.algorithms.asymmetric.RSA
-import dev.whyoleg.cryptography.algorithms.symmetric.HMAC
-import dev.whyoleg.cryptography.operations.signature.SignatureVerifier
+import dev.whyoleg.cryptography.algorithms.RSA
+import dev.whyoleg.cryptography.operations.SignatureVerifier
+import dev.whyoleg.cryptography.operations.VerifyFunction
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -49,13 +48,8 @@ internal class JwksVerifier(
     val verifier: SignatureVerifier = keyVerifier.getOrPut(kid) { key.getVerifier() }
 
     return object : SignatureVerifier {
-      override fun verifySignatureBlocking(
-        dataInput: ByteArray,
-        signatureInput: ByteArray
-      ): Boolean {
-        return verifier.verifySignatureBlocking(
-            dataInput = dataInput, signatureInput = signatureInput,
-        )
+      override fun createVerifyFunction(): VerifyFunction {
+        return verifier.createVerifyFunction()
       }
     }
   }
