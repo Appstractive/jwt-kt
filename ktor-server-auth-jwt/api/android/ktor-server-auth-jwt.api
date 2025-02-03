@@ -26,12 +26,12 @@ public final class io/ktor/server/auth/jwt/JWTChallengeContext {
 	public final fun getCall ()Lio/ktor/server/application/ApplicationCall;
 }
 
-public final class io/ktor/server/auth/jwt/JWTCredential : io/ktor/server/auth/Credential {
+public final class io/ktor/server/auth/jwt/JWTCredential {
 	public fun <init> (Lkotlinx/serialization/json/JsonObject;)V
 	public final fun getClaims ()Lkotlinx/serialization/json/JsonObject;
 }
 
-public final class io/ktor/server/auth/jwt/JWTPrincipal : io/ktor/server/auth/Principal {
+public final class io/ktor/server/auth/jwt/JWTPrincipal {
 	public fun <init> (Lkotlinx/serialization/json/JsonObject;)V
 	public final fun getClaims ()Lkotlinx/serialization/json/JsonObject;
 }
