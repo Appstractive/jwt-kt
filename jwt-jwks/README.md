@@ -11,6 +11,10 @@
 
 Verify JWTs using JSONWebKeySets.
 
+# Attention!
+
+JWKS is not yet supported, because it is not yet supported in cryptography-kotlin for all platforms. See discussion here: whyoleg/cryptography-kotlin#16
+
 ## Usage
 
 ### Installation
