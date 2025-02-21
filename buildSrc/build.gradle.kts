@@ -1,3 +1,3 @@
 ﻿plugins { `kotlin-dsl` }
 
-dependencies { implementation("org.jetbrains.dokka:dokka-gradle-plugin:1.9.20") }
+dependencies { implementation("org.jetbrains.dokka:dokka-gradle-plugin:2.0.0") }
