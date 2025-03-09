@@ -26,7 +26,6 @@ jobs:
         run: chmod +x gradlew
 
       - name: Setup Android SDK
-        if: ${{ env.ACT }} # Only run on local act setups, as GitHub Actions provides the Android SDK on Ubuntu
         uses: android-actions/setup-android@v3
         with:
           packages: 'platform-tools'
@@ -52,7 +51,6 @@ jobs:
         run: chmod +x gradlew
 
       - name: Setup Android SDK
-        if: ${{ env.ACT }} # Only run on local act setups, as GitHub Actions provides the Android SDK on Ubuntu
         uses: android-actions/setup-android@v3
         with:
           packages: 'platform-tools'
@@ -78,7 +76,6 @@ jobs:
         run: chmod +x gradlew
 
       - name: Setup Android SDK
-        if: ${{ env.ACT }} # Only run on local act setups, as GitHub Actions provides the Android SDK on Ubuntu
         uses: android-actions/setup-android@v3
         with:
           packages: 'platform-tools'
@@ -104,7 +101,6 @@ jobs:
         run: chmod +x gradlew
 
       - name: Setup Android SDK
-        if: ${{ env.ACT }} # Only run on local act setups, as GitHub Actions provides the Android SDK on Ubuntu
         uses: android-actions/setup-android@v3
         with:
           packages: 'platform-tools'
