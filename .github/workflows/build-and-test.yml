@@ -25,6 +25,12 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Setup Android SDK
+        if: ${{ env.ACT }} # Only run on local act setups, as GitHub Actions provides the Android SDK on Ubuntu
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
+
       - name: Build
         run: ./gradlew :jwt:build
 
@@ -44,6 +50,12 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: Setup Android SDK
+        if: ${{ env.ACT }} # Only run on local act setups, as GitHub Actions provides the Android SDK on Ubuntu
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
 
       - name: Build
         run: ./gradlew :jwt-hmac:build
@@ -65,6 +77,12 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
+      - name: Setup Android SDK
+        if: ${{ env.ACT }} # Only run on local act setups, as GitHub Actions provides the Android SDK on Ubuntu
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
+
       - name: Build
         run: ./gradlew :jwt-rsa:build
 
@@ -84,6 +102,12 @@ jobs:
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
+
+      - name: Setup Android SDK
+        if: ${{ env.ACT }} # Only run on local act setups, as GitHub Actions provides the Android SDK on Ubuntu
+        uses: android-actions/setup-android@v3
+        with:
+          packages: 'platform-tools'
 
       - name: Build
         run: ./gradlew :jwt-ecdsa:build
