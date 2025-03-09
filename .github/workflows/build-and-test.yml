@@ -31,7 +31,7 @@ jobs:
           packages: 'platform-tools'
 
       - name: Build
-        run: ./gradlew :jwt:build
+        run: ./gradlew :jwt-kt:build
 
   jwt-hmac:
 
@@ -56,7 +56,7 @@ jobs:
           packages: 'platform-tools'
 
       - name: Build
-        run: ./gradlew :jwt-hmac:build
+        run: ./gradlew :jwt-hmac-kt:build
 
   jwt-rsa:
 
@@ -81,7 +81,7 @@ jobs:
           packages: 'platform-tools'
 
       - name: Build
-        run: ./gradlew :jwt-rsa:build
+        run: ./gradlew :jwt-rsa-kt:build
 
   jwt-ecdsa:
 
@@ -106,4 +106,4 @@ jobs:
           packages: 'platform-tools'
 
       - name: Build
-        run: ./gradlew :jwt-ecdsa:build
+        run: ./gradlew :jwt-ecdsa-kt:build
