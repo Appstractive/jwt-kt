@@ -48,6 +48,7 @@ public synthetic class com/appstractive/jwt/JSONWebKeyEC$$serializer : kotlinx/s
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeyEC;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/appstractive/jwt/JSONWebKeyEC$Companion {
@@ -85,6 +86,7 @@ public synthetic class com/appstractive/jwt/JSONWebKeyHMAC$$serializer : kotlinx
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeyHMAC;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/appstractive/jwt/JSONWebKeyHMAC$Companion {
@@ -136,6 +138,7 @@ public synthetic class com/appstractive/jwt/JSONWebKeyRSA$$serializer : kotlinx/
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeyRSA;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/appstractive/jwt/JSONWebKeyRSA$Companion {
@@ -162,6 +165,7 @@ public synthetic class com/appstractive/jwt/JSONWebKeySet$$serializer : kotlinx/
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeySet;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/appstractive/jwt/JSONWebKeySet$Companion {
