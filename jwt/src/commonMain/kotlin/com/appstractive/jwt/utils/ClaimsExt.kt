@@ -1,7 +1,7 @@
 ﻿package com.appstractive.jwt.utils
 
 import com.appstractive.jwt.ClaimsBuilder
-import kotlinx.datetime.Instant
+import kotlin.time.Instant
 import kotlinx.serialization.StringFormat
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString

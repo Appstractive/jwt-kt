@@ -27,42 +27,42 @@ public final class com/appstractive/jwt/ClaimsBuilder {
 	public final fun claim (Ljava/lang/String;Lkotlinx/serialization/json/JsonElement;)V
 	public final fun claim (Ljava/lang/String;Lkotlinx/serialization/json/JsonObject;)V
 	public final fun claim (Ljava/lang/String;Z)V
-	public final fun expires (Lkotlinx/datetime/Instant;)V
-	public static synthetic fun expires$default (Lcom/appstractive/jwt/ClaimsBuilder;Lkotlinx/datetime/Instant;ILjava/lang/Object;)V
+	public final fun expires (Lkotlin/time/Instant;)V
+	public static synthetic fun expires$default (Lcom/appstractive/jwt/ClaimsBuilder;Lkotlin/time/Instant;ILjava/lang/Object;)V
 	public final fun getAudience ()Ljava/lang/String;
-	public final fun getExpiresAt ()Lkotlinx/datetime/Instant;
+	public final fun getExpiresAt ()Lkotlin/time/Instant;
 	public final fun getId ()Ljava/lang/String;
-	public final fun getIssuedAt ()Lkotlinx/datetime/Instant;
+	public final fun getIssuedAt ()Lkotlin/time/Instant;
 	public final fun getIssuer ()Ljava/lang/String;
-	public final fun getNotBefore ()Lkotlinx/datetime/Instant;
+	public final fun getNotBefore ()Lkotlin/time/Instant;
 	public final fun getSubject ()Ljava/lang/String;
-	public final fun issuedAt (Lkotlinx/datetime/Instant;)V
-	public static synthetic fun issuedAt$default (Lcom/appstractive/jwt/ClaimsBuilder;Lkotlinx/datetime/Instant;ILjava/lang/Object;)V
-	public final fun notBefore (Lkotlinx/datetime/Instant;)V
-	public static synthetic fun notBefore$default (Lcom/appstractive/jwt/ClaimsBuilder;Lkotlinx/datetime/Instant;ILjava/lang/Object;)V
+	public final fun issuedAt (Lkotlin/time/Instant;)V
+	public static synthetic fun issuedAt$default (Lcom/appstractive/jwt/ClaimsBuilder;Lkotlin/time/Instant;ILjava/lang/Object;)V
+	public final fun notBefore (Lkotlin/time/Instant;)V
+	public static synthetic fun notBefore$default (Lcom/appstractive/jwt/ClaimsBuilder;Lkotlin/time/Instant;ILjava/lang/Object;)V
 	public final fun objectClaim (Ljava/lang/String;Lkotlin/jvm/functions/Function1;)V
 	public final fun setAudience (Ljava/lang/String;)V
-	public final fun setExpiresAt (Lkotlinx/datetime/Instant;)V
+	public final fun setExpiresAt (Lkotlin/time/Instant;)V
 	public final fun setId (Ljava/lang/String;)V
-	public final fun setIssuedAt (Lkotlinx/datetime/Instant;)V
+	public final fun setIssuedAt (Lkotlin/time/Instant;)V
 	public final fun setIssuer (Ljava/lang/String;)V
-	public final fun setNotBefore (Lkotlinx/datetime/Instant;)V
+	public final fun setNotBefore (Lkotlin/time/Instant;)V
 	public final fun setSubject (Ljava/lang/String;)V
 }
 
 public final class com/appstractive/jwt/ClaimsKt {
 	public static final fun getAudience (Lcom/appstractive/jwt/JWT;)Ljava/lang/String;
 	public static final fun getAudience (Lkotlinx/serialization/json/JsonObject;)Ljava/lang/String;
-	public static final fun getExpiresAt (Lcom/appstractive/jwt/JWT;)Lkotlinx/datetime/Instant;
-	public static final fun getExpiresAt (Lkotlinx/serialization/json/JsonObject;)Lkotlinx/datetime/Instant;
+	public static final fun getExpiresAt (Lcom/appstractive/jwt/JWT;)Lkotlin/time/Instant;
+	public static final fun getExpiresAt (Lkotlinx/serialization/json/JsonObject;)Lkotlin/time/Instant;
 	public static final fun getId (Lcom/appstractive/jwt/JWT;)Ljava/lang/String;
 	public static final fun getId (Lkotlinx/serialization/json/JsonObject;)Ljava/lang/String;
-	public static final fun getIssuedAt (Lcom/appstractive/jwt/JWT;)Lkotlinx/datetime/Instant;
-	public static final fun getIssuedAt (Lkotlinx/serialization/json/JsonObject;)Lkotlinx/datetime/Instant;
+	public static final fun getIssuedAt (Lcom/appstractive/jwt/JWT;)Lkotlin/time/Instant;
+	public static final fun getIssuedAt (Lkotlinx/serialization/json/JsonObject;)Lkotlin/time/Instant;
 	public static final fun getIssuer (Lcom/appstractive/jwt/JWT;)Ljava/lang/String;
 	public static final fun getIssuer (Lkotlinx/serialization/json/JsonObject;)Ljava/lang/String;
-	public static final fun getNotBefore (Lcom/appstractive/jwt/JWT;)Lkotlinx/datetime/Instant;
-	public static final fun getNotBefore (Lkotlinx/serialization/json/JsonObject;)Lkotlinx/datetime/Instant;
+	public static final fun getNotBefore (Lcom/appstractive/jwt/JWT;)Lkotlin/time/Instant;
+	public static final fun getNotBefore (Lkotlinx/serialization/json/JsonObject;)Lkotlin/time/Instant;
 	public static final fun getSubject (Lcom/appstractive/jwt/JWT;)Ljava/lang/String;
 	public static final fun getSubject (Lkotlinx/serialization/json/JsonObject;)Ljava/lang/String;
 }
@@ -84,7 +84,7 @@ public final class com/appstractive/jwt/Header {
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class com/appstractive/jwt/Header$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class com/appstractive/jwt/Header$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/appstractive/jwt/Header$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/appstractive/jwt/Header;
@@ -92,6 +92,7 @@ public synthetic class com/appstractive/jwt/Header$$serializer : kotlinx/seriali
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/Header;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/appstractive/jwt/Header$Companion {
@@ -149,7 +150,7 @@ public final class com/appstractive/jwt/Signer {
 
 public abstract interface class com/appstractive/jwt/SigningAlgorithm {
 	public abstract fun generator (Ldev/whyoleg/cryptography/CryptographyAlgorithmId;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun sign (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun sign (Lcom/appstractive/jwt/Header;Lkotlinx/serialization/json/JsonObject;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class com/appstractive/jwt/SigningAlgorithm$DefaultImpls {
@@ -180,7 +181,7 @@ public final class com/appstractive/jwt/UnsignedJWT {
 
 public abstract interface class com/appstractive/jwt/VerificationAlgorithm {
 	public abstract fun verifier (Lcom/appstractive/jwt/JWT;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
-	public abstract fun verify (Lcom/appstractive/jwt/JWT;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+	public fun verify (Lcom/appstractive/jwt/JWT;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
 }
 
 public final class com/appstractive/jwt/VerificationAlgorithm$DefaultImpls {
@@ -197,11 +198,11 @@ public final class com/appstractive/jwt/Verifier {
 	public fun <init> ()V
 	public final fun algorithm (Lcom/appstractive/jwt/Algorithm;Lcom/appstractive/jwt/VerificationAlgorithm;)V
 	public final fun audience ([Ljava/lang/String;)V
-	public final fun expiresAt (Lkotlinx/datetime/Instant;)V
-	public static synthetic fun expiresAt$default (Lcom/appstractive/jwt/Verifier;Lkotlinx/datetime/Instant;ILjava/lang/Object;)V
+	public final fun expiresAt (Lkotlin/time/Instant;)V
+	public static synthetic fun expiresAt$default (Lcom/appstractive/jwt/Verifier;Lkotlin/time/Instant;ILjava/lang/Object;)V
 	public final fun issuer ([Ljava/lang/String;)V
-	public final fun notBefore (Lkotlinx/datetime/Instant;)V
-	public static synthetic fun notBefore$default (Lcom/appstractive/jwt/Verifier;Lkotlinx/datetime/Instant;ILjava/lang/Object;)V
+	public final fun notBefore (Lkotlin/time/Instant;)V
+	public static synthetic fun notBefore$default (Lcom/appstractive/jwt/Verifier;Lkotlin/time/Instant;ILjava/lang/Object;)V
 }
 
 public final class com/appstractive/jwt/utils/Base64UtilsKt {
@@ -215,6 +216,6 @@ public final class com/appstractive/jwt/utils/Base64UtilsKt {
 }
 
 public final class com/appstractive/jwt/utils/ClaimsExtKt {
-	public static final fun instantOrNull (Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;)Lkotlinx/datetime/Instant;
+	public static final fun instantOrNull (Lkotlinx/serialization/json/JsonObject;Ljava/lang/String;)Lkotlin/time/Instant;
 }
 

@@ -1,8 +1,8 @@
 ﻿package com.appstractive.jwt
 
 import dev.whyoleg.cryptography.operations.SignatureVerifier
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 interface VerificationAlgorithm {
   suspend fun verifier(jwt: JWT): SignatureVerifier

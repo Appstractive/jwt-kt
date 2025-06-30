@@ -40,7 +40,7 @@ public final class com/appstractive/jwt/JSONWebKeyEC : com/appstractive/jwt/JSON
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class com/appstractive/jwt/JSONWebKeyEC$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class com/appstractive/jwt/JSONWebKeyEC$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/appstractive/jwt/JSONWebKeyEC$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/appstractive/jwt/JSONWebKeyEC;
@@ -48,6 +48,7 @@ public synthetic class com/appstractive/jwt/JSONWebKeyEC$$serializer : kotlinx/s
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeyEC;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/appstractive/jwt/JSONWebKeyEC$Companion {
@@ -77,7 +78,7 @@ public final class com/appstractive/jwt/JSONWebKeyHMAC : com/appstractive/jwt/JS
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class com/appstractive/jwt/JSONWebKeyHMAC$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class com/appstractive/jwt/JSONWebKeyHMAC$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/appstractive/jwt/JSONWebKeyHMAC$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/appstractive/jwt/JSONWebKeyHMAC;
@@ -85,6 +86,7 @@ public synthetic class com/appstractive/jwt/JSONWebKeyHMAC$$serializer : kotlinx
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeyHMAC;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/appstractive/jwt/JSONWebKeyHMAC$Companion {
@@ -128,7 +130,7 @@ public final class com/appstractive/jwt/JSONWebKeyRSA : com/appstractive/jwt/JSO
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class com/appstractive/jwt/JSONWebKeyRSA$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class com/appstractive/jwt/JSONWebKeyRSA$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/appstractive/jwt/JSONWebKeyRSA$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/appstractive/jwt/JSONWebKeyRSA;
@@ -136,6 +138,7 @@ public synthetic class com/appstractive/jwt/JSONWebKeyRSA$$serializer : kotlinx/
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeyRSA;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/appstractive/jwt/JSONWebKeyRSA$Companion {
@@ -154,7 +157,7 @@ public final class com/appstractive/jwt/JSONWebKeySet {
 	public fun toString ()Ljava/lang/String;
 }
 
-public synthetic class com/appstractive/jwt/JSONWebKeySet$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
+public final synthetic class com/appstractive/jwt/JSONWebKeySet$$serializer : kotlinx/serialization/internal/GeneratedSerializer {
 	public static final field INSTANCE Lcom/appstractive/jwt/JSONWebKeySet$$serializer;
 	public final fun childSerializers ()[Lkotlinx/serialization/KSerializer;
 	public final fun deserialize (Lkotlinx/serialization/encoding/Decoder;)Lcom/appstractive/jwt/JSONWebKeySet;
@@ -162,6 +165,7 @@ public synthetic class com/appstractive/jwt/JSONWebKeySet$$serializer : kotlinx/
 	public final fun getDescriptor ()Lkotlinx/serialization/descriptors/SerialDescriptor;
 	public final fun serialize (Lkotlinx/serialization/encoding/Encoder;Lcom/appstractive/jwt/JSONWebKeySet;)V
 	public synthetic fun serialize (Lkotlinx/serialization/encoding/Encoder;Ljava/lang/Object;)V
+	public fun typeParametersSerializers ()[Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/appstractive/jwt/JSONWebKeySet$Companion {

@@ -1,5 +1,5 @@
-﻿import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.targets.js.dsl.ExperimentalWasmDsl
+﻿import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
   alias(libs.plugins.multiplatform)
@@ -14,7 +14,7 @@ version = rootProject.version
 
 kotlin {
   androidTarget {
-    publishAllLibraryVariants()
+    publishLibraryVariants("release")
     compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
   }
 
@@ -24,8 +24,15 @@ kotlin {
   linuxArm64()
   linuxX64()
 
-  js()
-  @OptIn(ExperimentalWasmDsl::class) wasmJs()
+  js {
+    browser()
+    nodejs()
+  }
+  @OptIn(ExperimentalWasmDsl::class)
+  wasmJs {
+    browser()
+    nodejs()
+  }
 
   listOf(
       iosX64(),

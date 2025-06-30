@@ -15,8 +15,8 @@ import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
-import kotlinx.datetime.Clock
-import kotlinx.datetime.Instant
+import kotlin.time.Clock
+import kotlin.time.Instant
 
 private val provider by lazy { CryptographyProvider.Default }
 internal val pkcs1: RSA<RSA.PKCS1.PublicKey, RSA.PKCS1.PrivateKey, RSA.PKCS1.KeyPair> by lazy {

@@ -25,8 +25,8 @@ TODO: Not yet published, requires JWK support from kotlin crypto library
 
 ```
 commonMain.dependencies {
-    implementation("com.appstractive:jwt-kt:1.1.0")
-    implementation("com.appstractive:jwt-jwks-kt:1.1.0")
+    implementation("com.appstractive:jwt-kt:1.2.0")
+    implementation("com.appstractive:jwt-jwks-kt:1.2.0")
 }
 ```
 
