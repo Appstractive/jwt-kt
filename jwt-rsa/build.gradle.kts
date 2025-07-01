@@ -62,17 +62,7 @@ kotlin {
       implementation(libs.test.kotlin.coroutines)
     }
 
-    androidMain.dependencies { implementation(libs.crypto.jdk) }
-
-    jvmMain.dependencies { implementation(libs.crypto.jdk) }
-
-    appleMain.dependencies { implementation(libs.crypto.openssl3) }
-
-    linuxMain.dependencies { implementation(libs.crypto.openssl3) }
-
-    mingwMain.dependencies { implementation(libs.crypto.openssl3) }
-
-    jsMain.dependencies { implementation(libs.crypto.webcrypto) }
+    wasmJsTest.dependencies { implementation(libs.kotlinx.browser) }
   }
 }
 

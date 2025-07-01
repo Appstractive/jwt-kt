@@ -48,16 +48,6 @@ kotlin {
       api(projects.jwtKt)
       implementation(libs.ktor.server.auth)
     }
-
-    commonTest.dependencies {}
-
-    androidMain.dependencies {}
-
-    jvmMain.dependencies {}
-
-    appleMain.dependencies {}
-
-    linuxMain.dependencies {}
   }
 }
 

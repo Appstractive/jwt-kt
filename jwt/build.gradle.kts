@@ -85,6 +85,8 @@ kotlin {
     mingwMain.dependencies { implementation(libs.crypto.openssl3) }
 
     jsMain.dependencies { implementation(libs.crypto.webcrypto) }
+
+    wasmJsMain.dependencies { implementation(libs.crypto.webcrypto) }
   }
 }
 

@@ -83,34 +83,30 @@ kotlin {
     }
 
     androidMain.dependencies {
-      implementation(libs.crypto.jdk)
       implementation(libs.ktor.client.cio)
     }
 
     jvmMain.dependencies {
-      implementation(libs.crypto.jdk)
       implementation(libs.ktor.client.cio)
     }
 
     appleMain.dependencies {
-      implementation(libs.crypto.openssl3)
       implementation(libs.ktor.client.cio)
     }
 
     linuxMain.dependencies {
-      implementation(libs.crypto.openssl3)
       implementation(libs.ktor.client.cio)
     }
 
     mingwMain.dependencies {
-      implementation(libs.crypto.openssl3)
       implementation(libs.ktor.client.win)
     }
 
     jsMain.dependencies {
-      implementation(libs.crypto.webcrypto)
       implementation(libs.ktor.client.js)
     }
+
+    wasmJsTest.dependencies { implementation(libs.kotlinx.browser) }
   }
 }
 
