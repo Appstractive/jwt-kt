@@ -74,19 +74,19 @@ kotlin {
       implementation(libs.test.kotlin.coroutines)
     }
 
-    androidMain.dependencies { implementation(libs.crypto.jdk) }
+    androidMain.dependencies { implementation(libs.crypto.optimal) }
 
-    jvmMain.dependencies { implementation(libs.crypto.jdk) }
+    jvmMain.dependencies { implementation(libs.crypto.optimal) }
 
-    appleMain.dependencies { implementation(libs.crypto.openssl3) }
+    appleMain.dependencies { implementation(libs.crypto.optimal) }
 
-    linuxMain.dependencies { implementation(libs.crypto.openssl3) }
+    linuxMain.dependencies { implementation(libs.crypto.optimal) }
 
-    mingwMain.dependencies { implementation(libs.crypto.openssl3) }
+    mingwMain.dependencies { implementation(libs.crypto.optimal) }
 
-    jsMain.dependencies { implementation(libs.crypto.webcrypto) }
+    jsMain.dependencies { implementation(libs.crypto.optimal) }
 
-    wasmJsMain.dependencies { implementation(libs.crypto.webcrypto) }
+    wasmJsMain.dependencies { implementation(libs.crypto.optimal) }
   }
 }
 
