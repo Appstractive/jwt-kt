@@ -51,6 +51,6 @@ test-ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "kt
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-nexus = { id = "io.github.gradle-nexus.publish-plugin", version = "1.3.0" }
+nexus = { id = "io.github.gradle-nexus.publish-plugin", version = "2.0.0" }
 dokka = { id = "org.jetbrains.dokka", version = "1.9.20" }
 kotlinx-binary-compatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.18.0" }
