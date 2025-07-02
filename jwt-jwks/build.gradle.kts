@@ -14,7 +14,7 @@ version = rootProject.version
 
 kotlin {
   androidTarget {
-    publishLibraryVariants("release")
+    publishLibraryVariants("release", "debug")
     compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
   }
 
