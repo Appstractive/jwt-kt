@@ -15,7 +15,7 @@ version = rootProject.version
 
 kotlin {
   androidTarget {
-    publishAllLibraryVariants()
+    publishLibraryVariants("release")
     compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
   }
 
@@ -25,8 +25,15 @@ kotlin {
   linuxArm64()
   linuxX64()
 
-  js()
-  @OptIn(ExperimentalWasmDsl::class) wasmJs()
+  js {
+    browser()
+    nodejs()
+  }
+  @OptIn(ExperimentalWasmDsl::class)
+  wasmJs {
+    browser()
+    nodejs()
+  }
 
   listOf(
       iosX64(),
@@ -49,6 +56,12 @@ kotlin {
       }
 
   sourceSets {
+    all {
+      languageSettings {
+        optIn("kotlin.time.ExperimentalTime")
+      }
+    }
+
     commonMain.dependencies {
       implementation(libs.kotlin.serialization)
       implementation(libs.kotlin.serialization.json)
@@ -61,17 +74,19 @@ kotlin {
       implementation(libs.test.kotlin.coroutines)
     }
 
-    androidMain.dependencies { implementation(libs.crypto.jdk) }
+    androidMain.dependencies { implementation(libs.crypto.optimal) }
 
-    jvmMain.dependencies { implementation(libs.crypto.jdk) }
+    jvmMain.dependencies { implementation(libs.crypto.optimal) }
 
-    appleMain.dependencies { implementation(libs.crypto.openssl3) }
+    appleMain.dependencies { implementation(libs.crypto.optimal) }
 
-    linuxMain.dependencies { implementation(libs.crypto.openssl3) }
+    linuxMain.dependencies { implementation(libs.crypto.optimal) }
 
-    mingwMain.dependencies { implementation(libs.crypto.openssl3) }
+    mingwMain.dependencies { implementation(libs.crypto.optimal) }
 
-    jsMain.dependencies { implementation(libs.crypto.webcrypto) }
+    jsMain.dependencies { implementation(libs.crypto.optimal) }
+
+    wasmJsMain.dependencies { implementation(libs.crypto.optimal) }
   }
 }
 

@@ -14,7 +14,7 @@ version = rootProject.version
 
 kotlin {
   androidTarget {
-    publishAllLibraryVariants()
+    publishLibraryVariants("release")
     compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
   }
 
@@ -48,16 +48,6 @@ kotlin {
       api(projects.jwtKt)
       implementation(libs.ktor.server.auth)
     }
-
-    commonTest.dependencies {}
-
-    androidMain.dependencies {}
-
-    jvmMain.dependencies {}
-
-    appleMain.dependencies {}
-
-    linuxMain.dependencies {}
   }
 }
 

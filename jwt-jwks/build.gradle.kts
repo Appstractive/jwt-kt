@@ -1,4 +1,5 @@
-﻿import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+﻿import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
   alias(libs.plugins.multiplatform)
@@ -13,7 +14,7 @@ version = rootProject.version
 
 kotlin {
   androidTarget {
-    publishAllLibraryVariants()
+    publishLibraryVariants("release")
     compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
   }
 
@@ -23,7 +24,15 @@ kotlin {
   linuxArm64()
   linuxX64()
 
-  js()
+  js {
+    browser()
+    nodejs()
+  }
+  @OptIn(ExperimentalWasmDsl::class)
+  wasmJs {
+    browser()
+    nodejs()
+  }
 
   listOf(
       iosX64(),
@@ -46,6 +55,12 @@ kotlin {
       }
 
   sourceSets {
+    all {
+      languageSettings {
+        optIn("kotlin.time.ExperimentalTime")
+      }
+    }
+
     commonMain.dependencies {
       implementation(projects.jwtKt)
       implementation(projects.jwtRsaKt)
@@ -68,34 +83,30 @@ kotlin {
     }
 
     androidMain.dependencies {
-      implementation(libs.crypto.jdk)
       implementation(libs.ktor.client.cio)
     }
 
     jvmMain.dependencies {
-      implementation(libs.crypto.jdk)
       implementation(libs.ktor.client.cio)
     }
 
     appleMain.dependencies {
-      implementation(libs.crypto.openssl3)
       implementation(libs.ktor.client.cio)
     }
 
     linuxMain.dependencies {
-      implementation(libs.crypto.openssl3)
       implementation(libs.ktor.client.cio)
     }
 
     mingwMain.dependencies {
-      implementation(libs.crypto.openssl3)
       implementation(libs.ktor.client.win)
     }
 
     jsMain.dependencies {
-      implementation(libs.crypto.webcrypto)
       implementation(libs.ktor.client.js)
     }
+
+    wasmJsTest.dependencies { implementation(libs.kotlinx.browser) }
   }
 }
 

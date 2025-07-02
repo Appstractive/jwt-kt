@@ -1,17 +1,25 @@
-﻿import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+﻿import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
-  application
   alias(libs.plugins.multiplatform)
   alias(libs.plugins.kotlinx.serialization)
 }
 
 group = "com.appstractive.jwt"
 
-version = "1.1.0"
+version = "1.2.0"
 
 kotlin {
-  jvm { compilerOptions { jvmTarget.set(JvmTarget.JVM_17) } }
+  jvm {
+    compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
+    @OptIn(ExperimentalKotlinGradlePluginApi::class)
+    binaries {
+      executable {
+        mainClass.set("com.appstractive.ApplicationKt")
+      }
+    }
+  }
 
   linuxX64().apply {
     binaries {
@@ -39,6 +47,12 @@ kotlin {
       }
 
   sourceSets {
+    all {
+      languageSettings {
+        optIn("kotlin.time.ExperimentalTime")
+      }
+    }
+
     commonMain.dependencies {
       implementation(projects.jwtHmacKt)
       implementation(projects.ktorServerAuthJwt)
@@ -63,5 +77,3 @@ kotlin {
     mingwMain.dependencies {}
   }
 }
-
-application { mainClass.set("com.appstractive.ApplicationKt") }

@@ -10,7 +10,7 @@ import dev.whyoleg.cryptography.operations.SignatureGenerator
 import dev.whyoleg.cryptography.operations.SignatureVerifier
 import dev.whyoleg.cryptography.operations.VerifyFunction
 import kotlin.time.Duration.Companion.hours
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonPrimitive
