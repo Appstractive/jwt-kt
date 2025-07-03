@@ -57,15 +57,13 @@ val sonatypeStagingProfileId by
 nexusPublishing {
   this.repositories {
     sonatype {
-      val sonatypeStagingProfileId: String by rootProject.extra
       val ossrhUsername: String by rootProject.extra
       val ossrhPassword: String by rootProject.extra
 
-      stagingProfileId.set(sonatypeStagingProfileId)
       username.set(ossrhUsername)
       password.set(ossrhPassword)
-      nexusUrl.set(uri("https://s01.oss.sonatype.org/service/local/"))
-      snapshotRepositoryUrl.set(uri("https://s01.oss.sonatype.org/content/repositories/snapshots/"))
+      nexusUrl.set(uri("https://ossrh-staging-api.central.sonatype.com/service/local/"))
+      snapshotRepositoryUrl.set(uri("https://central.sonatype.com/repository/maven-snapshots/"))
     }
   }
 }
