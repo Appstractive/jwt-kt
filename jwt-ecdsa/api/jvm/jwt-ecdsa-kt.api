@@ -13,6 +13,8 @@ public final class com/appstractive/jwt/signatures/ECDSASignerConfig {
 	public final fun der-txG9UtI ([BLjava/lang/String;)V
 	public static synthetic fun der-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
 	public static synthetic fun der-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;[BLjava/lang/String;ILjava/lang/Object;)V
+	public final fun key-txG9UtI (Ldev/whyoleg/cryptography/algorithms/ECDSA$PrivateKey;Ljava/lang/String;)V
+	public static synthetic fun key-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;Ldev/whyoleg/cryptography/algorithms/ECDSA$PrivateKey;Ljava/lang/String;ILjava/lang/Object;)V
 	public final fun pem-txG9UtI (Ljava/lang/String;Ljava/lang/String;)V
 	public final fun pem-txG9UtI ([BLjava/lang/String;)V
 	public static synthetic fun pem-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSASignerConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
@@ -25,6 +27,8 @@ public final class com/appstractive/jwt/signatures/ECDSAVerifierConfig {
 	public final fun der-txG9UtI ([BLjava/lang/String;)V
 	public static synthetic fun der-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V
 	public static synthetic fun der-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;[BLjava/lang/String;ILjava/lang/Object;)V
+	public final fun key-txG9UtI (Ldev/whyoleg/cryptography/algorithms/ECDSA$PublicKey;Ljava/lang/String;)V
+	public static synthetic fun key-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;Ldev/whyoleg/cryptography/algorithms/ECDSA$PublicKey;Ljava/lang/String;ILjava/lang/Object;)V
 	public final fun pem-txG9UtI (Ljava/lang/String;Ljava/lang/String;)V
 	public final fun pem-txG9UtI ([BLjava/lang/String;)V
 	public static synthetic fun pem-txG9UtI$default (Lcom/appstractive/jwt/signatures/ECDSAVerifierConfig;Ljava/lang/String;Ljava/lang/String;ILjava/lang/Object;)V

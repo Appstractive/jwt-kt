@@ -17,8 +17,6 @@ Verify JWTs using JSONWebKeySets.
 
 Gradle:
 
-TODO: Not yet published, requires JWK support from kotlin crypto library
-
 ```
 commonMain.dependencies {
     implementation("com.appstractive:jwt-kt:1.3.0")
