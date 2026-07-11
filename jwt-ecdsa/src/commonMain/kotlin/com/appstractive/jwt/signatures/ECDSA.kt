@@ -72,10 +72,11 @@ internal class ECDSASigner(
 ) : SigningAlgorithm {
 
   override suspend fun generator(digest: CryptographyAlgorithmId<Digest>): SignatureGenerator {
-    return ecdsa
+    val key = config.key ?: ecdsa
         .privateKeyDecoder(config.curve)
         .decodeFromByteArray(checkNotNull(config.privateKeyFormat), checkNotNull(config.privateKey))
-        .signatureGenerator(digest = digest, format = config.signatureFormat)
+
+    return key.signatureGenerator(digest = digest, format = config.signatureFormat)
   }
 }
 
@@ -83,18 +84,25 @@ internal class ECDSAVerifier(
   private val config: ECDSAVerifierConfig,
 ) : VerificationAlgorithm {
   override suspend fun verifier(jwt: JWT): SignatureVerifier {
-    return ecdsa
+    val key = config.key ?: ecdsa
         .publicKeyDecoder(curve = config.curve)
         .decodeFromByteArray(checkNotNull(config.publicKeyFormat), checkNotNull(config.publicKey))
-        .signatureVerifier(digest = jwt.header.alg.digest, format = config.signatureFormat)
+
+    return key.signatureVerifier(digest = jwt.header.alg.digest, format = config.signatureFormat)
   }
 }
 
 class ECDSASignerConfig {
+  internal var key: ECDSA.PrivateKey? = null
   internal var privateKey: ByteArray? = null
   internal var privateKeyFormat: EC.PrivateKey.Format? = null
   internal var curve: EC.Curve = EC.Curve.P256
   internal var signatureFormat: SignatureFormat = SignatureFormat.RAW
+
+  fun key(key: ECDSA.PrivateKey, curve: EC.Curve = EC.Curve.P256) {
+    this.key = key
+    this.curve = curve
+  }
 
   fun pem(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
     privateKey = key
@@ -122,10 +130,16 @@ class ECDSASignerConfig {
 }
 
 class ECDSAVerifierConfig {
+  internal var key: ECDSA.PublicKey? = null
   internal var publicKey: ByteArray? = null
   internal var publicKeyFormat: EC.PublicKey.Format? = null
   internal var curve: EC.Curve = EC.Curve.P256
   internal var signatureFormat: SignatureFormat = SignatureFormat.RAW
+
+  fun key(key: ECDSA.PublicKey, curve: EC.Curve = EC.Curve.P256) {
+    this.key = key
+    this.curve = curve
+  }
 
   fun pem(key: ByteArray, curve: EC.Curve = EC.Curve.P256) {
     publicKey = key

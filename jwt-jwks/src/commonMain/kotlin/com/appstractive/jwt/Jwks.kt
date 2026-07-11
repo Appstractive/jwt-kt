@@ -76,8 +76,9 @@ internal class JwksVerifier(
         val response = client.get(endpoint)
 
         if (response.status == HttpStatusCode.OK) {
+          val body = response.body<JSONWebKeySet>()
           lastUpdate.value = Clock.System.now()
-          keySet.value = response.body()
+          keySet.value = body
         }
       }
     }

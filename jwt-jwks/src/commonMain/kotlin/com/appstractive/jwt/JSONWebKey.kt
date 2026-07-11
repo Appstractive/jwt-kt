@@ -36,7 +36,7 @@ sealed interface JSONWebKey {
 @SerialName("RSA")
 data class JSONWebKeyRSA(
   override val alg: Algorithm? = null,
-  override val kid: String,
+  override val kid: String?,
   val use: String,
   val n: String,
   val e: String,
@@ -54,7 +54,7 @@ data class JSONWebKeyRSA(
 @SerialName("EC")
 data class JSONWebKeyEC(
   override val alg: Algorithm? = null,
-  override val kid: String,
+  override val kid: String?,
   val crv: Curve,
   val x: String,
   val y: String,
@@ -66,7 +66,7 @@ data class JSONWebKeyEC(
 @SerialName("oct")
 data class JSONWebKeyHMAC(
   override val alg: Algorithm? = null,
-  override val kid: String,
+  override val kid: String?,
   val k: String,
 ) : JSONWebKey {
   override val kty: String = "oct"

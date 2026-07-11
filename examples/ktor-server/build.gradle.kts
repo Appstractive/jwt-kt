@@ -54,7 +54,8 @@ kotlin {
     }
 
     commonMain.dependencies {
-      implementation(projects.jwtHmacKt)
+      implementation(projects.jwtEcdsaKt)
+      implementation(projects.jwtJwksKt)
       implementation(projects.ktorServerAuthJwt)
 
       implementation(libs.kotlin.datetime)
