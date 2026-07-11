@@ -19,6 +19,10 @@ kotlin {
         mainClass.set("com.appstractive.ApplicationKt")
       }
     }
+
+    mainRun {
+      mainClass.set("com.appstractive.ApplicationKt")
+    }
   }
 
   linuxX64().apply {
