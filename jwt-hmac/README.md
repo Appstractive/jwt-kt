@@ -25,8 +25,8 @@ Gradle:
 
 ```
 commonMain.dependencies {
-    implementation("com.appstractive:jwt-kt:1.2.0")
-    implementation("com.appstractive:jwt-hmac-kt:1.2.0")
+    implementation("com.appstractive:jwt-kt:1.3.0")
+    implementation("com.appstractive:jwt-hmac-kt:1.3.0")
 }
 ```
 

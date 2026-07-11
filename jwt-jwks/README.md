@@ -1,4 +1,4 @@
-# JWT Kotlin Multiplatform - JWKS (TODO)
+# JWT Kotlin Multiplatform - JWKS
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.appstractive/jwt-jwks-kt?label=Maven%20Central)](https://central.sonatype.com/artifact/com.appstractive/jwt-jwks-kt)
 
@@ -11,10 +11,6 @@
 
 Verify JWTs using JSONWebKeySets.
 
-# Attention!
-
-JWKS is not yet supported, because it is not yet supported in cryptography-kotlin for all platforms. See discussion here: whyoleg/cryptography-kotlin#16
-
 ## Usage
 
 ### Installation
@@ -25,8 +21,8 @@ TODO: Not yet published, requires JWK support from kotlin crypto library
 
 ```
 commonMain.dependencies {
-    implementation("com.appstractive:jwt-kt:1.2.0")
-    implementation("com.appstractive:jwt-jwks-kt:1.2.0")
+    implementation("com.appstractive:jwt-kt:1.3.0")
+    implementation("com.appstractive:jwt-jwks-kt:1.3.0")
 }
 ```
 
