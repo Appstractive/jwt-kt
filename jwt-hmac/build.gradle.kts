@@ -1,5 +1,4 @@
 ﻿import org.jetbrains.kotlin.gradle.ExperimentalWasmDsl
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
   alias(libs.plugins.multiplatform)
@@ -13,12 +12,15 @@ group = rootProject.group
 version = rootProject.version
 
 kotlin {
-  androidTarget {
-    publishLibraryVariants("release", "debug")
-    compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
+  jvmToolchain(17)
+
+  android {
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    minSdk = libs.versions.android.minSdk.get().toInt()
+    namespace = "com.appstractive.jwt.hmac"
   }
 
-  jvm { compilerOptions { jvmTarget.set(JvmTarget.JVM_17) } }
+  jvm()
 
   mingwX64()
   linuxArm64()
@@ -63,17 +65,5 @@ kotlin {
     }
 
     wasmJsTest.dependencies { implementation(libs.kotlinx.browser) }
-  }
-}
-
-android {
-  namespace = "com.appstractive.jwt.hmac"
-  compileSdk = libs.versions.compileSdk.get().toInt()
-
-  defaultConfig { minSdk = libs.versions.minSdk.get().toInt() }
-  sourceSets["main"].apply { manifest.srcFile("src/androidMain/AndroidManifest.xml") }
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
   }
 }

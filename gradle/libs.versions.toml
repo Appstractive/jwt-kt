@@ -1,15 +1,15 @@
 [versions]
 kotlin = "2.2.0" # https://kotlinlang.org/docs/releases.html#release-details
-agp = "8.12.0" # https://developer.android.com/studio/releases/gradle-plugin
+agp = "9.2.1" # https://developer.android.com/studio/releases/gradle-plugin
 
-compileSdk = "36"
-minSdk = "21"
+android-compileSdk = "36"
+android-minSdk = "21"
 
-ktor = "3.2.3"
+ktor = "3.5.1"
 
-kotlin-datetime = "0.7.1"
-kotlin-serialization = "1.9.0"
-kotlin-coroutines = "1.10.2"
+kotlin-datetime = "0.8.0"
+kotlin-serialization = "1.11.0"
+kotlin-coroutines = "1.11.0"
 
 cryptography = "0.5.0"
 
@@ -19,7 +19,7 @@ kotlin-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-c
 kotlin-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlin-serialization" }
 kotlin-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlin-datetime" }
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kotlin-coroutines" }
-kotlinx-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser", version = "0.3" }
+kotlinx-browser = { module = "org.jetbrains.kotlinx:kotlinx-browser", version = "0.5.0" }
 
 ktor-serialization-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 
@@ -46,14 +46,14 @@ test-kotlin = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref =
 test-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlin-coroutines" }
 test-ktor-client-mock = { module = "io.ktor:ktor-client-mock", version.ref = "ktor" }
 
-maven-publish-gradle-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.34.0" }
-kotlin-dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version = "2.0.0" }
+maven-publish-gradle-plugin = { module = "com.vanniktech:gradle-maven-publish-plugin", version = "0.37.0" }
+kotlin-dokka-gradle-plugin = { module = "org.jetbrains.dokka:dokka-gradle-plugin", version = "2.2.0" }
 android-gradle-plugin = { module = "com.android.tools.build:gradle", version.ref = "agp" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
 
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
-android-library = { id = "com.android.library", version.ref = "agp" }
+android-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 kotlinx-binary-compatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.18.1" }

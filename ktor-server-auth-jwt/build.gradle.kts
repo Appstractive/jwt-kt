@@ -1,6 +1,4 @@
-﻿import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
-plugins {
+﻿plugins {
   alias(libs.plugins.multiplatform)
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlinx.serialization)
@@ -13,12 +11,15 @@ group = rootProject.group
 version = rootProject.version
 
 kotlin {
-  androidTarget {
-    publishLibraryVariants("release", "debug")
-    compilerOptions { jvmTarget.set(JvmTarget.JVM_17) }
+  jvmToolchain(17)
+
+  android {
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
+    minSdk = libs.versions.android.minSdk.get().toInt()
+    namespace = group.toString()
   }
 
-  jvm { compilerOptions { jvmTarget.set(JvmTarget.JVM_17) } }
+  jvm()
 
   linuxArm64()
   linuxX64()
@@ -48,17 +49,5 @@ kotlin {
       api(projects.jwtKt)
       implementation(libs.ktor.server.auth)
     }
-  }
-}
-
-android {
-  namespace = group.toString()
-  compileSdk = libs.versions.compileSdk.get().toInt()
-
-  defaultConfig { minSdk = libs.versions.minSdk.get().toInt() }
-  sourceSets["main"].apply { manifest.srcFile("src/androidMain/AndroidManifest.xml") }
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_17
-    targetCompatibility = JavaVersion.VERSION_17
   }
 }
