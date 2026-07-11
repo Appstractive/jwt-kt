@@ -4,10 +4,18 @@ plugins {
     id("org.jetbrains.dokka")
 }
 
+val dokkaDir = layout.buildDirectory.dir("dokka")
+
 val javadocJar = tasks.register<Jar>("dokkaHtmlJar") {
-    dependsOn(tasks.dokkaHtml)
-    from(tasks.dokkaHtml.flatMap { it.outputDirectory })
-    archiveClassifier.set("javadoc")
+  dependsOn(tasks.dokkaGenerateHtml)
+  from(dokkaDir)
+  archiveClassifier.set("javadoc")
+}
+
+dokka {
+  dokkaPublications.html {
+    outputDirectory.set(dokkaDir)
+  }
 }
 
 mavenPublishing {

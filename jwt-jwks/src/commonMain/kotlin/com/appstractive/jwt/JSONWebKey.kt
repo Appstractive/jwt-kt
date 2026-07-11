@@ -29,6 +29,7 @@ val Curve.curve: EC.Curve
 sealed interface JSONWebKey {
   val alg: Algorithm?
   val kid: String?
+  val kty: String
 }
 
 @Serializable
@@ -45,7 +46,9 @@ data class JSONWebKeyRSA(
   val dp: String? = null,
   val dq: String? = null,
   val qi: String? = null,
-) : JSONWebKey
+) : JSONWebKey {
+  override val kty: String = "RSA"
+}
 
 @Serializable
 @SerialName("EC")
@@ -55,8 +58,9 @@ data class JSONWebKeyEC(
   val crv: Curve,
   val x: String,
   val y: String,
-  val d: String,
-) : JSONWebKey
+) : JSONWebKey {
+  override val kty: String = "EC"
+}
 
 @Serializable
 @SerialName("oct")
@@ -64,7 +68,9 @@ data class JSONWebKeyHMAC(
   override val alg: Algorithm? = null,
   override val kid: String,
   val k: String,
-) : JSONWebKey
+) : JSONWebKey {
+  override val kty: String = "oct"
+}
 
 @Serializable
 data class JSONWebKeySet(

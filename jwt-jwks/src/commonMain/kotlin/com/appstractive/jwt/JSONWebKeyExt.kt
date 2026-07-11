@@ -9,17 +9,17 @@ import dev.whyoleg.cryptography.operations.SignatureVerifier
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-fun JSONWebKeySet.getKey(kid: String?): JSONWebKey =
+fun JSONWebKeySet.getKey(kid: String?): JSONWebKey? =
     when {
       kid == null && keys.size == 1 -> {
-        keys.first()
+        keys.firstOrNull()
       }
 
       kid != null -> {
-        keys.first { it.kid == kid }
+        keys.firstOrNull { it.kid == kid }
       }
 
-      else -> throw IllegalArgumentException("No valid key found for JWT")
+      else -> null
     }
 
 suspend fun JSONWebKey.getVerifier(serializer: Json = json): SignatureVerifier {
@@ -31,7 +31,9 @@ suspend fun JSONWebKey.getVerifier(serializer: Json = json): SignatureVerifier {
           .publicKeyDecoder(curve = crv.curve)
           .decodeFromByteArray(
               format = EC.PublicKey.Format.JWK,
-              bytes = serializer.encodeToString(this).encodeToByteArray(), // TODO NYI in Crypto
+              bytes = serializer
+                  .encodeToString(this)
+                  .encodeToByteArray(),
           )
           .signatureVerifier(digest, ECDSA.SignatureFormat.RAW)
 
@@ -40,7 +42,9 @@ suspend fun JSONWebKey.getVerifier(serializer: Json = json): SignatureVerifier {
           .keyDecoder(digest)
           .decodeFromByteArray(
               format = HMAC.Key.Format.JWK,
-              bytes = serializer.encodeToString(this).encodeToByteArray(), // TODO NYI in Crypto
+              bytes = serializer
+                  .encodeToString(this)
+                  .encodeToByteArray(),
           )
           .signatureVerifier()
 
@@ -52,8 +56,9 @@ suspend fun JSONWebKey.getVerifier(serializer: Json = json): SignatureVerifier {
           pss.publicKeyDecoder(digest)
               .decodeFromByteArrayBlocking(
                   format = RSA.PublicKey.Format.JWK,
-                  bytes =
-                  serializer.encodeToString(this).encodeToByteArray(), // TODO NYI in Crypto
+                  bytes = serializer
+                      .encodeToString(this)
+                      .encodeToByteArray(),
               )
               .signatureVerifier()
 
@@ -64,8 +69,9 @@ suspend fun JSONWebKey.getVerifier(serializer: Json = json): SignatureVerifier {
               .publicKeyDecoder(digest)
               .decodeFromByteArrayBlocking(
                   format = RSA.PublicKey.Format.JWK,
-                  bytes =
-                  serializer.encodeToString(this).encodeToByteArray(), // TODO NYI in Crypto
+                  bytes = serializer
+                      .encodeToString(this)
+                      .encodeToByteArray(),
               )
               .signatureVerifier()
 
