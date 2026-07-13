@@ -1,5 +1,5 @@
 [versions]
-kotlin = "2.3.21" # https://kotlinlang.org/docs/releases.html#release-details
+kotlin = "2.4.0" # https://kotlinlang.org/docs/releases.html#release-details
 agp = "9.2.1" # https://developer.android.com/studio/releases/gradle-plugin
 
 android-compileSdk = "36"
