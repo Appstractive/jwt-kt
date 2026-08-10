@@ -1,4 +1,5 @@
 public final class com/appstractive/jwt/Algorithm : java/lang/Enum {
+	public static final field Companion Lcom/appstractive/jwt/Algorithm$Companion;
 	public static final field ES256 Lcom/appstractive/jwt/Algorithm;
 	public static final field ES384 Lcom/appstractive/jwt/Algorithm;
 	public static final field ES512 Lcom/appstractive/jwt/Algorithm;
@@ -11,9 +12,14 @@ public final class com/appstractive/jwt/Algorithm : java/lang/Enum {
 	public static final field RS256 Lcom/appstractive/jwt/Algorithm;
 	public static final field RS384 Lcom/appstractive/jwt/Algorithm;
 	public static final field RS512 Lcom/appstractive/jwt/Algorithm;
+	public static final field UNSUPPORTED Lcom/appstractive/jwt/Algorithm;
 	public static fun getEntries ()Lkotlin/enums/EnumEntries;
 	public static fun valueOf (Ljava/lang/String;)Lcom/appstractive/jwt/Algorithm;
 	public static fun values ()[Lcom/appstractive/jwt/Algorithm;
+}
+
+public final class com/appstractive/jwt/Algorithm$Companion {
+	public final fun serializer ()Lkotlinx/serialization/KSerializer;
 }
 
 public final class com/appstractive/jwt/ClaimsBuilder {
@@ -201,6 +207,7 @@ public final class com/appstractive/jwt/Verifier {
 	public final fun expiresAt (Lkotlin/time/Instant;)V
 	public static synthetic fun expiresAt$default (Lcom/appstractive/jwt/Verifier;Lkotlin/time/Instant;ILjava/lang/Object;)V
 	public final fun issuer ([Ljava/lang/String;)V
+	public final fun leeway-LRDsOJo (J)V
 	public final fun notBefore (Lkotlin/time/Instant;)V
 	public static synthetic fun notBefore$default (Lcom/appstractive/jwt/Verifier;Lkotlin/time/Instant;ILjava/lang/Object;)V
 }

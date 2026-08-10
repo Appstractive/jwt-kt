@@ -178,9 +178,11 @@ public final class com/appstractive/jwt/JwksConfig {
 	public fun <init> ()V
 	public final fun getCacheDuration-UwyO8pc ()J
 	public final fun getClient ()Lio/ktor/client/HttpClient;
+	public final fun getClock ()Lkotlin/time/Clock;
 	public final fun getEndpoint ()Ljava/lang/String;
 	public final fun setCacheDuration-LRDsOJo (J)V
 	public final fun setClient (Lio/ktor/client/HttpClient;)V
+	public final fun setClock (Lkotlin/time/Clock;)V
 	public final fun setEndpoint (Ljava/lang/String;)V
 }
 
