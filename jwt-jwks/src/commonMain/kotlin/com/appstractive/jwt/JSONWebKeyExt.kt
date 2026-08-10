@@ -1,12 +1,12 @@
 ﻿package com.appstractive.jwt
 
+import dev.whyoleg.cryptography.CryptographyProviderApi
 import dev.whyoleg.cryptography.algorithms.EC
 import dev.whyoleg.cryptography.algorithms.ECDSA
 import dev.whyoleg.cryptography.algorithms.HMAC
 import dev.whyoleg.cryptography.algorithms.RSA
 import dev.whyoleg.cryptography.algorithms.SHA256
 import dev.whyoleg.cryptography.operations.SignatureVerifier
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
 fun JSONWebKeySet.getKey(kid: String?): JSONWebKey? =
@@ -22,6 +22,7 @@ fun JSONWebKeySet.getKey(kid: String?): JSONWebKey? =
       else -> null
     }
 
+@OptIn(CryptographyProviderApi::class)
 suspend fun JSONWebKey.getVerifier(serializer: Json = json): SignatureVerifier {
   val digest = alg?.digest ?: SHA256
 

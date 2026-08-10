@@ -72,6 +72,8 @@ kotlin {
       implementation(libs.kotlin.coroutines)
       implementation(libs.kotlin.datetime)
 
+      implementation(libs.crypto.provider.base)
+
       implementation(libs.ktor.serialization.json)
       implementation(libs.ktor.client.core)
       implementation(libs.ktor.client.serialization)

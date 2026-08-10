@@ -145,6 +145,19 @@ class JwksVerifierTests {
                   "e": "AQAB",
                   "alg": "RS256",
                   "use": "sig"
+              },
+              {
+                  "kid": "SC3IWaKN-7FqcsKo4VZGDPhovW9nlGcBn2YZOguGr_c",
+                  "kty": "RSA",
+                  "alg": "RSA-OAEP",
+                  "use": "enc",
+                  "n": "7NsBybCadmLmhU9ccokGixh-hGKIyzNKmgT1p8tIn7Z0RdxONoYpUM7sEqmE4AMFiSrBCkWzI6Yq9tY6eeJUSoyOZpOkTY1rRgaQ_kfp51RCNQPRSawrYs86AeeRm8O0ZSytewv1yPZbyyY-_1mVjsJiS6n-nxj5p5ZikZ2sD79sJVktn6ZbOzEoRMEQc2XXBD3S2xTvluc45us3fmhbOjt_qiH0u43a9SSqu6rWivfOp6hAl6LNu2xZy4uoxuQUIM_Ua6AVBGzrM_4kfAHPVo7q4boMO-FWsrDvq7m3RkLGUp5gRWdGaOoxy5GhXnE-EE9PSZ9S0NbZKuVzVjK1dQ",
+                  "e": "AQAB",
+                  "x5c": [
+                    "MIIClzCCAX8CBgGf7F4ZrDANBgkqhkiG9w0BAQsFADAPMQ0wCwYDVQQDDAR0ZXN0MB4XDTI2MDgxMDE1NDgzN1oXDTM2MDgxMDE1NTAxN1owDzENMAsGA1UEAwwEdGVzdDCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAOzbAcmwmnZi5oVPXHKJBosYfoRiiMszSpoE9afLSJ+2dEXcTjaGKVDO7BKphOADBYkqwQpFsyOmKvbWOnniVEqMjmaTpE2Na0YGkP5H6edUQjUD0UmsK2LPOgHnkZvDtGUsrXsL9cj2W8smPv9ZlY7CYkup/p8Y+aeWYpGdrA+/bCVZLZ+mWzsxKETBEHNl1wQ90tsU75bnOObrN35oWzo7f6oh9LuN2vUkqruq1or3zqeoQJeizbtsWcuLqMbkFCDP1GugFQRs6zP+JHwBz1aO6uG6DDvhVrKw76u5t0ZCxlKeYEVnRmjqMcuRoV5xPhBPT0mfUtDW2Srlc1YytXUCAwEAATANBgkqhkiG9w0BAQsFAAOCAQEApVa54i+ITGtzhWznAbnt8v3WoT7ZjSfWS7SpD+lR1y+JCzgJqvJDuysCcayfiPZNikLN0DWq99XE/KrNRJrZ2KpYL71hQu/QhJyNFKSZH/GAnqNYqmT+myHxIXBaCfXUHK4XqMqA2XSzt0bChYdMQsrB2bt+pvwvRYrqsXnt2rycL9FvKgrggD1I+hISEwo8WXye2L3RoA5eUHk6836M7S9DWWucOjPpbmNedJk92JzeAwOTHqaX8GHt2XmaXHb8DGH7IeKlRUW4cED+YW9IF+J4Fau/IwAHkMWWlyiM5ykZLZRDgjf40zt6tR3Crx7ZqzZ1wN6hY5318F5f6Pxwug=="
+                  ],
+                  "x5t": "YuEMCAcYeJnSnhMZ6uJdD2NyL5c",
+                  "x5t#S256": "hjw3CtwkuDa7hZHcqOOmFM1hXUPdBzmlA7PrN9eWtlU"
               }
           ]
       }

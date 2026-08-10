@@ -2,15 +2,20 @@
 
 import dev.whyoleg.cryptography.algorithms.EC
 import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.encoding.Decoder
+import kotlinx.serialization.encoding.Encoder
 import kotlinx.serialization.json.JsonClassDiscriminator
 
 enum class Curve {
   @SerialName("P-256")
   P256,
+
   @SerialName("P-384")
   P384,
+
   @SerialName("P-521")
   P521,
 }

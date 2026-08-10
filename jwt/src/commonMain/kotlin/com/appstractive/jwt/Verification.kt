@@ -2,6 +2,7 @@
 
 import dev.whyoleg.cryptography.operations.SignatureVerifier
 import kotlin.time.Clock
+import kotlin.time.Duration
 import kotlin.time.Instant
 
 interface VerificationAlgorithm {
@@ -20,6 +21,8 @@ class Verifier {
 
   private var audiences: MutableSet<String> = mutableSetOf()
   private var issuers: MutableSet<String> = mutableSetOf()
+
+  private var leeway: Duration = Duration.ZERO
 
   fun algorithm(type: Algorithm, algorithm: VerificationAlgorithm) {
     algorithms[type] = algorithm
@@ -41,6 +44,13 @@ class Verifier {
     verifyNotBefore = now
   }
 
+  /**
+   * Add a leeway to the notBefore and expiresAt verification.
+   */
+  fun leeway(leeway: Duration) {
+    this.leeway = leeway
+  }
+
   internal suspend fun verify(jwt: JWT): Boolean {
     if (audiences.isNotEmpty() && !audiences.contains(jwt.audience)) {
       return false
@@ -53,7 +63,7 @@ class Verifier {
     verifyExpiresAt?.let {
       val expiresAt = jwt.expiresAt ?: return false
 
-      if (expiresAt < it) {
+      if ((expiresAt + leeway) < it) {
         return false
       }
     }
@@ -61,7 +71,7 @@ class Verifier {
     verifyNotBefore?.let {
       val notBefore = jwt.notBefore ?: return false
 
-      if (notBefore >= it) {
+      if ((notBefore - leeway) >= it) {
         return false
       }
     }

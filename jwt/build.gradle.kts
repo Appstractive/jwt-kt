@@ -76,18 +76,18 @@ kotlin {
       implementation(libs.test.kotlin.coroutines)
     }
 
-    androidMain.dependencies { implementation(libs.crypto.optimal) }
+    androidMain.dependencies { implementation(libs.crypto.provider.optimal) }
 
-    jvmMain.dependencies { implementation(libs.crypto.optimal) }
+    jvmMain.dependencies { implementation(libs.crypto.provider.optimal) }
 
-    appleMain.dependencies { implementation(libs.crypto.optimal) }
+    appleMain.dependencies { implementation(libs.crypto.provider.optimal) }
 
-    linuxMain.dependencies { implementation(libs.crypto.optimal) }
+    linuxMain.dependencies { implementation(libs.crypto.provider.optimal) }
 
-    mingwMain.dependencies { implementation(libs.crypto.optimal) }
+    mingwMain.dependencies { implementation(libs.crypto.provider.optimal) }
 
-    jsMain.dependencies { implementation(libs.crypto.optimal) }
+    jsMain.dependencies { implementation(libs.crypto.provider.optimal) }
 
-    wasmJsMain.dependencies { implementation(libs.crypto.optimal) }
+    wasmJsMain.dependencies { implementation(libs.crypto.provider.optimal) }
   }
 }

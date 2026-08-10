@@ -11,8 +11,10 @@ import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.request.get
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpStatusCode
 import io.ktor.serialization.kotlinx.json.json
+import io.ktor.util.logging.KtorSimpleLogger
 import kotlin.time.Clock
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.hours
@@ -39,12 +41,14 @@ internal class JwksVerifier(
   private val cacheMutex: Mutex = Mutex()
 
   private val keySet: MutableStateFlow<JSONWebKeySet> = MutableStateFlow(JSONWebKeySet(emptyList()))
-  private val lastUpdate: MutableStateFlow<Instant> = MutableStateFlow(Clock.System.now() - config.cacheDuration)
+  private val lastUpdate: MutableStateFlow<Instant> = MutableStateFlow(Instant.DISTANT_PAST)
 
   private val keyVerifierCache: MutableStateFlow<Map<String?, SignatureVerifier>> = MutableStateFlow(emptyMap())
 
   private val client = config.client.config { install(ContentNegotiation) { json(json) } }
   private val endpoint = checkNotNull(config.endpoint) { "Endpoint not configured" }
+
+  private val logger = KtorSimpleLogger("JwksVerifier")
 
   override suspend fun verifier(jwt: JWT): SignatureVerifier {
     updateKeySet()
@@ -55,14 +59,16 @@ internal class JwksVerifier(
     jwt: JWT,
   ): SignatureVerifier = cacheMutex.withLock {
     val kid = jwt.header.kid
-    val key: JSONWebKey? = keySet.value.getKey(kid)
 
     val cached = keyVerifierCache.value[kid]
 
     if (cached != null) {
       cached
     } else {
-      val verifier = key?.getVerifier() ?: UnknownKeyVerifier(kid)
+      val key: JSONWebKey? = keySet.value.getKey(kid)
+      val verifier = key?.getVerifier() ?: UnknownKeyVerifier(kid).also {
+        logger.warn("Unknown keyId: $kid")
+      }
       keyVerifierCache.update {
         it + (kid to verifier)
       }
@@ -72,13 +78,21 @@ internal class JwksVerifier(
 
   private suspend fun updateKeySet() {
     updateMutex.withLock {
-      if (Clock.System.now() - lastUpdate.value > config.cacheDuration) {
+      if (keySet.value.keys.isEmpty() || config.clock.now() - lastUpdate.value > config.cacheDuration) {
         val response = client.get(endpoint)
 
         if (response.status == HttpStatusCode.OK) {
-          val body = response.body<JSONWebKeySet>()
-          lastUpdate.value = Clock.System.now()
-          keySet.value = body
+          runCatching {
+            val body = response.body<JSONWebKeySet>()
+            lastUpdate.value = config.clock.now()
+            keySet.value = body
+          }
+              .onFailure {
+                logger.error("Failed to parse JWKS: ${it.message}")
+              }
+        } else {
+          val body = response.bodyAsText()
+          logger.error("Failed to update JWKS: $body")
         }
       }
     }
@@ -89,6 +103,7 @@ class JwksConfig {
   var endpoint: String? = null
   var client: HttpClient = HttpClient()
   var cacheDuration: Duration = 24.hours
+  var clock: Clock = Clock.System
 }
 
 fun Verifier.jwks(configure: JwksConfig.() -> Unit) {

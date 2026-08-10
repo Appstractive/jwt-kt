@@ -1,5 +1,6 @@
 ﻿package com.appstractive.jwt
 
+import com.appstractive.jwt.utils.AlgorithmSerializer
 import com.appstractive.jwt.utils.urlEncoded
 import dev.whyoleg.cryptography.CryptographyAlgorithmId
 import dev.whyoleg.cryptography.algorithms.Digest
@@ -7,8 +8,10 @@ import dev.whyoleg.cryptography.algorithms.SHA256
 import dev.whyoleg.cryptography.algorithms.SHA384
 import dev.whyoleg.cryptography.algorithms.SHA512
 import dev.whyoleg.cryptography.operations.SignatureGenerator
+import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonObject
 
+@Serializable(with = AlgorithmSerializer::class)
 enum class Algorithm {
   HS256,
   HS384,
@@ -22,6 +25,7 @@ enum class Algorithm {
   ES256,
   ES384,
   ES512,
+  UNSUPPORTED,
 }
 
 val Algorithm.digest: CryptographyAlgorithmId<Digest>
@@ -41,6 +45,8 @@ val Algorithm.digest: CryptographyAlgorithmId<Digest>
       Algorithm.HS512,
       Algorithm.RS512,
       Algorithm.PS512 -> SHA512
+
+      Algorithm.UNSUPPORTED -> error("Unsupported algorithm")
     }
 
 interface SigningAlgorithm {
