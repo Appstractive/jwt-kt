@@ -7,13 +7,21 @@ package io.ktor.server.auth.jwt
 import com.appstractive.jwt.Claims
 import com.appstractive.jwt.Verifier
 import com.appstractive.jwt.jwtVerifier
-import io.ktor.http.auth.*
-import io.ktor.server.application.*
-import io.ktor.server.auth.*
-import io.ktor.server.response.*
-import kotlin.reflect.*
+import io.ktor.http.auth.HttpAuthHeader
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.auth.Authentication
+import io.ktor.server.auth.AuthenticationConfig
+import io.ktor.server.auth.AuthenticationContext
+import io.ktor.server.auth.AuthenticationFailedCause
+import io.ktor.server.auth.AuthenticationFunction
+import io.ktor.server.auth.AuthenticationProvider
+import io.ktor.server.auth.UnauthorizedResponse
+import io.ktor.server.response.respond
+import io.ktor.util.logging.KtorSimpleLogger
+import io.ktor.util.logging.Logger
 
 internal val JWTAuthKey: Any = "JWTAuthNative"
+private val logger: Logger = KtorSimpleLogger("JWTAuthenticationProvider")
 
 /**
  * A JWT credential that consists of the specified [claims].
@@ -26,8 +34,8 @@ public class JWTCredential(val claims: Claims)
 /**
  * A JWT principal that consists of the specified [claims].
  *
- * @param payload JWT
- * @see Payload
+ * @param claims JWT
+ * @see Claims
  */
 public class JWTPrincipal(val claims: Claims)
 
@@ -51,38 +59,43 @@ public class JWTAuthenticationProvider internal constructor(config: Config) :
     val token = authHeader(call)
     if (token == null) {
       context.bearerChallenge(
-          AuthenticationFailedCause.NoCredentials, realm, schemes, challengeFunction,
+          cause = AuthenticationFailedCause.NoCredentials,
+          realm = realm,
+          schemes = schemes,
+          challengeFunction = challengeFunction,
       )
       return
     }
 
     try {
-      val principal =
-          verifyAndValidate(
-              call = call,
-              jwtVerifier = verifier(token),
-              token = token,
-              schemes = schemes,
-              validate = authenticationFunction,
-          )
+      val principal = verifyAndValidate(
+          call = call,
+          jwtVerifier = verifier(token),
+          token = token,
+          schemes = schemes,
+          validate = authenticationFunction,
+      )
       if (principal != null) {
         context.principal(name, principal)
         return
       }
 
       context.bearerChallenge(
-          AuthenticationFailedCause.InvalidCredentials, realm, schemes, challengeFunction,
+          cause = AuthenticationFailedCause.InvalidCredentials,
+          realm = realm,
+          schemes = schemes,
+          challengeFunction = challengeFunction,
       )
     } catch (cause: Throwable) {
       val message = cause.message ?: cause.toString()
-      context.error(JWTAuthKey, AuthenticationFailedCause.Error(message))
+      context.error(key = JWTAuthKey, cause = AuthenticationFailedCause.Error(message))
     }
   }
 
   /** A configuration for the [jwt] authentication provider. */
   public class Config internal constructor(name: String?) : AuthenticationProvider.Config(name) {
     internal var authenticationFunction: AuthenticationFunction<JWTCredential> = {
-      throw NotImplementedError(
+      error(
           "JWT auth validate function is not specified. Use jwt { validate { ... } } to fix.",
       )
     }
@@ -93,7 +106,9 @@ public class JWTAuthenticationProvider internal constructor(config: Config) :
       call.request.parseAuthorizationHeaderOrNull()
     }
 
-    internal var verifier: ((HttpAuthHeader) -> Verifier?) = { null }
+    internal var verifier: ((HttpAuthHeader) -> Verifier?) = {
+      error("JWT auth verifier function is not specified. If you want to disable verification, set a verifier returning null using: verifier { null }")
+    }
 
     internal var challenge: JWTAuthChallengeFunction = { scheme, realm ->
       call.respond(
@@ -135,7 +150,7 @@ public class JWTAuthenticationProvider internal constructor(config: Config) :
       this.verifier = { verifier }
     }
 
-    /** Provides a [JWTVerifier] used to verify a token format and signature. */
+    /** Provides a [Verifier] used to verify a token format and signature. */
     public fun verifier(verifier: (HttpAuthHeader) -> Verifier?) {
       this.verifier = verifier
     }
