@@ -57,4 +57,4 @@ kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", v
 multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
 android-library = { id = "com.android.kotlin.multiplatform.library", version.ref = "agp" }
 kotlinx-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-kotlinx-binary-compatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.18.1" }
+kotlinx-binary-compatibility = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version = "0.18.2" }
